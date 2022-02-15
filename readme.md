@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
  * @LastEditors: 41
- * @LastEditTime: 2022-02-15 16:43:08
+ * @LastEditTime: 2022-02-15 17:25:14
  * @Description: 
 -->
 # 项目说明
@@ -88,3 +88,31 @@ dotenv.config()
 module.exports = process.env
 ```
 - 改写`main.js` 导入配置和使用模板字符串
+
+## 四.添加路由
+路由:根据不同的URL，调用对应处理函数
+### 1.安装koa-router
+```bash
+npm i koa-router
+```
+- 1.导入包
+- 2.实例化对象
+- 3.编写路由
+- 4.注册中间件
+### 2.编写路由
+- 创建`src/routers`目录，编写`user.route.js`
+```js
+const Router = require('koa-router')
+
+const router = new Router({ prefix: '/users' })
+
+// GET /users/
+router.get('/', (ctx, next) => {
+  ctx.body = 'hello users'
+})
+
+module.exports = router
+```
+### 3.改写main.js
+- 导入路由
+- 注册中间件
