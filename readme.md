@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
  * @LastEditors: 41
- * @LastEditTime: 2022-02-15 17:25:14
+ * @LastEditTime: 2022-02-15 19:15:56
  * @Description: 
 -->
 # 项目说明
@@ -116,3 +116,38 @@ module.exports = router
 ### 3.改写main.js
 - 导入路由
 - 注册中间件
+
+## 五.目录结构的优化
+### 1.将http服务和app业务拆分
+- 创建`src/app/index.js`
+```js
+// 导入包
+const Koa = require('koa')
+// 创建app实例
+const app = new Koa()
+// 导入封装好的路由
+const userRouter = require('../routers/user.route')
+// 创建中间件
+app.use(userRouter.routes())
+
+module.exports = app
+```
+***
+- 改写`main.js`
+```js
+// 导入设置的端口号
+const { APP_PORT } = require('./config/config.default')
+// 导入封装的app
+const app = require('./app/index')
+// 监听端口
+app.listen(APP_PORT, () => {
+  //使用模板字符串输出端口
+  console.log(`server is running on http://localhost:${APP_PORT}`);
+})
+```
+
+### 2.将路由和控制器拆分
+- 路由:解析URL，分发给控制器对应的方法
+- 控制器:处理不同的业务
+改写`user.route.js`
+创建`controller/user.controller.js`
