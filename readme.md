@@ -2,10 +2,15 @@
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
  * @LastEditors: 41
- * @LastEditTime: 2022-02-15 14:55:46
+ * @LastEditTime: 2022-02-15 15:06:20
  * @Description: 
 -->
-# 项目初始化
+# 项目说明
+- 本项目是百度晋级班第一题:校园社区的后端
+- 本项目基于koa框架
+***
+# 搭建过程记录
+## 项目初始化
 ### 1.npm初始化
 ```bash
 npm init -y
