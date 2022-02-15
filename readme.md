@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
  * @LastEditors: 41
- * @LastEditTime: 2022-02-15 21:29:48
+ * @LastEditTime: 2022-02-16 00:24:14
  * @Description: 
 -->
 # 项目说明
@@ -196,4 +196,15 @@ class UserService {
 }
 
 module.exports = new UserService()
+```
+## 七.数据库操作
+sequelize ORM数据库工具
+ORM:对象关系映射
+- 数据表映射(对应)一个类
+- 数据表中的数据行(记录)对应一个对象
+- 数据表字段对应对象的属性
+- 数据表的操作对应对象的方法
+### 1.安装sequelize
+```bash
+npm i mysql2 sequelize --save
 ```
