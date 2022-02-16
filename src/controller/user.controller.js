@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-16 22:55:57
+ * @LastEditTime: 2022-02-17 00:35:20
  * @Description: 
  */
 const { createUser } = require('../service/user.service')
@@ -33,7 +33,8 @@ class UserController {
   }
 
   async login (ctx, next) {
-    ctx.body = '登录成功'
+    const { user_name } = ctx.request.body
+    ctx.body = `欢迎回来,${user_name}`
   }
 }
 

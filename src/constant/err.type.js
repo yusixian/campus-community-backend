@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: 41
- * @LastEditTime: 2022-02-16 22:55:12
+ * @LastEditTime: 2022-02-17 00:50:22
  * @Description: 
  */
 module.exports = {
@@ -19,6 +19,21 @@ module.exports = {
   userRegisterError: {
     code: '10003',
     message: '用户注册错误',
+    result: ''
+  },
+  userDosNotExist: {
+    code: '10004',
+    message: '用户不存在',
+    result: ''
+  },
+  userLoginError: {
+    code: '10005',
+    message: '用户登录失败',
+    result: ''
+  },
+  invalidPassword: {
+    code: '10006',
+    message: '密码不匹配',
     result: ''
   }
 }

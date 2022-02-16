@@ -2,12 +2,15 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 00:04:02
+ * @LastEditTime: 2022-02-17 00:58:26
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
 const { getUserInfo } = require('../service/user.service')
-const { userFormateError, userAlreadtExited, userRegisterError } = require('../constant/err.type')
+const {
+  userFormateError, userAlreadtExited,
+  userRegisterError, userDosNotExist,
+  userLoginError, invalidPassword } = require('../constant/err.type')
 const userValidator = async (ctx, next) => {
   const { user_name, password } = ctx.request.body
   // 合法性
@@ -48,8 +51,33 @@ const cryptPassword = async (ctx, next) => {
 
   await next()
 }
+
+const verifyLogin = async (ctx, next) => {
+  // 1.判断用户是否存在(不存在报错)
+  const { user_name, password } = ctx.request.body
+  try {
+    const res = await getUserInfo({ user_name })
+    if (!res) {
+      console.error('用户名不存在', { user_name });
+      ctx.app.emit('error', userDosNotExist, ctx)
+      return
+    }
+    // 2.密码是否匹配(不匹配报错)
+    if (!bcrypt.compareSync(password, res.password)) {
+      ctx.app.emit('error', invalidPassword, ctx)
+      return
+    }
+  } catch (error) {
+    console.error(err);
+    return ctx.app.emit('error', userLoginError, ctx)
+  }
+
+  await next()
+
+}
 module.exports = {
   userValidator,
   verifyUser,
-  cryptPassword
+  cryptPassword,
+  verifyLogin
 }
