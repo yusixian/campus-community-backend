@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
  * @LastEditors: 41
- * @LastEditTime: 2022-02-16 23:08:02
+ * @LastEditTime: 2022-02-17 00:11:55
  * @Description: 
 -->
 [toc]
@@ -388,3 +388,26 @@ const errHandler = require('./errHandler')
 // 统一的错误处理
 app.on('error', errHandler)
 ```
+
+## 十二.加密
+在将密码保存到数据库之前，要对密码进行加密处理
+### 1.安装bcryptjs
+```BASH
+npm i bcryptjs
+```
+### 2.编写加密中间件
+```js
+const cryptPassword = async (ctx, next) => {
+  const { password } = ctx.request.body
+  const salt = bcrypt.genSaltSync(10)
+  // hash保存的是密文
+  const hash = bcrypt.hashSync(password, salt)
+  ctx.request.body.password = hash
+
+  await next()
+}
+```
+### 3.在router中使用
+改写`user.router.js`中注册路由的时候添加中间件
+使用中间件解耦很方便
+

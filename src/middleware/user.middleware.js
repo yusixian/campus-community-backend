@@ -2,9 +2,10 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-02-16 23:01:52
+ * @LastEditTime: 2022-02-17 00:04:02
  * @Description: 
  */
+const bcrypt = require('bcryptjs')
 const { getUserInfo } = require('../service/user.service')
 const { userFormateError, userAlreadtExited, userRegisterError } = require('../constant/err.type')
 const userValidator = async (ctx, next) => {
@@ -36,7 +37,19 @@ const verifyUser = async (ctx, next) => {
 
   await next()
 }
+
+
+const cryptPassword = async (ctx, next) => {
+  const { password } = ctx.request.body
+  const salt = bcrypt.genSaltSync(10)
+  // hash保存的是密文
+  const hash = bcrypt.hashSync(password, salt)
+  ctx.request.body.password = hash
+
+  await next()
+}
 module.exports = {
   userValidator,
-  verifyUser
+  verifyUser,
+  cryptPassword
 }
