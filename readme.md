@@ -2,9 +2,10 @@
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
  * @LastEditors: 41
- * @LastEditTime: 2022-02-16 16:17:50
+ * @LastEditTime: 2022-02-16 23:08:02
  * @Description: 
 -->
+[toc]
 # 项目说明
 - 本项目是百度晋级班第一题:校园社区的后端
 - 本项目基于koa框架
@@ -294,4 +295,96 @@ class UserController {
 }
 
 module.exports = new UserController()
+```
+
+## 十.错误处理
+- 在控制器中对不同的错误进行处理，返回不同的提示
+
+## 十一.将错误处理拆分为中间件
+### 1.拆分中间件
+添加`src/middleware/user.middleware.js`
+```JS
+const { getUserInfo } = require('../service/user.service')
+const { userFormateError, userAlreadtExited, userRegisterError } = require('../constant/err.type')
+const userValidator = async (ctx, next) => {
+  const { user_name, password } = ctx.request.body
+  // 合法性
+  if (!user_name || !password) {
+    console.error('用户名或密码为空', ctx.request.body);
+    ctx.app.emit('error', userFormateError, ctx)
+    return
+  }
+  await next()
+}
+
+const verifyUser = async (ctx, next) => {
+  const { user_name, password } = ctx.request.body
+  console.log(user_name);
+  try {
+    // 合理性 先在数据库中进行查询
+    if (await getUserInfo({ user_name })) {
+      console.error('用户名已经存在', { user_name })
+      ctx.app.emit('error', userAlreadtExited, ctx)
+      return
+    }
+  } catch (err) {
+    console.error('获取用户信息错误', err)
+    ctx.app.emit('error', userRegisterError, ctx)
+    return
+  }
+
+  await next()
+}
+module.exports = {
+  userValidator,
+  verifyUser
+}
+```
+
+### 2.统一错误处理
+- 在出错的地方使用`ctx.app.emit`提交错误
+- 在app中通过`app.on`监听
+编写统一的错误定义文件
+```js
+module.exports = {
+  userFormateError: {
+    code: '10001',
+    message: '用户名或密码为空',
+    result: ''
+  },
+  userAlreadtExited: {
+    code: '10002',
+    message: '用户已经存在',
+    result: ''
+  },
+  userRegisterError: {
+    code: '10003',
+    message: '用户注册错误',
+    result: ''
+  }
+}
+```
+### 3.错误处理函数
+```JS
+module.exports = (err, ctx) => {
+  let status = 500
+  switch (err.code) {
+    case '10001':
+      status = 400
+      break
+    case '10002':
+      status = 409
+      break
+    default:
+      status = 500
+  }
+  ctx.status = status
+  ctx.body = err
+}
+```
+改写`app/index.js`
+```JS
+const errHandler = require('./errHandler')
+// 统一的错误处理
+app.on('error', errHandler)
 ```
