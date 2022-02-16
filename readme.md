@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
  * @LastEditors: 41
- * @LastEditTime: 2022-02-16 00:24:14
+ * @LastEditTime: 2022-02-16 16:17:50
  * @Description: 
 -->
 # 项目说明
@@ -207,4 +207,91 @@ ORM:对象关系映射
 ### 1.安装sequelize
 ```bash
 npm i mysql2 sequelize --save
+```
+### 2.连接数据库
+```js
+const { Sequelize } = require('sequelize')
+const {
+  MYSQL_HOST,
+  MYSQL_PROT,
+  MYSQL_USER,
+  MYSQL_PWD,
+  MYSQL_DB } = require('../config/config.default')
+
+
+const seq = new Sequelize(MYSQL_DB, MYSQL_USER, MYSQL_PWD, {
+  host: MYSQL_HOST,
+  dialect: 'mysql',
+})
+
+seq.authenticate().then(() => {
+  console.log('数据库连接成功');
+}).catch(err => {
+  console.log('数据库连接失败', err);
+})
+
+```
+### 3.编写配置文件
+```
+APP_PORT = 8000
+
+MYSQL_HOST = localhost
+MYSQL_PROT = 3306
+MYSQL_USER = root
+MYSQL_PWD  = yysy0324
+MYSQL_DB   = sc_user
+```
+
+## 八.创建模型
+- 创建`src/model/user.model.js`
+- 通过`sync`同步模型创建model中设计的数据表
+
+## 九.添加用户
+- 所有数据库的操作都在service层完成。service调用model完成数据库操作
+```JS
+const User = require('../model/user.model')
+class UserService {
+  async createUser (user_name, password) {
+    // 插入数据
+    // await表达式:promise对象的值
+    const res = await User.create({
+      // 表的字段 这里用了简写，属性名 属性值相同！
+      user_name,
+      password
+    })
+    console.log(res);
+    return res.dataValues
+  }
+}
+
+module.exports = new UserService()
+```
+- 同时改写`user.controller.js`
+```JS
+const { createUser } = require('../service/user.service')
+class UserController {
+  async register (ctx, next) {
+    // 1.获取数据
+    // console.log(ctx.request.body);
+    const { user_name, password } = ctx.request.body
+    // console.log(user_name, password);
+    // 2.操作数据库
+    const res = await createUser(user_name, password)
+    // 3.返回结果
+    ctx.body = {
+      code: 0,
+      message: "用户注册成功",
+      result: {
+        id: res.id,
+        user_name: res.user_name
+      }
+    }
+  }
+
+  async login (ctx, next) {
+    ctx.body = '登录成功'
+  }
+}
+
+module.exports = new UserController()
 ```

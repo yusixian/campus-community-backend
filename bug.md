@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:08:52
  * @LastEditors: 41
- * @LastEditTime: 2022-02-16 00:39:24
+ * @LastEditTime: 2022-02-16 16:03:40
  * @Description: 
 -->
 ### 1.nodemon安装的时候加-D
@@ -13,3 +13,6 @@
 ### 3.mysql2和sequelize必须要添加到依赖。就是`--save`才可以成功连接数据库
 
 ### 4.npm下载不动使用cnpm下载
+
+### 5.通过postman send数据后，竟然无法解构
+- 在postman中要选择是json格式文件才行！
