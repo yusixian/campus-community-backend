@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 00:11:55
+ * @LastEditTime: 2022-02-17 14:26:34
  * @Description: 
 -->
 [toc]
@@ -411,3 +411,26 @@ const cryptPassword = async (ctx, next) => {
 改写`user.router.js`中注册路由的时候添加中间件
 使用中间件解耦很方便
 
+## 十三.登录验证
+- 验证格式
+- 验证用户是否存在
+- 验证密码是否匹配
+***
+- 1.在`src/middleware/user.middleware.js`中添加中间件,其中判断是否为空的中间件和注册的判断可以复用
+- 2.定义错误类型
+- 3.改写路由
+```JS
+// 登录接口
+router.post('/login', userValidator, verifyLogin, login)
+```
+
+## 十四.用户的认证与授权
+登录成功后，给用户颁发一个令牌token，用户在以后的每一次请求中携带这个令牌
+jwt:jsonwebtoken
+- header:头部
+- payload:载荷
+- signature:签名
+### 1.安装jsonwebtoken
+```BASH
+npm i jsonwebtoken
+```

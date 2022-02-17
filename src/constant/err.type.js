@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 00:50:22
+ * @LastEditTime: 2022-02-17 15:21:30
  * @Description: 
  */
 module.exports = {
@@ -34,6 +34,16 @@ module.exports = {
   invalidPassword: {
     code: '10006',
     message: '密码不匹配',
+    result: ''
+  },
+  tokenExpiredError: {
+    code: '10101',
+    message: 'token已过期',
+    result: ''
+  },
+  invalidToken: {
+    code: '10102',
+    message: 'token无效',
     result: ''
   }
 }

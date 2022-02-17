@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 00:58:26
+ * @LastEditTime: 2022-02-17 13:58:33
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -71,9 +71,7 @@ const verifyLogin = async (ctx, next) => {
     console.error(err);
     return ctx.app.emit('error', userLoginError, ctx)
   }
-
   await next()
-
 }
 module.exports = {
   userValidator,

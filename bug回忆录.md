@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:08:52
  * @LastEditors: 41
- * @LastEditTime: 2022-02-16 22:52:11
+ * @LastEditTime: 2022-02-17 15:33:20
  * @Description: 
 -->
 [toc]
@@ -24,3 +24,5 @@
 
 ### 7.通过emit到app进行统一的错误处理
 - 这里的emit和vue中的emit有些类似的地方！
+
+### 8.在postman中设置变量的时候不加''会被识别为字符串
