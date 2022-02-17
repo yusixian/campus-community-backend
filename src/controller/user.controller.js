@@ -51,7 +51,6 @@ class UserController {
       console.error('用户登录失败', err);
 
     }
-    // ctx.body = `欢迎回来,${user_name}`
   }
   async changePassword (ctx, next) {
     // 1.获取数据

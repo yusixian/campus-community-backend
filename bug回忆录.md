@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:08:52
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 15:33:20
+ * @LastEditTime: 2022-02-17 19:11:12
  * @Description: 
 -->
 [toc]
@@ -26,3 +26,12 @@
 - 这里的emit和vue中的emit有些类似的地方！
 
 ### 8.在postman中设置变量的时候不加''会被识别为字符串
+
+### 9.`__dirname`可能不是最外层
+- 用`path.resolve(__dirname,'..')`可以向外跳一层
+
+### 10.在`views/index.html`单独打开是有样式的,但是运行后没有样式了！
+- 使用`koa-static`搭建静态资源
+
+### 11.absolute+left+transform没办法完全水平居中
+- 动画的过程使用了transform挤掉了居中的transform

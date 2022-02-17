@@ -12,13 +12,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "art-template": "^4.13.2",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
+    "koa-art-template": "^1.1.1",
     "koa-body": "^4.2.0",
     "koa-router": "^10.1.1",
+    "koa-static": "^5.0.0",
     "mysql2": "^2.3.3",
+    "path": "^0.12.7",
     "sequelize": "^6.16.1"
   },
   "devDependencies": {
