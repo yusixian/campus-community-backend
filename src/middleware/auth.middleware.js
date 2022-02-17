@@ -5,7 +5,7 @@ const { TokenExpiredError } = require("jsonwebtoken");
  * @Author: 41
  * @Date: 2022-02-17 15:04:08
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 15:22:55
+ * @LastEditTime: 2022-02-17 15:53:40
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -14,7 +14,7 @@ const { tokenExpiredError, invalidToken } = require('../constant/err.type')
 const auth = async (ctx, next) => {
   const { authorization } = ctx.request.header
   const token = authorization.replace('Bearer ', '')
-  console.log(token);
+  // console.log(token);
   try {
     // user中包含了payload的信息(id,user_name,is_admin)
     const user = jwt.verify(token, JWT_SECRET)

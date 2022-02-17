@@ -2,11 +2,11 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 14:33:20
+ * @LastEditTime: 2022-02-17 16:13:28
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
-const { createUser, getUserInfo } = require('../service/user.service')
+const { createUser, getUserInfo, updateById } = require('../service/user.service')
 const { userRegisterError } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 class UserController {
@@ -52,6 +52,27 @@ class UserController {
 
     }
     // ctx.body = `欢迎回来,${user_name}`
+  }
+  async changePassword (ctx, next) {
+    // 1.获取数据
+    const id = ctx.state.user.id
+    const password = ctx.request.body.password
+    console.log(id, password);
+    // 2.操作数据库
+    if (await updateById({ id, password })) {
+      ctx.body = {
+        code: 0,
+        message: '修改密码成功',
+        result: ''
+      }
+    } else {
+      ctx.body = {
+        code: '10007',
+        message: '修改密码失败',
+        result: ''
+      }
+    }
+    // 3.返回结果
   }
 }
 
