@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: 41
- * @LastEditTime: 2022-02-17 15:21:30
+ * @LastEditors: cos
+ * @LastEditTime: 2022-02-18 14:38:03
  * @Description: 
  */
 module.exports = {
@@ -44,6 +44,13 @@ module.exports = {
   invalidToken: {
     code: '10102',
     message: 'token无效',
+    result: ''
+  },
+
+  // 文章相关errorType
+  articleCreateErr: {
+    code: '11001',
+    message: '发帖失败',
     result: ''
   }
 }
