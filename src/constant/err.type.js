@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: cos
- * @LastEditTime: 2022-02-19 20:59:04
+ * @LastEditTime: 2022-02-19 23:17:14
  * @Description: 
  */
 module.exports = {
@@ -54,10 +54,24 @@ module.exports = {
   // 文章相关errorType
   articleCreateError: {
     code: '11001',
-    message: '发帖失败',
-    result: ''
+    message: '发帖失败'
   },
-
+  articleDeleteError: {
+    code: '11002',
+    message: '删除文章失败'
+  },
+  articleParamsError: {
+    code: '11003',
+    message: '文章标题或内容为空'
+  },
+  articleDosNotExist: {
+    code: '11004',
+    message: '该文章不存在！'
+  },
+  articleUpdateError: {
+    code: '11005',
+    message: '更新文章失败'
+  },
   // 分区管理 partition
   partitionCreateErr: {
     code: '12001',

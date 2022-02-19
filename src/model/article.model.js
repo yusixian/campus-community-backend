@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 13:57:27
- * @LastEditTime: 2022-02-19 18:50:16
- * @LastEditors: lihao
+ * @LastEditTime: 2022-02-19 22:56:16
+ * @LastEditors: cos
  * @Description: 文章类型 
  * @FilePath: \campus-community-backend\src\model\article.model.js
  */
