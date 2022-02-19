@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:08:52
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 19:11:12
+ * @LastEditTime: 2022-02-18 15:11:19
  * @Description: 
 -->
 [toc]
@@ -35,3 +35,6 @@
 
 ### 11.absolute+left+transform没办法完全水平居中
 - 动画的过程使用了transform挤掉了居中的transform
+
+### 12.在apifox中修改密码接口一直有问题
+- 忘记换类型了，修改密码是`patch`！
