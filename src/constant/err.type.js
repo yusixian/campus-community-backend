@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: cos
- * @LastEditTime: 2022-02-18 14:38:03
+ * @LastEditTime: 2022-02-19 19:13:41
  * @Description: 
  */
 module.exports = {
@@ -46,7 +46,11 @@ module.exports = {
     message: 'token无效',
     result: ''
   },
-
+  unAuthorizedError: {
+    code: '10103',
+    message: '未授权,当前请求需要用户验证',
+    result: ''
+  },
   // 文章相关errorType
   articleCreateErr: {
     code: '11001',
