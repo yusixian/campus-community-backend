@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: cos
- * @LastEditTime: 2022-02-19 19:32:20
+ * @LastEditTime: 2022-02-19 21:01:57
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -76,8 +76,8 @@ const verifyLogin = async (ctx, next) => {
 const verifyAdmin = async (ctx, next) => {
   const { is_admin } = ctx.state.user
   if(!is_admin) {
-    console.log('用户无权限，请使用管理员账号', err)
-    ctx.app.emit('error', unAuthorizedError, ctx)
+    console.error('用户无权限，请使用管理员账号')
+    return ctx.app.emit('error', unAuthorizedError, ctx)
   }
   await next()
 }
@@ -85,5 +85,6 @@ module.exports = {
   userValidator,
   verifyUser,
   cryptPassword,
-  verifyLogin
+  verifyLogin,
+  verifyAdmin
 }

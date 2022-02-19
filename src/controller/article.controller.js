@@ -1,13 +1,13 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-02-19 16:33:25
+ * @LastEditTime: 2022-02-19 20:42:38
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
 const { createArticle } = require('../service/article.service')
-const { articleCreateErr } = require('../constant/err.type')
+const { articleCreateError } = require('../constant/err.type')
 
 class ArticleController {
     async postArticle(ctx, next) {
@@ -27,8 +27,8 @@ class ArticleController {
                 }
             }
         } catch (err) {
-            console.log(err);
-            ctx.app.emit('error', articleCreateErr, ctx)
+            console.error('发帖失败！', err);
+            ctx.app.emit('error', articleCreateError, ctx)
         }
     }
 }

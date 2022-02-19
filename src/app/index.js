@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-15 17:29:53
- * @LastEditors: cos
- * @LastEditTime: 2022-02-18 15:02:23
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-02-19 15:57:50
  * @Description: 
  */
 // 导入包
@@ -24,11 +24,13 @@ render(app, {
 const userRouter = require('../routers/user.route')
 const homeRouter = require('../routers/home.route')
 const articleRouter = require('../routers/article.route')
+const partition = require('../routers/partition.route')
 // 创建中间件
 app.use(KoaBody())
 app.use(userRouter.routes())
 app.use(homeRouter.routes())
 app.use(articleRouter.routes())
+app.use(partition.routes()) // 分区的路由
 app.use(serve(path.resolve(__dirname, '..') + '/public'))
 // 统一的错误处理
 app.on('error', errHandler)
