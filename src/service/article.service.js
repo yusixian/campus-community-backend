@@ -7,7 +7,7 @@
  * @FilePath: \campus-community-backend\src\service\article.service.js
  */
 
-const Article = require('../model/ariticle.model')
+const Article = require('../model/article.model')
 class ArticleService {
     /**
      * @description: 插入数据库

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "createDB": "node src/model/user.model.js",
+    "createDB": "node src/model/partition.model.js",
     "dev": "nodemon ./src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

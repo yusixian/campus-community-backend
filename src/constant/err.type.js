@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: cos
- * @LastEditTime: 2022-02-18 14:38:03
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-02-19 17:32:41
  * @Description: 
  */
 module.exports = {
@@ -51,6 +51,33 @@ module.exports = {
   articleCreateErr: {
     code: '11001',
     message: '发帖失败',
+    result: ''
+  },
+
+  // 分区管理 partition
+  partitionCreateErr: {
+    code: '12001',
+    message: '创建分区失败',
+    result: ''
+  },
+  partitionIsExitedErr: {
+    code: '12002',
+    message: '分区已存在',
+    result: ''
+  },
+  partitionFormateError: {
+    code: '12003',
+    message: '分区名称不可以为空',
+    result: ''
+  },
+  partitionDeleteError: {
+    code: '12004',
+    message: '分区删除失败',
+    result: ''
+  },
+  partitionIdError: {
+    code: '12005',
+    message: '分区id为空',
     result: ''
   }
 }

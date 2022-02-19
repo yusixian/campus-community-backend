@@ -9,7 +9,7 @@
 const { createArticle } = require('../service/article.service')
 const { articleCreateErr } = require('../constant/err.type')
 
-class AriticleController {
+class ArticleController {
     async postArticle(ctx, next) {
         console.log(ctx.request.body);
         const { user_id, title, content, summary } = ctx.request.body;
@@ -31,4 +31,4 @@ class AriticleController {
     }
 }
 
-module.exports = new AriticleController()
+module.exports = new ArticleController()
