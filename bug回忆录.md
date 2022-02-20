@@ -38,3 +38,23 @@
 
 ### 12.在apifox中修改密码接口一直有问题
 - 忘记换类型了，修改密码是`patch`！
+
+### 13.apifox自动登录前置脚本一直提示用户名密码为空
+
+请求头里记得加上`header: { "Content-Type": "application/json" }` ！！！
+
+```
+ const loginRequest =  {
+     url: baseUrl + '/users/login',
+     method: 'POST',
+     header: {
+     	"Content-Type": "application/json"
+     },
+     body: {
+         mode: 'raw',
+         raw: JSON.stringify({ user_name: username, password: pwd }),
+     }
+ };
+```
+
+```！！
