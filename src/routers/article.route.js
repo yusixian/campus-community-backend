@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:09:32
- * @LastEditTime: 2022-02-19 23:27:20
+ * @LastEditTime: 2022-02-20 17:47:22
  * @LastEditors: cos
  * @Description: 文章管理相关路由
  * @FilePath: \campus-community-backend\src\routers\article.route.js
@@ -17,6 +17,6 @@ const router = new Router({ prefix: '/articles' })
 
 router.post('/create', auth, postArticle)
 router.delete('/delete', auth, deleteArticle)
-router.post('/update', auth, updateArticle)
+router.patch('/update', auth, updateArticle)
 
 module.exports = router
