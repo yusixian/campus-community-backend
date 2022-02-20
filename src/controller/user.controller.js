@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-18 14:55:48
+ * @LastEditTime: 2022-02-20 21:37:55
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -72,6 +72,10 @@ class UserController {
       }
     }
     // 3.返回结果
+  }
+
+  async upload (ctx, next) {
+    ctx.body = '图片上传成功'
   }
 }
 

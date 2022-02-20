@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 13:57:27
- * @LastEditTime: 2022-02-20 20:51:40
- * @LastEditors: cos
+ * @LastEditTime: 2022-02-20 21:55:48
+ * @LastEditors: 41
  * @Description: 文章类型 
  * @FilePath: \campus-community-backend\src\model\article.model.js
  */
@@ -28,7 +28,7 @@ const Article = seq.define('sc_Article', {
   is_admin: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    defaultValue: 0, 
+    defaultValue: 0,
     comment: '是否为管理员,0:不是管理员(默认) 1:管理员'
   },
   title: {
@@ -49,31 +49,31 @@ const Article = seq.define('sc_Article', {
   partition_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 1, 
+    defaultValue: 1,
     comment: '分区id，未选则默认为1，即无分区'
   },
   comments: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0, 
+    defaultValue: 0,
     comment: '评论数， 初始为0'
   },
   likes: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0, 
+    defaultValue: 0,
     comment: '点赞数， 初始为0'
   },
   collections: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0, 
+    defaultValue: 0,
     comment: '收藏数 初始为0'
   },
   visits: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0, 
+    defaultValue: 0,
     comment: '浏览数， 初始为0'
   }
   // Sequelize 会自动创建and更新两个字段：createdAt和updateAt

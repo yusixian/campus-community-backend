@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:08:52
  * @LastEditors: 41
- * @LastEditTime: 2022-02-18 15:11:19
+ * @LastEditTime: 2022-02-20 19:22:44
  * @Description: 
 -->
 [toc]
@@ -43,7 +43,7 @@
 
 请求头里记得加上`header: { "Content-Type": "application/json" }` ！！！
 
-```
+```js
  const loginRequest =  {
      url: baseUrl + '/users/login',
      method: 'POST',
@@ -56,5 +56,3 @@
      }
  };
 ```
-
-```！！

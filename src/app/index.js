@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-15 17:29:53
- * @LastEditors: lihao
- * @LastEditTime: 2022-02-19 15:57:50
+ * @LastEditors: 41
+ * @LastEditTime: 2022-02-20 21:51:51
  * @Description: 
  */
 // 导入包
@@ -21,16 +21,18 @@ render(app, {
 })
 // console.log(path.resolve(__dirname, '..'));
 // 导入封装好的路由
-const userRouter = require('../routers/user.route')
-const homeRouter = require('../routers/home.route')
-const articleRouter = require('../routers/article.route')
-const partition = require('../routers/partition.route')
+const router = require('../routers/index')
+// const userRouter = require('../routers/user.route')
+// const homeRouter = require('../routers/home.route')
+// const articleRouter = require('../routers/article.route')
+// const partition = require('../routers/partition.route')
 // 创建中间件
 app.use(KoaBody())
-app.use(userRouter.routes())
-app.use(homeRouter.routes())
-app.use(articleRouter.routes())
-app.use(partition.routes()) // 分区的路由
+app.use(router.routes())
+// app.use(userRouter.routes())
+// app.use(homeRouter.routes())
+// app.use(articleRouter.routes())
+// app.use(partition.routes()) // 分区的路由
 app.use(serve(path.resolve(__dirname, '..') + '/public'))
 // 统一的错误处理
 app.on('error', errHandler)
