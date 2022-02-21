@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:08:52
  * @LastEditors: 41
- * @LastEditTime: 2022-02-20 19:22:44
+ * @LastEditTime: 2022-02-21 09:37:48
  * @Description: 
 -->
 [toc]
@@ -56,3 +56,5 @@
      }
  };
 ```
+## 14.uploadDir`../upload`这种`../`的方式是不对的！
+- 一般来说,在配置的文件中,我们都不要使用相对路径！！！
