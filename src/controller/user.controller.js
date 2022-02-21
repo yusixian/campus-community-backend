@@ -2,22 +2,28 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-20 21:37:55
+ * @LastEditTime: 2022-02-21 15:03:19
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
+const path = require('path')
 const { createUser, getUserInfo, updateById } = require('../service/user.service')
-const { userRegisterError } = require('../constant/err.type')
+const {
+  userRegisterError,
+  userLoginError,
+  changePasswordError,
+  fileUploadError
+} = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 class UserController {
   async register (ctx, next) {
     // 1.获取数据
     // console.log(ctx.request.body);
-    const { user_name, password } = ctx.request.body
-    // console.log(user_name, password);
+    const { user_name, password, is_admin, img } = ctx.request.body
+    console.log(user_name, password, is_admin, img);
     try {
       // 2.操作数据库
-      const res = await createUser(user_name, password)
+      const res = await createUser(user_name, password, is_admin, img)
       // 3.返回结果
       ctx.body = {
         code: 0,
@@ -28,12 +34,10 @@ class UserController {
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error('用户注册失败', err);
       ctx.app.emit('error', userRegisterError, ctx)
     }
-
   }
-
   async login (ctx, next) {
     const { user_name } = ctx.request.body
     // 1.获取用户信息(在token的payload中，记录id,user_name,is_admin)
@@ -49,7 +53,7 @@ class UserController {
       }
     } catch (err) {
       console.error('用户登录失败', err);
-
+      ctx.app.emit('error', userLoginError, ctx)
     }
   }
   async changePassword (ctx, next) {
@@ -65,17 +69,32 @@ class UserController {
         result: ''
       }
     } else {
-      ctx.body = {
-        code: '10007',
-        message: '修改密码失败',
-        result: ''
-      }
+      ctx.app.emit('error', changePasswordError
+        , ctx)
     }
     // 3.返回结果
   }
 
   async upload (ctx, next) {
-    ctx.body = '图片上传成功'
+    // console.log(ctx.request.files.file);
+    const id = ctx.state.user.id
+    const { file } = ctx.request.files
+    const img = '/uploads/' + path.basename(file.path)
+    console.log(id, img);
+
+    if (await updateById({ id, img })) {
+      if (file) {
+        ctx.body = {
+          code: 0,
+          message: '头像上传成功',
+          result: {
+            img: path.basename(file.path)
+          }
+        }
+      }
+    } else {
+      return ctx.app.emit('error', fileUploadError, ctx)
+    }
   }
 }
 

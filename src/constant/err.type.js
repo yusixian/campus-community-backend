@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: lihao
- * @LastEditTime: 2022-02-21 18:21:52
+ * @LastEditors: 41
+ * @LastEditTime: 2022-02-21 10:06:40
  * @Description: 
  */
 module.exports = {
@@ -34,6 +34,11 @@ module.exports = {
   invalidPassword: {
     code: '10006',
     message: '密码不匹配',
+    result: ''
+  },
+  changePasswordError: {
+    code: '10007',
+    message: '修改密码失败',
     result: ''
   },
   tokenExpiredError: {
@@ -139,6 +144,10 @@ module.exports = {
   commentSelectByArticleIdFailedError: {
     code: '13005',
     message: '查询评论失败',
+  },
+  fileUploadError: {
+    code: '13000',
+    message: '资源上传失败',
     result: ''
   }
   
