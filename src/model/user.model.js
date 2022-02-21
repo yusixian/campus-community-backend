@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 14:42:24
  * @LastEditors: 41
- * @LastEditTime: 2022-02-17 19:32:21
+ * @LastEditTime: 2022-02-21 14:18:43
  * @Description: 
  */
 const { DataTypes } = require('sequelize')
@@ -28,6 +28,12 @@ const User = seq.define('sc_User', {
     allowNull: false,
     defaultValue: 0,
     comment: '是否位管理员,0:不是管理员(默认) 1:管理员'
+  },
+  img: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: '',
+    comment: '头像图片的地址'
   }
 })
 // 轻质同步数据库(创建数据表)

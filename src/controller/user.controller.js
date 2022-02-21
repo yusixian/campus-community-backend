@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-21 10:06:53
+ * @LastEditTime: 2022-02-21 15:03:19
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -19,11 +19,11 @@ class UserController {
   async register (ctx, next) {
     // 1.获取数据
     // console.log(ctx.request.body);
-    const { user_name, password } = ctx.request.body
-    // console.log(user_name, password);
+    const { user_name, password, is_admin, img } = ctx.request.body
+    console.log(user_name, password, is_admin, img);
     try {
       // 2.操作数据库
-      const res = await createUser(user_name, password)
+      const res = await createUser(user_name, password, is_admin, img)
       // 3.返回结果
       ctx.body = {
         code: 0,
@@ -77,13 +77,19 @@ class UserController {
 
   async upload (ctx, next) {
     // console.log(ctx.request.files.file);
+    const id = ctx.state.user.id
     const { file } = ctx.request.files
-    if (file) {
-      ctx.body = {
-        code: 0,
-        message: '头像上传成功',
-        result: {
-          img: path.basename(file.path)
+    const img = '/uploads/' + path.basename(file.path)
+    console.log(id, img);
+
+    if (await updateById({ id, img })) {
+      if (file) {
+        ctx.body = {
+          code: 0,
+          message: '头像上传成功',
+          result: {
+            img: path.basename(file.path)
+          }
         }
       }
     } else {
