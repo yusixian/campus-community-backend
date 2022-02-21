@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: cos
- * @LastEditTime: 2022-02-20 20:06:55
+ * @LastEditors: 41
+ * @LastEditTime: 2022-02-21 10:06:40
  * @Description: 
  */
 module.exports = {
@@ -34,6 +34,11 @@ module.exports = {
   invalidPassword: {
     code: '10006',
     message: '密码不匹配',
+    result: ''
+  },
+  changePasswordError: {
+    code: '10007',
+    message: '修改密码失败',
     result: ''
   },
   tokenExpiredError: {
@@ -108,6 +113,11 @@ module.exports = {
   partitionIdError: {
     code: '12005',
     message: '分区id为空',
+    result: ''
+  },
+  fileUploadError: {
+    code: '13000',
+    message: '资源上传失败',
     result: ''
   }
 }
