@@ -1,14 +1,15 @@
 /*
  * @Author: 41
  * @Date: 2022-02-15 17:29:53
- * @LastEditors: 41
- * @LastEditTime: 2022-02-20 22:23:51
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-02-21 16:25:12
  * @Description: 
  */
 // 导入包
 const Koa = require('koa')
 const render = require('koa-art-template')
 const path = require('path')
+const cors = require('koa2-cors')
 const serve = require('koa-static')
 const KoaBody = require('koa-body')
 const errHandler = require('./errHandler')
@@ -21,6 +22,7 @@ render(app, {
 })
 // 导入封装好的路由
 const router = require('../routers/index')
+app.use(cors())
 app.use(KoaBody())
 app.use(router.routes()).use(router.allowedMethods())
 app.use(serve(path.resolve(__dirname, '..') + '/public'))

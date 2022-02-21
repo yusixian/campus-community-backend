@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: cos
- * @LastEditTime: 2022-02-20 20:06:55
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-02-21 18:21:52
  * @Description: 
  */
 module.exports = {
@@ -109,5 +109,37 @@ module.exports = {
     code: '12005',
     message: '分区id为空',
     result: ''
+  },
+  partitionQueryALLError: {
+    code: '12006',
+    message: '查询所有分区失败',
+    result: ''
+  },
+  // 评论，comment
+  commentCreateError: {
+    code: '13001',
+    message: '评论失败',
+    result: ''
+  },
+  commentCreateInfoFormateError: {
+    code: '13002',
+    message: '评论内容和评论文章不可以为空',
+    result: ''
+  },
+  commentIdFormateError: {
+    code: '13003',
+    message: '评论id不可以为空',
+    result: ''
+  },
+  commentDeleteFailedError: {
+    code: '13004',
+    message: '评论删除失败',
+    result: ''
+  },
+  commentSelectByArticleIdFailedError: {
+    code: '13005',
+    message: '查询评论失败',
+    result: ''
   }
+  
 }

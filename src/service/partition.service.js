@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:02:42
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-19 17:25:40
+ * @LastEditTime: 2022-02-21 18:24:33
  * @FilePath: \campus-community-backend\src\service\partition.service.js
  * @Description: 分区管理 partition
  */
@@ -56,6 +56,15 @@ class PartitionService {
     console.log(res);
     return res
   }
+  /**
+   * 查询所有的分区
+   * @returns 
+   */
+  async selectAllPartition() {
+    const res = await Partition.findAll()
+    console.log(res);
+    return res
+  } 
 }
 
 module.exports = new PartitionService()

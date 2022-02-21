@@ -2,13 +2,13 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:26:12
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-19 17:38:53
+ * @LastEditTime: 2022-02-21 18:22:16
  * @FilePath: \campus-community-backend\src\controller\partition.controller.js
  * @Description:分区管理 partition
  */
 
-const { createPartition, delPartitionById } = require('../service/partition.service')
-const { partitionCreateErr, partitionDeleteError } = require('../constant/err.type')
+const { createPartition, delPartitionById, selectAllPartition } = require('../service/partition.service')
+const { partitionCreateErr, partitionDeleteError, partitionQueryALLError } = require('../constant/err.type')
 
 class PartitionController {
   /**
@@ -47,6 +47,23 @@ class PartitionController {
       }
     } catch (err) {
       ctx.app.emit('error', partitionDeleteError, ctx)
+    }
+  }
+  /**
+   * 查询所有的分区
+   * @param {*} ctx 
+   * @param {*} next 
+   */
+  async queryAllPartition(ctx, next) {
+    try {
+      const res = await selectAllPartition()
+      ctx.body = {
+        code: 0,
+        message: "查询所有分区成功",
+        result: res
+      }
+    } catch (err) {
+      ctx.app.emit('error', partitionQueryALLError, ctx)
     }
   }
 }
