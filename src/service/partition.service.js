@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:02:42
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-21 18:24:33
+ * @LastEditTime: 2022-02-21 18:39:24
  * @FilePath: \campus-community-backend\src\service\partition.service.js
  * @Description: 分区管理 partition
  */

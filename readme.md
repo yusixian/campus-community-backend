@@ -1,8 +1,8 @@
 <!--
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
- * @LastEditors: cos
- * @LastEditTime: 2022-02-18 15:34:51
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-02-21 18:50:40
  * @Description: 项目说明、启动、功能介绍
 -->
 [toc]
@@ -52,12 +52,12 @@ yarn dev
     - [ ] 删除文章
     - [ ] 黑名单
 
-  - [ ] 评论管理 comment 
+  - [x] 评论管理 comment 
 
-  - [ ] 分区管理 partition
+  - [x] 分区管理 partition
 
-    - [ ] 添加板块
-    - [ ] 删除板块
+    - [x] 添加板块
+    - [x] 删除板块
 
   - [ ] 系统管理
 
