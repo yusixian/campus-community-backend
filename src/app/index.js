@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:29:53
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-21 18:35:41
+ * @LastEditTime: 2022-02-22 20:02:29
  * @Description: 
  */
 // 导入包
@@ -26,7 +26,6 @@ render(app, {
 })
 // 添加跨域中间件
 app.use(cors())
-app.use(KoaBody())
 // 配置上传文件
 app.use(KoaBody({
   multipart: true,
