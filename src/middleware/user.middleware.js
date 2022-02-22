@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
- * @LastEditors: cos
- * @LastEditTime: 2022-02-19 21:01:57
+ * @LastEditors: 41
+ * @LastEditTime: 2022-02-22 10:04:24
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -10,9 +10,10 @@ const { getUserInfo } = require('../service/user.service')
 const {
   userFormateError, userAlreadtExited,
   userRegisterError, userDosNotExist,
-  userLoginError, invalidPassword, unAuthorizedError} = require('../constant/err.type')
+  userLoginError, invalidPassword, unAuthorizedError } = require('../constant/err.type')
 const userValidator = async (ctx, next) => {
   const { user_name, password } = ctx.request.body
+  // console.log(user_name, password);
   // 合法性
   if (!user_name || !password) {
     console.error('用户名或密码为空', ctx.request.body);
@@ -75,7 +76,7 @@ const verifyLogin = async (ctx, next) => {
 }
 const verifyAdmin = async (ctx, next) => {
   const { is_admin } = ctx.state.user
-  if(!is_admin) {
+  if (!is_admin) {
     console.error('用户无权限，请使用管理员账号')
     return ctx.app.emit('error', unAuthorizedError, ctx)
   }
