@@ -2,13 +2,14 @@
  * @Author: 41
  * @Date: 2022-02-16 19:01:07
  * @LastEditors: cos
- * @LastEditTime: 2022-02-19 22:49:48
+ * @LastEditTime: 2022-02-23 00:45:38
  * @Description: HTTP 错误响应代码转换 https://developer.mozilla.org/zh-CN/docs/web/http/status
  */
 module.exports = (err, ctx) => {
   let status = 500
   switch (err.code) {
     case '10001':   // 请求参数有误。or 语义有误
+    case '11000':
     case '11003': 
       status = 400  // 400 Bad Request
       break   
