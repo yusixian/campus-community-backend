@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 14:52:20
+ * @LastEditTime: 2022-02-23 14:56:18
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -28,7 +28,7 @@ class UserController {
       res['sessionid'] = new Date().getTime()
       ctx.body = {
         code: 0,
-        message: '用户登录成功',
+        message: 'token更新成功',
         result: {
           oldtoken: token,
           newtoken: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' })
