@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 16:40:39
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 12:20:37
+ * @LastEditTime: 2022-02-23 12:28:20
  * @FilePath: \campus-community-backend\src\middleware\partition.middleware.js
  * @Description: partition 中间件
  */
@@ -46,6 +46,7 @@ const PartitionIdIsExited = async (ctx, next) => {
   if(!await selectPartitionCountById(id)){
     ctx.app.emit('error', partitionIsNotExitedErr, ctx)
   }
+  await next()
 }
 
 module.exports = {
