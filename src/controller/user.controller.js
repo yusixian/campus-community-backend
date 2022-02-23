@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-22 10:02:49
+ * @LastEditTime: 2022-02-23 13:48:24
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -44,6 +44,7 @@ class UserController {
     try {
       // 从返回结果对象中剔除password属性，将剩下的属性放到res对象
       const { password, ...res } = await getUserInfo({ user_name })
+      res['sessionid'] = new Date().getTime()  // 给token添加sessionid配置,可以避免多token同时生效！
       ctx.body = {
         code: 0,
         message: '用户登录成功',
