@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-22 21:03:21
+ * @LastEditTime: 2022-02-23 18:52:34
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
@@ -26,7 +26,7 @@ class CommentContrller {
       ctx.body = {
         code: 0,
         message: "评论成功",
-        result: ''
+        
       }
     } catch (err) {
       ctx.app.emit('error', commentCreateError, ctx)
@@ -45,7 +45,7 @@ class CommentContrller {
       ctx.body = {
         code: 0,
         message: '删除评论成功',
-        result: ''
+        
       }
     } catch {
       ctx.app.emit('error', commentDeleteFailedError, ctx)
@@ -68,7 +68,7 @@ class CommentContrller {
       ctx.body = {
         code: 0,
         message: '恢复评论成功',
-        result: ''
+        
       }
     } catch {
       ctx.app.emit('error', commentDeleteFailedError, ctx)
