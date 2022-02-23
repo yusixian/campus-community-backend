@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 12:22:24
+ * @LastEditors: 41
+ * @LastEditTime: 2022-02-23 20:28:31
  * @Description: 
  */
 module.exports = {
@@ -39,6 +39,11 @@ module.exports = {
   changePasswordError: {
     code: '10007',
     message: '修改密码失败',
+    result: ''
+  },
+  adminError: {
+    code: '10008',
+    message: '没有管理员权限',
     result: ''
   },
   tokenExpiredError: {
@@ -155,5 +160,5 @@ module.exports = {
     message: '资源上传失败',
     result: ''
   }
-  
+
 }

@@ -2,19 +2,20 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 14:56:18
+ * @LastEditTime: 2022-02-23 20:37:26
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
 const path = require('path')
-const { createUser, getUserInfo, updateById } = require('../service/user.service')
+const { createUser, getUserInfo, updateById, getAllInfo } = require('../service/user.service')
 const {
   userRegisterError,
   userLoginError,
   changePasswordError,
   fileUploadError,
   tokenExpiredError,
-  invalidToken
+  invalidToken,
+  adminError
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 class UserController {
@@ -125,6 +126,24 @@ class UserController {
     } else {
       return ctx.app.emit('error', fileUploadError, ctx)
     }
+  }
+  async findall (ctx, next) {
+    // console.log(ctx.state.user.is_admin);
+    let res = await getAllInfo()
+    // console.log(res);
+    if (ctx.state.user.is_admin) {
+      ctx.body = {
+        code: 0,
+        message: '查询成功',
+        result: {
+          user: res
+        }
+      }
+    } else {
+      return ctx.app.emit('error', adminError, ctx)
+    }
+
+
   }
 }
 

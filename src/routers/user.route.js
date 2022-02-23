@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:18:24
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 14:12:23
+ * @LastEditTime: 2022-02-23 20:25:44
  * @Description: 
  */
 const Router = require('koa-router')
@@ -10,7 +10,7 @@ const Router = require('koa-router')
 const router = new Router({ prefix: '/users' })
 
 // 导入controller
-const { register, login, changePassword, upload, updatetoken } = require('../controller/user.controller')
+const { register, login, changePassword, upload, updatetoken, findall } = require('../controller/user.controller')
 // 导入中间件
 const {
   userValidator,
@@ -29,4 +29,6 @@ router.patch('/', auth, cryptPassword, changePassword)
 router.post('/upload', auth, upload)
 // token更新接口
 router.get('/updatetoken', updatetoken)
+// 查询所有用户信息的接口
+router.get('/info', auth, findall)
 module.exports = router

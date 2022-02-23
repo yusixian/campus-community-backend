@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:18:52
  * @LastEditors: 41
- * @LastEditTime: 2022-02-21 14:42:32
+ * @LastEditTime: 2022-02-23 20:34:09
  * @Description: 
  */
 const User = require('../model/user.model')
@@ -49,6 +49,12 @@ class UserService {
       where: whereOpt
     })
     return res ? res.dataValues : null
+  }
+
+  async getAllInfo () {
+    return await User.findAll({
+      raw: true
+    })
   }
 
   async updateById ({ id, user_name, password, is_admin, img }) {
