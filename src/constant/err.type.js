@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: 41
- * @LastEditTime: 2022-02-21 10:06:40
+ * @LastEditors: cos
+ * @LastEditTime: 2022-02-23 01:42:13
  * @Description: 
  */
 module.exports = {
@@ -57,9 +57,9 @@ module.exports = {
     result: ''
   },
   // 文章相关errorType
-  articleOperationError: {
+  articleIDError: {
     code: '11000',
-    message: '操作失败！服务器遇到未知错误'
+    message: '文章id不可以为空'
   },
   articleCreateError: {
     code: '11001',
@@ -87,7 +87,7 @@ module.exports = {
   },
   articleRestoreError: {
     code: '11007',
-    message: '恢复文章失败，该文章不存在或未被屏蔽'
+    message: '恢复文章失败，该文章可能未被屏蔽'
   },
   // 分区管理 partition
   partitionCreateErr: {
