@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 16:40:39
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 12:28:20
+ * @LastEditTime: 2022-02-23 14:57:05
  * @FilePath: \campus-community-backend\src\middleware\partition.middleware.js
  * @Description: partition 中间件
  */
@@ -41,8 +41,9 @@ const partitionIdIsNull = async (ctx, next) => {
 }
 // 根据分区id判断分区是否存在
 const PartitionIdIsExited = async (ctx, next) => {
-  const {id} = ctx.request.body.partition_id
+  const id = ctx.request.body.partition_id
   || ctx.request.query.partition_id
+  console.log(await selectPartitionCountById(id));
   if(!await selectPartitionCountById(id)){
     ctx.app.emit('error', partitionIsNotExitedErr, ctx)
   }

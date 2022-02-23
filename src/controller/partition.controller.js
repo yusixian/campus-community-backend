@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:26:12
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-21 18:22:16
+ * @LastEditTime: 2022-02-23 18:52:40
  * @FilePath: \campus-community-backend\src\controller\partition.controller.js
  * @Description:分区管理 partition
  */
@@ -24,7 +24,7 @@ class PartitionController {
       ctx.body = {
         code: 0,
         message: "分区创建成功",
-        result: ''
+        result: undefined
       }
     } catch (err) {
       ctx.app.emit('error', partitionCreateErr, ctx)
@@ -43,7 +43,7 @@ class PartitionController {
       ctx.body = {
         code: 0,
         message: "分区删除成功",
-        result: ''
+        
       }
     } catch (err) {
       ctx.app.emit('error', partitionDeleteError, ctx)
