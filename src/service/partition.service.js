@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:02:42
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 09:50:38
+ * @LastEditTime: 2022-02-23 14:58:57
  * @FilePath: \campus-community-backend\src\service\partition.service.js
  * @Description: 分区管理 partition
  */
@@ -71,12 +71,13 @@ class PartitionService {
    * @returns 
    */
   async selectPartitionCountById(id) {
-    const res = await Partition.findAll({
-      where: {
-        id: id
+    const res = await Partition.count({
+      where:{
+        id: {
+          [Op.eq]: id
+        }
       }
     })
-    console.log(res);
     return res
   }
 }
