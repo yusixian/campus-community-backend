@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 20:39:56
+ * @LastEditTime: 2022-02-23 22:42:17
  * @Description: 
  */
 module.exports = {
@@ -44,7 +44,10 @@ module.exports = {
   adminError: {
     code: '10008',
     message: '没有管理员权限',
-    result: ''
+  },
+  userChangeError: {
+    code: '10009',
+    message: '用户状态改变失败',
   },
   tokenExpiredError: {
     code: 10101,

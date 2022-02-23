@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 20:46:20
+ * @LastEditTime: 2022-02-23 22:46:38
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -15,7 +15,8 @@ const {
   fileUploadError,
   tokenExpiredError,
   invalidToken,
-  adminError
+  adminError,
+  userChangeError
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 class UserController {
@@ -128,10 +129,9 @@ class UserController {
     }
   }
   async findall (ctx, next) {
-    // console.log(ctx.state.user.is_admin);
-    let res = await getAllInfo()
-    // console.log(res);
-    if (ctx.state.user.is_admin) {
+    try {
+      let res = await getAllInfo()
+
       ctx.body = {
         code: 0,
         message: '查询成功',
@@ -139,11 +139,40 @@ class UserController {
           user: res
         }
       }
-    } else {
-      return ctx.app.emit('error', adminError, ctx)
     }
+    catch (err) {
+      return ctx.app.emit('error', adminError, err)
+    }
+  }
+  async blockade (ctx, next) {
+    const { user_name, is_active } = ctx.request.body
+    if (user_name === "") {
+      ctx.app.emit('error', userDosNotExist, ctx)
+      return;
+    }
+    try {
+      const { id } = await getUserInfo({ user_name })
+      await updateById({ id, is_active })
+      console.log(is_active);
+      if (is_active) {
+        ctx.body = {
+          code: 0,
+          message: `${user_name}用户已解封`,
+          result: {
+          }
+        }
+      } else {
+        ctx.body = {
+          code: 0,
+          message: `${user_name}用户已封号`,
+          result: {
+          }
+        }
+      }
 
-
+    } catch (err) {
+      return ctx.app.emit('error', userChangeError, err)
+    }
   }
 }
 
