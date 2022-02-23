@@ -2,19 +2,21 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 14:56:18
+ * @LastEditTime: 2022-02-23 22:46:38
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
 const path = require('path')
-const { createUser, getUserInfo, updateById } = require('../service/user.service')
+const { createUser, getUserInfo, updateById, getAllInfo } = require('../service/user.service')
 const {
   userRegisterError,
   userLoginError,
   changePasswordError,
   fileUploadError,
   tokenExpiredError,
-  invalidToken
+  invalidToken,
+  adminError,
+  userChangeError
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 class UserController {
@@ -48,11 +50,11 @@ class UserController {
   async register (ctx, next) {
     // 1.获取数据
     // console.log(ctx.request.body);
-    const { user_name, password, is_admin, img } = ctx.request.body
-    console.log(user_name, password, is_admin, img);
+    const { user_name, password, is_admin, img, is_active } = ctx.request.body
+    console.log(user_name, password, is_admin, img, is_active);
     try {
       // 2.操作数据库
-      const res = await createUser(user_name, password, is_admin, img)
+      const res = await createUser(user_name, password, is_admin, img, is_active)
       // 3.返回结果
       ctx.body = {
         code: 0,
@@ -124,6 +126,52 @@ class UserController {
       }
     } else {
       return ctx.app.emit('error', fileUploadError, ctx)
+    }
+  }
+  async findall (ctx, next) {
+    try {
+      let res = await getAllInfo()
+
+      ctx.body = {
+        code: 0,
+        message: '查询成功',
+        result: {
+          user: res
+        }
+      }
+    }
+    catch (err) {
+      return ctx.app.emit('error', adminError, err)
+    }
+  }
+  async blockade (ctx, next) {
+    const { user_name, is_active } = ctx.request.body
+    if (user_name === "") {
+      ctx.app.emit('error', userDosNotExist, ctx)
+      return;
+    }
+    try {
+      const { id } = await getUserInfo({ user_name })
+      await updateById({ id, is_active })
+      console.log(is_active);
+      if (is_active) {
+        ctx.body = {
+          code: 0,
+          message: `${user_name}用户已解封`,
+          result: {
+          }
+        }
+      } else {
+        ctx.body = {
+          code: 0,
+          message: `${user_name}用户已封号`,
+          result: {
+          }
+        }
+      }
+
+    } catch (err) {
+      return ctx.app.emit('error', userChangeError, err)
     }
   }
 }

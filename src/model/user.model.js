@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 14:42:24
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 11:55:09
+ * @LastEditTime: 2022-02-23 21:22:21
  * @Description: 
  */
 const { DataTypes } = require('sequelize')
@@ -27,13 +27,19 @@ const User = seq.define('sc_User', {
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: 0,
-    comment: '是否位管理员,0:不是管理员(默认) 1:管理员'
+    comment: '是否位管理员,false:不是管理员(默认) true:管理员'
   },
   img: {
     type: DataTypes.STRING,
     allowNull: true,
     defaultValue: '',
     comment: '头像图片的地址'
+  },
+  is_active: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: 0,
+    comment: '是否可用,false:封号,true:可用'
   }
 })
 // 轻质同步数据库(创建数据表)

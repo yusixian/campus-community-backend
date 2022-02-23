@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 13:57:27
- * @LastEditTime: 2022-02-23 11:56:20
+ * @LastEditTime: 2022-02-23 21:22:37
  * @LastEditors: 41
  * @Description: 文章类型 
  * @FilePath: \campus-community-backend\src\model\article.model.js

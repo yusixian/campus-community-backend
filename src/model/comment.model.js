@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 13:29:28
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 13:42:23
+ * @LastEditTime: 2022-02-23 21:22:44
  * @FilePath: \campus-community-backend\src\model\comment.model.js
  * @Description: 评论的model
  */
