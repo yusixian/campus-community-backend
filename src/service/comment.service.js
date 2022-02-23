@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:47:31
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-21 18:11:56
+ * @LastEditTime: 2022-02-22 20:56:51
  * @FilePath: \campus-community-backend\src\service\comment.service.js
  * @Description: 评论的业务逻辑层
  * 
@@ -60,6 +60,22 @@ class CommentService {
         }
       }
     })
+    return res
+  }
+  /**
+   * 通过文章id批量删除评论
+   * @param {*} ids 需要删除的评论列表
+   * @returns 
+   */
+  async delCommentBatchByIds(ids) {
+    const res = await Comment.destroy({
+      where: {
+        id: {
+          [Op.in]: ids
+        }
+      }
+    })
+    console.log(res);
     return res
   }
   /**

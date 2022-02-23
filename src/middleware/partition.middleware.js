@@ -2,14 +2,14 @@
  * @Author: lihao
  * @Date: 2022-02-19 16:40:39
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-19 17:38:09
+ * @LastEditTime: 2022-02-23 12:20:37
  * @FilePath: \campus-community-backend\src\middleware\partition.middleware.js
  * @Description: partition 中间件
  */
 
-const { partitionIsExited } = require('../service/partition.service')
+const { partitionIsExited, selectPartitionCountById } = require('../service/partition.service')
 
-const { partitionIsExitedErr, partitionFormateError, partitionIdError} = require('../constant/err.type')
+const { partitionIsExitedErr, partitionFormateError, partitionIdError, partitionIsNotExitedErr} = require('../constant/err.type')
 
 // 判断分区名称是否合法
 const partitionValidator = async (ctx, next) => {
@@ -39,10 +39,19 @@ const partitionIdIsNull = async (ctx, next) => {
   }
   await next()
 }
+// 根据分区id判断分区是否存在
+const PartitionIdIsExited = async (ctx, next) => {
+  const {id} = ctx.request.body.partition_id
+  || ctx.request.query.partition_id
+  if(!await selectPartitionCountById(id)){
+    ctx.app.emit('error', partitionIsNotExitedErr, ctx)
+  }
+}
 
 module.exports = {
   partitionValidator,
   partitionIsUni,
-  partitionIdIsNull
+  partitionIdIsNull,
+  PartitionIdIsExited
 }
 

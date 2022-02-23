@@ -2,13 +2,13 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-21 18:05:32
+ * @LastEditTime: 2022-02-22 21:03:21
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
  */
 
-const { createComment, delCommentById, restoreCommentById, selectCommentByArticleId } = require('../service/comment.service')
+const { createComment, delCommentById, restoreCommentById, selectCommentByArticleId, delCommentBatchByIds } = require('../service/comment.service')
 
 const { commentCreateError, commentDeleteFailedError, unAuthorizedError, commentSelectByArticleIdFailedError } = require('../constant/err.type')
 class CommentContrller {
@@ -38,7 +38,7 @@ class CommentContrller {
    * @param {*} next 
    */
   async deleleComment(ctx, next) {
-    
+
     const { id } = ctx.request.query
     try {
       const res = await delCommentById(id)
@@ -80,7 +80,7 @@ class CommentContrller {
    * @param {*} next 
    */
   async queryCommentByArticleId(ctx, next) {
-    const {id} = ctx.request.query
+    const { id } = ctx.request.query
     try {
       const res = await selectCommentByArticleId(id)
       console.log(res);
@@ -91,6 +91,25 @@ class CommentContrller {
       }
     } catch {
       ctx.app.emit('error', commentSelectByArticleIdFailedError, ctx)
+    }
+  }
+  /**
+   * 通过文章id批量删除评论
+   * @param {*} ctx 
+   * @param {*} next 
+   */
+  async delBatchCommentByIds(ctx, next) {
+    const {ids} = ctx.request.body
+    try {
+      const res = await delCommentBatchByIds(ids)
+      console.log(res);
+      ctx.body = {
+        code: 0,
+        message: '删除评论成功',
+        result: res //被删除的评论数量
+      }
+    } catch {
+      ctx.app.emit('error', commentDeleteFailedError, ctx)
     }
   }
 

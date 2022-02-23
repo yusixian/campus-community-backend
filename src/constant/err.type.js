@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: 41
- * @LastEditTime: 2022-02-21 10:06:40
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-02-23 12:20:25
  * @Description: 
  */
 module.exports = {
@@ -118,6 +118,11 @@ module.exports = {
   partitionQueryALLError: {
     code: '12006',
     message: '查询所有分区失败',
+    result: ''
+  },
+  partitionIsNotExitedErr: {
+    code: '12007',
+    message: '分区不存在',
     result: ''
   },
   // 评论，comment

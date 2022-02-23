@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:02:42
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-21 18:39:24
+ * @LastEditTime: 2022-02-23 09:50:38
  * @FilePath: \campus-community-backend\src\service\partition.service.js
  * @Description: 分区管理 partition
  */
@@ -65,6 +65,20 @@ class PartitionService {
     console.log(res);
     return res
   } 
+  /**
+   * 根据分区id查询id是否存在
+   * @param {*} id 被查询的分区id
+   * @returns 
+   */
+  async selectPartitionCountById(id) {
+    const res = await Partition.findAll({
+      where: {
+        id: id
+      }
+    })
+    console.log(res);
+    return res
+  }
 }
 
 module.exports = new PartitionService()
