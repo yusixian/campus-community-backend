@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 14:42:24
  * @LastEditors: 41
- * @LastEditTime: 2022-02-21 14:18:43
+ * @LastEditTime: 2022-02-23 11:55:09
  * @Description: 
  */
 const { DataTypes } = require('sequelize')

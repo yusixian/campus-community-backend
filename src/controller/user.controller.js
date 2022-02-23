@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-22 10:02:49
+ * @LastEditTime: 2022-02-23 14:56:18
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -12,10 +12,39 @@ const {
   userRegisterError,
   userLoginError,
   changePasswordError,
-  fileUploadError
+  fileUploadError,
+  tokenExpiredError,
+  invalidToken
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 class UserController {
+  async updatetoken (ctx, next) {
+    const { authorization } = ctx.request.header
+    const token = authorization.replace('Bearer ', '')
+    try {
+      const user = jwt.verify(token, JWT_SECRET)
+      const user_name = user.user_name
+      const { password, ...res } = await getUserInfo({ user_name })
+      res['sessionid'] = new Date().getTime()
+      ctx.body = {
+        code: 0,
+        message: 'token更新成功',
+        result: {
+          oldtoken: token,
+          newtoken: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' })
+        }
+      }
+    } catch (err) {
+      switch (err.name) {
+        case 'TokenExpiredError':
+          console.error('token已过期', err);
+          return ctx.app.emit('error', tokenExpiredError, ctx)
+        case 'JsonWebTokenError':
+          console.error('无效token', err);
+          return ctx.app.emit('error', invalidToken, ctx)
+      }
+    }
+  }
   async register (ctx, next) {
     // 1.获取数据
     // console.log(ctx.request.body);
@@ -44,6 +73,7 @@ class UserController {
     try {
       // 从返回结果对象中剔除password属性，将剩下的属性放到res对象
       const { password, ...res } = await getUserInfo({ user_name })
+      res['sessionid'] = new Date().getTime()  // 给token添加sessionid配置,可以避免多token同时生效！
       ctx.body = {
         code: 0,
         message: '用户登录成功',

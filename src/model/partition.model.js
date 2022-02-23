@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-02-19 14:31:15
- * @LastEditTime: 2022-02-21 12:17:18
- * @LastEditors: lihao
+ * @LastEditTime: 2022-02-23 11:56:17
+ * @LastEditors: 41
  * @Description: 分区管理 partition
  * @FilePath: \campus-community-backend\src\model\partition.model.js
  */
@@ -31,7 +31,7 @@ const Partition = seq.define('sc_Partition', {
     comment: '创建分区的用户id'
   }
 })
-Partition.belongsTo(User,{
+Partition.belongsTo(User, {
   foreignKey: 'cre_user_id'
 })
 // 轻质同步数据库(创建数据表)
