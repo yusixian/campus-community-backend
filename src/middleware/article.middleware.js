@@ -1,22 +1,27 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 15:10:21
- * @LastEditTime: 2022-02-23 02:26:37
+ * @LastEditTime: 2022-02-24 15:49:15
  * @LastEditors: cos
  * @Description: 文章相关中间件
  * @FilePath: \campus-community-backend\src\middleware\article.middleware.js
  */
-const { articleParamsError, articleIDError, articleDosNotExist } = require('../constant/err.type');
+const { articleParamsError, articleIDError, articleDosNotExist, partitionIsNotExitedErr } = require('../constant/err.type');
 const { searchArticleByID } = require('../service/article.service');
+const { selectPartitionCountById } = require('../service/partition.service');
+
 
 // 验证发表文章信息合法性(必须传递必选参数)
 const articleInfoValidate = async (ctx, next) => {
   const { title, content, partition_id } = ctx.request.body;
+  // console.log(title, content, partition_id)
   if(!title || !content) 
     return ctx.app.emit('error', articleParamsError, ctx);
   ctx.state.newArticle = { title, content } 
   if(partition_id) {
-    // 等一个分区中间件，根据分区id判断分区是否存在
+    // 根据分区id判断分区是否存在
+    if(!await selectPartitionCountById(partition_id))
+      return ctx.app.emit('error', partitionIsNotExitedErr, ctx)
     ctx.state.newArticle.partition_id = partition_id
   }
   // console.log("articleInfoValidate:",ctx.state.newArticle)

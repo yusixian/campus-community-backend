@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 19:01:07
  * @LastEditors: cos
- * @LastEditTime: 2022-02-23 20:46:33
+ * @LastEditTime: 2022-02-24 15:26:34
  * @Description: HTTP 错误响应代码转换 https://developer.mozilla.org/zh-CN/docs/web/http/status
  */
 module.exports = (err, ctx) => {
@@ -18,6 +18,7 @@ module.exports = (err, ctx) => {
       break
     case 10004:   // 请求失败，请求所希望得到的资源未被在服务器上发现
     case 11004:
+    case 12007:
       status = 404  // 404 Not Found
       break
     case 10002:   // 和被请求的资源的当前状态之间存在冲突
