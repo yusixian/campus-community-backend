@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: 41
- * @LastEditTime: 2022-02-23 22:42:17
+ * @LastEditors: cos
+ * @LastEditTime: 2022-02-24 21:36:09
  * @Description: 
  */
 module.exports = {
@@ -97,6 +97,11 @@ module.exports = {
     code: 11007,
     message: '恢复文章失败，该文章可能未被屏蔽'
   },
+  articleFilterParamsError: {
+    code: 11008,
+    message: '过滤参数错误，请检查query参数正确性'
+  },
+
   // 分区管理 partition
   partitionCreateErr: {
     code: 12001,

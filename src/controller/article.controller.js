@@ -1,12 +1,12 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-02-24 19:13:26
+ * @LastEditTime: 2022-02-25 00:15:13
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
-const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID} = require('../service/article.service')
+const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle} = require('../service/article.service')
 const { articleOperationError, articleCreateError, 
     articleDeleteError, articleParamsError, 
     articleDosNotExist, articleUpdateError, 
@@ -155,6 +155,31 @@ class ArticleController {
           code: 0,
           message: "获取文章成功！",
           result: article
+      }
+    } catch (err) {
+      console.error('获取文章失败！', err);
+      return ctx.app.emit('error', articleOperationError, ctx)
+    }
+  }
+
+  
+  /**
+   * @description:根据id获取文章
+   */
+   async getByPages(ctx, next) {
+    try {
+      const filterOpt = ctx.state.filterOpt
+      console.log("filterOpt:", filterOpt)
+      const res = await filterArticle(filterOpt)
+      const article_pages = res.page_nums
+      const article_total = res.count
+      const article_list = res.rows
+      const result = { article_total , article_pages, article_list }
+      console.log(result)
+      ctx.body = {
+          code: 0,
+          message: "获取文章成功！",
+          result
       }
     } catch (err) {
       console.error('获取文章失败！', err);

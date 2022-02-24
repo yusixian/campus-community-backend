@@ -1,12 +1,13 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-02-24 19:30:44
+ * @LastEditTime: 2022-02-25 00:54:45
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
  */
-
+const { Op } = require("sequelize");
+const moment = require('moment');
 const Article = require('../model/article.model')
 class ArticleService {
   /**
@@ -114,6 +115,50 @@ class ArticleService {
     const res = await Article.update(newArticle, { where: whereOpt })
     // console.log("res", res)
     return res[0] > 0 ? true : false
+  }
+  
+  /**
+   * @param {FilterOption} filterOpt 
+   * @return {Array<Article>} article_list or null
+   * @description: filterOpt
+   * @current filterOpt.current || 1 当前页
+   * @size filterOpt.size || 10 每页最大文章数
+   */
+  async filterArticle(filterOpt, orderOpt) {
+    const whereOpt = {}
+    const current = filterOpt.current || 1
+    const size = filterOpt.size || 10
+    const { partition_id, status, start_time, end_time } = filterOpt
+    let isDel = true  // 为false则查被软删除的
+    // console.log("status:", status)
+    switch (status) {
+      case 0: whereOpt.status = 0; break
+      case 1: whereOpt.status = 1; break
+      case 2: whereOpt.status = 2; isDel = false; break
+      default: break
+    }
+    partition_id && Object.assign(whereOpt, { partition_id })
+    if(start_time || end_time) whereOpt.createdAt = {}
+    if(start_time) Object.assign(whereOpt.createdAt, { 
+      [Op.gt]: moment(start_time).toDate()
+    })
+    if(end_time) Object.assign(whereOpt.createdAt, { 
+      [Op.lt]: moment(end_time).toDate()
+    })
+    console.log("whereOpt:",whereOpt)
+    // const start_time = filterOpt.start_time
+    const { count, rows } = await Article.findAndCountAll({
+      paranoid: isDel,
+      where: whereOpt,
+      // order: orderOpt,
+      offset: (current-1)*size,
+      limit: size,
+      raw: true
+    })
+    const page_nums = Math.ceil(count/size)
+    // console.log("whereOpt:", whereOpt)
+    // console.log({ page_nums, count, rows })
+    return { page_nums, count, rows }
   }
 }
 

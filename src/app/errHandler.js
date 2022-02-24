@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 19:01:07
  * @LastEditors: cos
- * @LastEditTime: 2022-02-24 15:26:34
+ * @LastEditTime: 2022-02-24 21:36:25
  * @Description: HTTP 错误响应代码转换 https://developer.mozilla.org/zh-CN/docs/web/http/status
  */
 module.exports = (err, ctx) => {
@@ -11,6 +11,7 @@ module.exports = (err, ctx) => {
     case 10001:   // 请求参数有误。or 语义有误
     case 11000:
     case 11003: 
+    case 11008:
       status = 400  // 400 Bad Request
       break   
     case 10103:   // 当前请求需要管理员权限，用户并非管理员，服务器拒绝请求。
