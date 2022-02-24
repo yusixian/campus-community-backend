@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:09:32
- * @LastEditTime: 2022-02-23 02:33:30
+ * @LastEditTime: 2022-02-24 17:40:41
  * @LastEditors: cos
  * @Description: 文章管理相关路由
  * @FilePath: \campus-community-backend\src\routers\article.route.js
@@ -17,7 +17,7 @@ const { verifyAdmin } = require('../middleware/user.middleware')
 const router = new Router({ prefix: '/articles' })
 
 router.post('/create', auth, articleInfoValidate, postArticle)
-router.post('/restore', auth, verifyAdmin, articleIDValidate, articleExistValidate, restoreArticle)
+router.post('/restore', auth, verifyAdmin, articleIDValidate, restoreArticle)
 router.delete('/delete', auth, articleIDValidate, articleExistValidate, deleteArticle)
 router.delete('/shield', auth, verifyAdmin, articleIDValidate, articleExistValidate, shieldArticle)
 router.patch('/update', auth, articleInfoValidate, articleIDValidate,articleExistValidate, updateArticle)

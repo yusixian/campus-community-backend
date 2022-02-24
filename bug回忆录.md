@@ -1,8 +1,8 @@
 <!--
  * @Author: 41
  * @Date: 2022-02-15 21:08:52
- * @LastEditors: 41
- * @LastEditTime: 2022-02-21 09:37:48
+ * @LastEditors: cos
+ * @LastEditTime: 2022-02-24 18:51:57
  * @Description: 
 -->
 [toc]
@@ -58,3 +58,13 @@
 ```
 ## 14.uploadDir`../upload`这种`../`的方式是不对的！
 - 一般来说,在配置的文件中,我们都不要使用相对路径！！！
+
+## 15.class里别用this！
+- 非箭头函数会自动创建this指向自己
+- class里面不支持箭头函数
+- 想在类里调用其他方法，请用类名.prototype.方法
+## 16.类型转换问题 空对象
+- [Boolean - MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
+- 其值不是undefined或null的任何对象（包括其值为false的布尔对象）在传递给条件语句时都将计算为true
+- 0，-0，null，false，NaN，undefined，或空字符串（""） 为true
+- 其他为false
