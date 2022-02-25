@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 15:10:21
- * @LastEditTime: 2022-02-25 00:42:20
+ * @LastEditTime: 2022-02-25 13:05:40
  * @LastEditors: cos
  * @Description: 文章相关中间件
  * @FilePath: \campus-community-backend\src\middleware\article.middleware.js
@@ -60,13 +60,14 @@ const articleExistValidate = async (ctx, next) => {
 // status、partition_id、开始结束时间等
 const articleFilterValidate = async (ctx, next) => {
   console.log(ctx.request.query)
-  let { current, size, status, partition_id, start_time, end_time } = ctx.request.query
+  let { current, size, status, partition_id, start_time, end_time, user_id } = ctx.request.query
   ctx.state.filterOpt = {}
   const filterOpt = ctx.state.filterOpt
   try {
     if(current) filterOpt.current = parseInt(current)
     if(size) filterOpt.size = parseInt(size)
     if(partition_id) filterOpt.partition_id = parseInt(partition_id)
+    if(user_id) filterOpt.user_id = parseInt(user_id)
 
     if(moment(start_time).isValid()) filterOpt.start_time = start_time
     if(moment(end_time).isValid()) filterOpt.end_time = end_time

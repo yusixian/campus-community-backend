@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-02-25 00:54:45
+ * @LastEditTime: 2022-02-25 13:16:03
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -83,6 +83,16 @@ class ArticleService {
     // console.log(res)
     return res
   }
+  
+  /**
+   * @description: 根据文章id增加该文章的浏览量
+   * @param {number} article_id
+   */
+  async incrementVisitsByID(article_id) {
+    const res = await Article.increment({visits: 1}, { where: { id: article_id } }) // 增加浏览量
+    console.log(res)
+    return res
+  }
 
   /**
    * @description: 根据id查询单个帖子是否存在 软删除的帖子会查不到
@@ -116,28 +126,41 @@ class ArticleService {
     // console.log("res", res)
     return res[0] > 0 ? true : false
   }
-  
+
   /**
-   * @param {FilterOption} filterOpt 
-   * @return {Array<Article>} article_list or null
-   * @description: filterOpt
-   * @current filterOpt.current || 1 当前页
-   * @size filterOpt.size || 10 每页最大文章数
+   * @param {number} status 过滤参数
+   * @return {boolean} ParanoidOpt 偏执表选项
+   * @description: 
    */
-  async filterArticle(filterOpt, orderOpt) {
+  async getParanoidOpt(status) {
+    let paranoidOpt = true
+    switch (status) {
+      case 0: 
+      case 1: 
+        break
+      case 2: paranoidOpt = false; break
+      default: break
+    }
+    return paranoidOpt
+  }
+
+  /**
+   * @param {FilterOption} filterOpt 过滤参数
+   * @return {WhereOpt} 提取过滤参数到whereOpt
+   * @description: 
+   */
+  async getWhereOpt(filterOpt) {
     const whereOpt = {}
-    const current = filterOpt.current || 1
-    const size = filterOpt.size || 10
-    const { partition_id, status, start_time, end_time } = filterOpt
-    let isDel = true  // 为false则查被软删除的
+    const { partition_id, status, start_time, end_time, user_id } = filterOpt
     // console.log("status:", status)
     switch (status) {
       case 0: whereOpt.status = 0; break
       case 1: whereOpt.status = 1; break
-      case 2: whereOpt.status = 2; isDel = false; break
+      case 2: whereOpt.status = 2; break
       default: break
     }
     partition_id && Object.assign(whereOpt, { partition_id })
+    user_id && Object.assign(whereOpt, { user_id })
     if(start_time || end_time) whereOpt.createdAt = {}
     if(start_time) Object.assign(whereOpt.createdAt, { 
       [Op.gt]: moment(start_time).toDate()
@@ -145,20 +168,56 @@ class ArticleService {
     if(end_time) Object.assign(whereOpt.createdAt, { 
       [Op.lt]: moment(end_time).toDate()
     })
-    console.log("whereOpt:",whereOpt)
+    // console.log("whereOpt:",whereOpt)
+    return whereOpt
+  }
+
+  /**
+   * @param {FilterOption} filterOpt 过滤参数
+   * @param {OrderOption} orderOpt 排序参数 
+   * @return {Array<Article>} article_list or null
+   * @description: filterOpt、
+   */
+  async filterArticle(filterOpt, orderOpt) {
+    const current = filterOpt.current || 1
+    const size = filterOpt.size || 10
+
+    const whereOpt = await ArticleService.prototype.getWhereOpt(filterOpt)
+    const { status } = filterOpt
+    const paranoidOpt = await ArticleService.prototype.getParanoidOpt(status)
+
+    console.log("whereOpt:",whereOpt, 'paranoidOpt:', paranoidOpt)
     // const start_time = filterOpt.start_time
     const { count, rows } = await Article.findAndCountAll({
-      paranoid: isDel,
       where: whereOpt,
       // order: orderOpt,
       offset: (current-1)*size,
       limit: size,
+      paranoid: paranoidOpt,
       raw: true
     })
     const page_nums = Math.ceil(count/size)
-    // console.log("whereOpt:", whereOpt)
     // console.log({ page_nums, count, rows })
     return { page_nums, count, rows }
+  }
+  
+  /**
+   * @param {FilterOption} filterOpt 过滤参数
+   * @param {OrderOption} orderOpt 排序参数 
+   * @return {Array<Article>} article_list or null
+   * @description: filterOpt、
+   */
+  async countArticle(filterOpt) {
+    const whereOpt = await ArticleService.prototype.getWhereOpt(filterOpt)
+    const { status } = filterOpt
+    const paranoidOpt = await ArticleService.prototype.getParanoidOpt(status)
+    console.log("whereOpt:",whereOpt)
+    // const start_time = filterOpt.start_time
+    const count = await Article.count({
+      paranoid: paranoidOpt,
+      where: whereOpt
+    })
+    return count
   }
 }
 
