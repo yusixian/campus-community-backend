@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 16:40:39
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 14:57:05
+ * @LastEditTime: 2022-02-25 10:56:24
  * @FilePath: \campus-community-backend\src\middleware\partition.middleware.js
  * @Description: partition 中间件
  */
@@ -43,7 +43,6 @@ const partitionIdIsNull = async (ctx, next) => {
 const PartitionIdIsExited = async (ctx, next) => {
   const id = ctx.request.body.partition_id
   || ctx.request.query.partition_id
-  console.log(await selectPartitionCountById(id));
   if(!await selectPartitionCountById(id)){
     ctx.app.emit('error', partitionIsNotExitedErr, ctx)
   }

@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 18:52:34
+ * @LastEditTime: 2022-02-25 16:13:06
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
@@ -11,6 +11,8 @@
 const { createComment, delCommentById, restoreCommentById, selectCommentByArticleId, delCommentBatchByIds } = require('../service/comment.service')
 
 const { commentCreateError, commentDeleteFailedError, unAuthorizedError, commentSelectByArticleIdFailedError } = require('../constant/err.type')
+
+const { selectCommentReplyByCommentId } = require('../service/commentReply.service')
 class CommentContrller {
   /**
    * 新增评论
@@ -20,13 +22,12 @@ class CommentContrller {
   async inserComment(ctx, next) {
     // TODO 
     const { comment_content, article_id } = ctx.request.body;
-    console.log(comment_content, article_id, ctx.state.user.id);
     try {
       const res = await createComment(comment_content, ctx.state.user.id, article_id)
       ctx.body = {
         code: 0,
         message: "评论成功",
-        
+
       }
     } catch (err) {
       ctx.app.emit('error', commentCreateError, ctx)
@@ -45,7 +46,7 @@ class CommentContrller {
       ctx.body = {
         code: 0,
         message: '删除评论成功',
-        
+
       }
     } catch {
       ctx.app.emit('error', commentDeleteFailedError, ctx)
@@ -57,7 +58,6 @@ class CommentContrller {
    * @param {*} next 
    */
   async restoreComment(ctx, next) {
-    console.log(ctx.state.user);
     if (!ctx.state.user.is_admin) { //管理员权限可以恢复评论
       ctx.app.emit('error', unAuthorizedError, ctx)
       return
@@ -68,9 +68,10 @@ class CommentContrller {
       ctx.body = {
         code: 0,
         message: '恢复评论成功',
-        
+
       }
-    } catch {
+    } catch (err) {
+      console.log(err);
       ctx.app.emit('error', commentDeleteFailedError, ctx)
     }
   }
@@ -82,14 +83,19 @@ class CommentContrller {
   async queryCommentByArticleId(ctx, next) {
     const { id } = ctx.request.query
     try {
-      const res = await selectCommentByArticleId(id)
-      console.log(res);
+      let comment_res = await selectCommentByArticleId(id)
+      for (let index = 0; index < comment_res.length; index++) {
+        let comment_reply_res = await selectCommentReplyByCommentId(comment_res[index].id)
+        console.log(comment_res[index]);
+        comment_res[index].dataValues.reply = comment_reply_res
+      }
       ctx.body = {
         code: 0,
         message: '查询评论成功',
-        result: res
+        result: comment_res
       }
-    } catch {
+    } catch (err) {
+      console.log(err);
       ctx.app.emit('error', commentSelectByArticleIdFailedError, ctx)
     }
   }
@@ -99,16 +105,16 @@ class CommentContrller {
    * @param {*} next 
    */
   async delBatchCommentByIds(ctx, next) {
-    const {ids} = ctx.request.body
+    const { ids } = ctx.request.query
     try {
       const res = await delCommentBatchByIds(ids)
-      console.log(res);
       ctx.body = {
         code: 0,
         message: '删除评论成功',
         result: res //被删除的评论数量
       }
-    } catch {
+    } catch (err) {
+      console.log(err);
       ctx.app.emit('error', commentDeleteFailedError, ctx)
     }
   }

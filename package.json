@@ -8,6 +8,7 @@
     "createArticalModel": "node src/model/article.model.js",
     "createPartitionModel": "node src/model/partition.model.js",
     "createCommentModel": "node src/model/comment.model.js",
+    "createReply": "node src/model/commentReply.model.js",
     "dev": "nodemon ./src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:02:42
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 14:58:57
+ * @LastEditTime: 2022-02-25 10:56:29
  * @FilePath: \campus-community-backend\src\service\partition.service.js
  * @Description: 分区管理 partition
  */
@@ -17,7 +17,6 @@ class PartitionService {
    * @returns 
    */
   async createPartition(partition_name, partition_desc, cre_user_id) {
-    console.log(partition_name, partition_desc, cre_user_id);
     const res = await Partition.create({
       partition_name,
       partition_desc, 
@@ -53,7 +52,6 @@ class PartitionService {
         }
       }
     })
-    console.log(res);
     return res
   }
   /**
@@ -62,7 +60,6 @@ class PartitionService {
    */
   async selectAllPartition() {
     const res = await Partition.findAll()
-    console.log(res);
     return res
   } 
   /**

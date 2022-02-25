@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 18:52:05
+ * @LastEditTime: 2022-02-24 19:26:54
  * @Description: 
  */
 module.exports = {
@@ -153,7 +153,23 @@ module.exports = {
   fileUploadError: {
     code: 13000,
     message: '资源上传失败',
-    
+  },
+  // 评论回复表
+  commentReplyValidatorError: {
+    code: 14000,
+    message: '评论回复关键数据项不可以为空'
+  },
+  commentReplyIdFormateError: {
+    code: 14001,
+    message: '评论回复id不可以为空'
+  },
+  commentReplyAddError: {
+    code: 14002,
+    message: '评论回复异常'
+  },
+  commentReplyDelError: {
+    code: 14003,
+    message: '评论回复删除异常'
   }
   
 }

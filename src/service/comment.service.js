@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:47:31
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-22 20:56:51
+ * @LastEditTime: 2022-02-25 15:55:25
  * @FilePath: \campus-community-backend\src\service\comment.service.js
  * @Description: 评论的业务逻辑层
  * 
@@ -23,7 +23,6 @@ class CommentService {
    * @returns 
    */
   async createComment(comment_content, user_id, article_id) {
-    console.log(comment_content, user_id, article_id);
     const res = await Comment.create({
       comment_content,
       user_id, 
@@ -44,7 +43,6 @@ class CommentService {
         }
       }
     })
-    console.log(res);
     return res
   }
   /**
@@ -75,7 +73,6 @@ class CommentService {
         }
       }
     })
-    console.log(res);
     return res
   }
   /**
@@ -86,11 +83,9 @@ class CommentService {
   async selectCommentByArticleId(id) {
     const res = await Comment.findAll({
       where:{
-        article_id: id,
-        deletedAt: null
+        article_id: id
       }
     })
-    console.log(res);
     return res
   }
 }

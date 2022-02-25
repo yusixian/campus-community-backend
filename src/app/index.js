@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:29:53
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-22 20:02:29
+ * @LastEditTime: 2022-02-24 20:18:56
  * @Description: 
  */
 // 导入包
@@ -24,6 +24,8 @@ render(app, {
   root: path.join(path.resolve(__dirname, '..'), 'views'), //视图的位置
   extname: '.html'// 模板文件的后缀
 })
+
+
 // 添加跨域中间件
 app.use(cors())
 // 配置上传文件

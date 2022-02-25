@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-02-21 13:29:28
- * @LastEditors: 41
- * @LastEditTime: 2022-02-23 13:42:23
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-02-25 10:23:09
  * @FilePath: \campus-community-backend\src\model\comment.model.js
  * @Description: 评论的model
  */
@@ -33,10 +33,12 @@ const Comment = seq.define('sc_Comment', {
     allowNull: false,
     comment: '被评论的文章id'
   }
-}, {
-  // 软删除
-  paranoid: true,
-})
+},
+//  {
+//   // 软删除
+//   paranoid: true,
+// }
+)
 
 Comment.belongsTo(User, {
   foreignKey: 'user_id'

@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-02-19 14:31:15
- * @LastEditTime: 2022-02-23 11:56:17
- * @LastEditors: 41
+ * @LastEditTime: 2022-02-25 10:23:15
+ * @LastEditors: lihao
  * @Description: 分区管理 partition
  * @FilePath: \campus-community-backend\src\model\partition.model.js
  */

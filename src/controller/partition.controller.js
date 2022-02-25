@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:26:12
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-23 18:52:40
+ * @LastEditTime: 2022-02-25 10:58:41
  * @FilePath: \campus-community-backend\src\controller\partition.controller.js
  * @Description:分区管理 partition
  */
@@ -17,16 +17,15 @@ class PartitionController {
    * @param {*} next 
    */
   async insertPartition(ctx, next) {
-    console.log(ctx.request.body);
     const { partition_name, partition_desc } = ctx.request.body;
     try {
       const res = await createPartition(partition_name, partition_desc, ctx.state.user.id)
       ctx.body = {
         code: 0,
-        message: "分区创建成功",
-        result: undefined
+        message: "分区创建成功"
       }
     } catch (err) {
+      console.log(err);
       ctx.app.emit('error', partitionCreateErr, ctx)
     }
   }
@@ -36,7 +35,6 @@ class PartitionController {
    * @param {*} next 
    */
   async deletePartition(ctx, next) {
-    console.log(ctx.request.body);
     const { id } = ctx.request.query;
     try {
       const res = await delPartitionById(id)
@@ -46,6 +44,7 @@ class PartitionController {
         
       }
     } catch (err) {
+      console.log(err);
       ctx.app.emit('error', partitionDeleteError, ctx)
     }
   }
@@ -63,6 +62,7 @@ class PartitionController {
         result: res
       }
     } catch (err) {
+      console.log(err);
       ctx.app.emit('error', partitionQueryALLError, ctx)
     }
   }
