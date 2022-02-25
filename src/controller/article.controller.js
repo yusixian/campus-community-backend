@@ -1,12 +1,12 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-02-25 12:36:13
+ * @LastEditTime: 2022-02-25 13:17:14
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
-const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle} = require('../service/article.service')
+const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle, incrementVisitsByID} = require('../service/article.service')
 const { articleOperationError, articleCreateError, 
     articleDeleteError, articleParamsError, 
     articleDosNotExist, articleUpdateError, 
@@ -150,6 +150,9 @@ class ArticleController {
    */
   async getByID(ctx, next) {
     try {
+      const article_id = ctx.state.article_id
+      await searchArticleByID(article_id, true)
+      const res = await incrementVisitsByID(article_id)
       const article = ctx.state.article
       ctx.body = {
           code: 0,

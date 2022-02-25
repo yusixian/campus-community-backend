@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-02-25 12:34:18
+ * @LastEditTime: 2022-02-25 13:16:03
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -83,6 +83,16 @@ class ArticleService {
     // console.log(res)
     return res
   }
+  
+  /**
+   * @description: 根据文章id增加该文章的浏览量
+   * @param {number} article_id
+   */
+  async incrementVisitsByID(article_id) {
+    const res = await Article.increment({visits: 1}, { where: { id: article_id } }) // 增加浏览量
+    console.log(res)
+    return res
+  }
 
   /**
    * @description: 根据id查询单个帖子是否存在 软删除的帖子会查不到
@@ -141,7 +151,7 @@ class ArticleService {
    */
   async getWhereOpt(filterOpt) {
     const whereOpt = {}
-    const { partition_id, status, start_time, end_time } = filterOpt
+    const { partition_id, status, start_time, end_time, user_id } = filterOpt
     // console.log("status:", status)
     switch (status) {
       case 0: whereOpt.status = 0; break
@@ -150,6 +160,7 @@ class ArticleService {
       default: break
     }
     partition_id && Object.assign(whereOpt, { partition_id })
+    user_id && Object.assign(whereOpt, { user_id })
     if(start_time || end_time) whereOpt.createdAt = {}
     if(start_time) Object.assign(whereOpt.createdAt, { 
       [Op.gt]: moment(start_time).toDate()
@@ -157,6 +168,7 @@ class ArticleService {
     if(end_time) Object.assign(whereOpt.createdAt, { 
       [Op.lt]: moment(end_time).toDate()
     })
+    // console.log("whereOpt:",whereOpt)
     return whereOpt
   }
 
