@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: 41
- * @LastEditTime: 2022-02-25 17:16:28
+ * @LastEditors: cos
+ * @LastEditTime: 2022-02-25 18:06:32
  * @Description: 
  */
 module.exports = {
@@ -195,6 +195,31 @@ module.exports = {
     code: 13000,
     message: '资源上传失败',
 
-  }
+  },
 
+  // 点赞 Like
+  likeIdError: {
+    code: 14000,
+    message: '点赞记录ID不合法！'
+  },
+  likeParamsError: {
+    code: 14001,
+    message: '点赞参数不合法！'
+  },
+  likeCreateError: {
+    code: 14002,
+    message: '添加点赞记录失败！'
+  },
+  likeRepeatError: {
+    code: 14003,
+    message: '点赞重复，该用户已点赞过！'
+  },
+  likeOperationError: {
+    code: 14004,
+    message: '点赞接口操作失败'
+  },
+  likeDosNotExistError: {
+    code: 14005,
+    message: '该点赞记录不存在！'
+  }
 }

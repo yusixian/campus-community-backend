@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 19:01:07
  * @LastEditors: cos
- * @LastEditTime: 2022-02-24 21:36:25
+ * @LastEditTime: 2022-02-25 17:08:08
  * @Description: HTTP 错误响应代码转换 https://developer.mozilla.org/zh-CN/docs/web/http/status
  */
 module.exports = (err, ctx) => {
@@ -12,6 +12,8 @@ module.exports = (err, ctx) => {
     case 11000:
     case 11003: 
     case 11008:
+    case 14000:
+    case 14001:
       status = 400  // 400 Bad Request
       break   
     case 10103:   // 当前请求需要管理员权限，用户并非管理员，服务器拒绝请求。
@@ -20,9 +22,11 @@ module.exports = (err, ctx) => {
     case 10004:   // 请求失败，请求所希望得到的资源未被在服务器上发现
     case 11004:
     case 12007:
+    case 14005:
       status = 404  // 404 Not Found
       break
     case 10002:   // 和被请求的资源的当前状态之间存在冲突
+    case 14003:
       status = 409  // 409 Conflict
       break
     default:        // 服务器遇到了不知道如何处理的情况。

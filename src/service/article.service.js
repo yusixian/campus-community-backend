@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-02-25 13:16:03
+ * @LastEditTime: 2022-02-25 16:22:05
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -92,6 +92,23 @@ class ArticleService {
     const res = await Article.increment({visits: 1}, { where: { id: article_id } }) // 增加浏览量
     console.log(res)
     return res
+  }
+
+  /**
+   * @description: 根据文章id增加该文章的点赞数量
+   * @param {number} article_id
+   * @param {number} nums 默认为1 
+   */
+  async incrementLikesByID(article_id, nums = 1) {
+    await Article.increment({likes: nums}, { where: { id: article_id } })
+  }
+  
+  /**
+   * @description: 根据文章id减少该文章的点赞数量
+   * @param {number} article_id
+   */
+  async decrementLikesByID(article_id, nums = 1) {
+    await Article.increment({likes: -nums}, { where: { id: article_id } })
   }
 
   /**
