@@ -1,8 +1,8 @@
 <!--
  * @Author: 41
  * @Date: 2022-02-15 21:08:52
- * @LastEditors: 41
- * @LastEditTime: 2022-02-21 09:37:48
+ * @LastEditors: cos
+ * @LastEditTime: 2022-02-24 21:30:03
  * @Description: 
 -->
 [toc]
@@ -58,3 +58,22 @@
 ```
 ## 14.uploadDir`../upload`这种`../`的方式是不对的！
 - 一般来说,在配置的文件中,我们都不要使用相对路径！！！
+
+## 15.class里别用this！
+- 非箭头函数会自动创建this指向自己
+- class里面不支持箭头函数
+- 想在类里调用其他方法，请用类名.prototype.方法
+## 16.query中的参数类型转换问题 空对象
+- query中的参数为字符串类型，需转换！
+- [Boolean - MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Boolean)
+- 其值不是undefined或null的任何对象（包括其值为false的布尔对象）在传递给条件语句时都将计算为true
+- 0，-0，null，false，NaN，undefined，或空字符串（""） 为true
+- 其他为false
+## 17. GET请求中body会被自动忽略，需用params
+- 官方规范：[RFC7231] A payload within a GET request message has no defined semantics; sending a payload body on a GET request might cause some existing implementations to reject the request.
+## 18. query中属性是在其原型上的，无法通过解构获得
+```js
+console.log(ctx.request.query)    // [Object: null prototype] { status: '0' }
+const { status } = ctx.request.query    //Error
+[Object: null prototype] { status: '0' }
+```

@@ -1,22 +1,28 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 15:10:21
- * @LastEditTime: 2022-02-23 02:26:37
+ * @LastEditTime: 2022-02-25 13:05:40
  * @LastEditors: cos
  * @Description: 文章相关中间件
  * @FilePath: \campus-community-backend\src\middleware\article.middleware.js
  */
-const { articleParamsError, articleIDError, articleDosNotExist } = require('../constant/err.type');
+const { articleParamsError, articleIDError, articleDosNotExist, partitionIsNotExitedErr, articleFilterParamsError } = require('../constant/err.type');
 const { searchArticleByID } = require('../service/article.service');
+const { selectPartitionCountById } = require('../service/partition.service');
+const moment = require('moment');
+
 
 // 验证发表文章信息合法性(必须传递必选参数)
 const articleInfoValidate = async (ctx, next) => {
   const { title, content, partition_id } = ctx.request.body;
+  // console.log(title, content, partition_id)
   if(!title || !content) 
     return ctx.app.emit('error', articleParamsError, ctx);
   ctx.state.newArticle = { title, content } 
   if(partition_id) {
-    // 等一个分区中间件，根据分区id判断分区是否存在
+    // 根据分区id判断分区是否存在
+    if(!await selectPartitionCountById(partition_id))
+      return ctx.app.emit('error', partitionIsNotExitedErr, ctx)
     ctx.state.newArticle.partition_id = partition_id
   }
   // console.log("articleInfoValidate:",ctx.state.newArticle)
@@ -26,6 +32,7 @@ const articleInfoValidate = async (ctx, next) => {
 // 验证文章id必须存在
 const articleIDValidate = async (ctx, next) => {
   const article_id = ctx.request.body.article_id || ctx.request.query.article_id;
+  console.log("typeof: ",typeof article_id)
   if(!article_id) 
     return ctx.app.emit('error', articleIDError, ctx);
 
@@ -49,8 +56,41 @@ const articleExistValidate = async (ctx, next) => {
   await next()
 }
 
+// 验证文章过滤参数，将已传的参数判断合法性后挂到ctx.state.filterOpt上
+// status、partition_id、开始结束时间等
+const articleFilterValidate = async (ctx, next) => {
+  console.log(ctx.request.query)
+  let { current, size, status, partition_id, start_time, end_time, user_id } = ctx.request.query
+  ctx.state.filterOpt = {}
+  const filterOpt = ctx.state.filterOpt
+  try {
+    if(current) filterOpt.current = parseInt(current)
+    if(size) filterOpt.size = parseInt(size)
+    if(partition_id) filterOpt.partition_id = parseInt(partition_id)
+    if(user_id) filterOpt.user_id = parseInt(user_id)
+
+    if(moment(start_time).isValid()) filterOpt.start_time = start_time
+    if(moment(end_time).isValid()) filterOpt.end_time = end_time
+    
+    // console.log(`start_time:${start_time},end_time:${end_time}`)
+    if(status) status = parseInt(status)
+    switch (status) {
+      case 0:
+      case 1:
+      case 2: Object.assign(filterOpt, { status }); break;
+      default: break;
+    }
+    // console.log("filterOpt:", filterOpt)
+  } catch(err) {
+    console.error('error!', articleFilterParamsError)
+    return ctx.app.emit('error', articleFilterParamsError, ctx);
+  }
+  await next()
+}
+
 module.exports = {
   articleInfoValidate,
   articleIDValidate,
-  articleExistValidate
+  articleExistValidate,
+  articleFilterValidate
 }

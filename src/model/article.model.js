@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 13:57:27
- * @LastEditTime: 2022-02-23 11:56:20
- * @LastEditors: 41
+ * @LastEditTime: 2022-02-24 16:14:42
+ * @LastEditors: cos
  * @Description: 文章类型 
  * @FilePath: \campus-community-backend\src\model\article.model.js
  */
@@ -62,10 +62,10 @@ const Article = seq.define('sc_Article', {
     comment: '浏览数， 初始为0'
   },
   status: {
-    type: DataTypes.BOOLEAN,
+    type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: false,
-    comment: 'false已发布 true被屏蔽 默认为false'
+    defaultValue: 0,
+    comment: '0已发布 1被屏蔽 2为回收站 默认为0'
   },
   cover_url: {
     type: DataTypes.STRING,
@@ -86,5 +86,5 @@ Article.belongsTo(Partition, {
   foreignKey: 'partition_id'
 })
 // 强制同步数据库(创建数据表Ariticle，若存在则删除再建)
-// Article.sync({ force: true })
+// Article.sync({ alter: true })
 module.exports = Article
