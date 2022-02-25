@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:18:24
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 22:28:35
+ * @LastEditTime: 2022-02-25 16:30:35
  * @Description: 
  */
 const Router = require('koa-router')
@@ -14,6 +14,10 @@ const {
   register,
   login,
   changePassword,
+  changeAdmin,
+  changeName,
+  changeCity,
+  changeSex,
   upload,
   updatetoken,
   findall,
@@ -24,6 +28,7 @@ const {
   verifyUser,
   cryptPassword,
   verifyLogin,
+  verifySex,
   verifyAdmin } = require('../middleware/user.middleware')
 const { auth } = require('../middleware/auth.middleware')
 // GET /users/
@@ -31,14 +36,23 @@ const { auth } = require('../middleware/auth.middleware')
 router.post('/register', userValidator, verifyUser, cryptPassword, register)
 // 登录接口
 router.post('/login', userValidator, verifyLogin, login)
-// 修改密码接口
-router.patch('/', auth, cryptPassword, changePassword)
 // 上传头像接口
 router.post('/upload', auth, upload)
+// 封号接口
+router.post('/blockadeornot', auth, verifyAdmin, blockade)
+// 切换管理员接口
+router.post('/admin', auth, verifyAdmin, changeAdmin)
+// 修改密码接口
+router.patch('/password', auth, cryptPassword, changePassword)
+// 修改昵称接口
+router.patch('/name', auth, changeName)
+// 修改昵称接口
+router.patch('/city', auth, changeCity)
+// 修改性别接口
+router.patch('/sex', auth, verifySex, changeSex)
 // token更新接口
 router.get('/updatetoken', updatetoken)
 // 查询所有用户信息的接口
 router.get('/info', auth, verifyAdmin, findall)
-// 封号接口
-router.post('/blockadeornot', blockade)
+
 module.exports = router

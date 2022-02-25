@@ -2,15 +2,20 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 10:25:45
+ * @LastEditTime: 2022-02-25 16:36:16
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
 const { getUserInfo } = require('../service/user.service')
 const {
-  userFormateError, userAlreadtExited,
-  userRegisterError, userDosNotExist,
-  userLoginError, invalidPassword, unAuthorizedError } = require('../constant/err.type')
+  userFormateError,
+  userAlreadtExited,
+  userRegisterError,
+  userDosNotExist,
+  userLoginError,
+  invalidPassword,
+  sexError,
+  unAuthorizedError } = require('../constant/err.type')
 const userValidator = async (ctx, next) => {
   const { user_name, password } = ctx.request.body
   // console.log(user_name, password);
@@ -83,10 +88,20 @@ const verifyAdmin = async (ctx, next) => {
   }
   await next()
 }
+const verifySex = async (ctx, next) => {
+  const { sex } = ctx.request.body
+  console.log(sex);
+  if (sex !== '男' && sex !== '女' && sex !== '保密') {
+    console.error('输入性别错误！')
+    return ctx.app.emit('error', sexError, ctx)
+  }
+  await next()
+}
 module.exports = {
   userValidator,
   verifyUser,
   cryptPassword,
   verifyLogin,
-  verifyAdmin
+  verifyAdmin,
+  verifySex
 }

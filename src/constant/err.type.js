@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: cos
- * @LastEditTime: 2022-02-24 21:36:09
+ * @LastEditors: 41
+ * @LastEditTime: 2022-02-25 16:34:17
  * @Description: 
  */
 module.exports = {
@@ -42,12 +42,32 @@ module.exports = {
 
   },
   adminError: {
-    code: '10008',
+    code: 10008,
     message: '没有管理员权限',
   },
   userChangeError: {
-    code: '10009',
+    code: 10009,
     message: '用户状态改变失败',
+  },
+  changeAdminError: {
+    code: 10010,
+    message: '管理员状态改变失败',
+  },
+  changeNameError: {
+    code: 10011,
+    message: '昵称改变失败',
+  },
+  changeCityError: {
+    code: 10012,
+    message: '城市改变失败',
+  },
+  changeSexError: {
+    code: 10013,
+    message: '性别改变失败',
+  },
+  sexError: {
+    code: 10014,
+    message: '输入的性别不符合要求',
   },
   tokenExpiredError: {
     code: 10101,

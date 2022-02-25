@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-17 15:04:08
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 14:04:22
+ * @LastEditTime: 2022-02-25 14:47:44
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -15,6 +15,7 @@ const auth = async (ctx, next) => {
   try {
     // user中包含了payload的信息(id,user_name,is_admin)
     const user = jwt.verify(token, JWT_SECRET)
+    // console.log(user);
     ctx.state.user = user
   } catch (err) {
     switch (err.name) {

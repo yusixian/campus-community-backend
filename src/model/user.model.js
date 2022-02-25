@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 14:42:24
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 21:22:21
+ * @LastEditTime: 2022-02-25 15:09:42
  * @Description: 
  */
 const { DataTypes } = require('sequelize')
@@ -40,6 +40,24 @@ const User = seq.define('sc_User', {
     allowNull: true,
     defaultValue: 0,
     comment: '是否可用,false:封号,true:可用'
+  },
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '',
+    comment: '用户的昵称'
+  },
+  city: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '',
+    comment: '用户的城市'
+  },
+  sex: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: '保密',
+    comment: '用户的性别'
   }
 })
 // 轻质同步数据库(创建数据表)

@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-25 09:50:54
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 10:54:26
+ * @LastEditTime: 2022-02-25 15:20:55
  * @Description: 
  */
 const User = require('./user.model')
