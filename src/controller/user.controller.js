@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-24 12:01:32
+ * @LastEditTime: 2022-02-25 17:25:59
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -16,7 +16,13 @@ const {
   tokenExpiredError,
   invalidToken,
   adminError,
-  userChangeError
+  findError,
+  userChangeError,
+  changeAdminError,
+  changeNameError,
+  changeCityError,
+  changeSexError,
+  resetError
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 class UserController {
@@ -50,11 +56,12 @@ class UserController {
   async register (ctx, next) {
     // 1.获取数据
     // console.log(ctx.request.body);
-    const { user_name, password, is_admin, img, is_active } = ctx.request.body
-    console.log(user_name, password, is_admin, img, is_active);
+    // console.log(123);
+    const { user_name, password, is_admin, img, is_active, name, city, sex } = ctx.request.body
+    console.log(user_name, password, is_admin, img, is_active, name, city, sex);
     try {
       // 2.操作数据库
-      const res = await createUser(user_name, password, is_admin, img, is_active)
+      const res = await createUser(user_name, password, is_admin, img, is_active, name, city, sex)
       // 3.返回结果
       ctx.body = {
         code: 0,
@@ -106,7 +113,60 @@ class UserController {
     }
     // 3.返回结果
   }
-
+  async changeName (ctx, next) {
+    // 1.获取数据
+    const id = ctx.state.user.id
+    const name = ctx.request.body.name
+    console.log(id, name);
+    // 2.操作数据库
+    if (await updateById({ id, name })) {
+      ctx.body = {
+        code: 0,
+        message: '修改昵称成功',
+        result: ''
+      }
+    } else {
+      ctx.app.emit('error', changeNameError
+        , ctx)
+    }
+    // 3.返回结果
+  }
+  async changeCity (ctx, next) {
+    // 1.获取数据
+    const id = ctx.state.user.id
+    const city = ctx.request.body.city
+    console.log(id, city);
+    // 2.操作数据库
+    if (await updateById({ id, city })) {
+      ctx.body = {
+        code: 0,
+        message: '修改城市成功',
+        result: ''
+      }
+    } else {
+      ctx.app.emit('error', changeCityError
+        , ctx)
+    }
+    // 3.返回结果   
+  }
+  async changeSex (ctx, next) {
+    // 1.获取数据
+    const id = ctx.state.user.id
+    const sex = ctx.request.body.sex
+    console.log(id, sex);
+    // 2.操作数据库
+    if (await updateById({ id, sex })) {
+      ctx.body = {
+        code: 0,
+        message: '修改性别成功',
+        result: ''
+      }
+    } else {
+      ctx.app.emit('error', changeSexError
+        , ctx)
+    }
+    // 3.返回结果       
+  }
   async upload (ctx, next) {
     // console.log(ctx.request.files.file);
     const id = ctx.state.user.id
@@ -144,6 +204,23 @@ class UserController {
       return ctx.app.emit('error', adminError, err)
     }
   }
+  async findone (ctx, next) {
+    try {
+      const { id } = ctx.request.query
+      let res = await getUserInfo({ id })
+      ctx.body = {
+        code: 0,
+        message: '查询成功',
+        result: {
+          user: res
+        }
+      }
+    }
+    catch (err) {
+      return ctx.app.emit('error', findError, err)
+    }
+
+  }
   async blockade (ctx, next) {
     const { user_name, is_active } = ctx.request.body
     if (user_name === "") {
@@ -174,6 +251,55 @@ class UserController {
       return ctx.app.emit('error', userChangeError, err)
     }
   }
-}
+  async changeAdmin (ctx, body) {
+    const { user_name, is_admin } = ctx.request.body
+    if (user_name === "") {
+      ctx.app.emit('error', userDosNotExist, ctx)
+      return;
+    }
+    try {
+      const { id } = await getUserInfo({ user_name })
+      await updateById({ id, is_admin })
+      console.log(is_admin);
+      if (is_admin) {
+        ctx.body = {
+          code: 0,
+          message: `${user_name}用户被提拔为管理员`,
+          result: {
+          }
+        }
+      } else {
+        ctx.body = {
+          code: 0,
+          message: `${user_name}用户已被撤销管理员职位`,
+          result: {
+          }
+        }
+      }
+    } catch (err) {
+      return ctx.app.emit('error', changeAdminError, err)
+    }
+  }
+  async reset (ctx, next) {
+    const { user_name, password } = ctx.request.body
+    console.log(user_name, password);
+    if (user_name === "") {
+      ctx.app.emit('error', userDosNotExist, ctx)
+      return;
+    }
+    try {
+      const { id } = await getUserInfo({ user_name })
+      await updateById({ id, password })
+      ctx.body = {
+        code: 0,
+        message: `${user_name}用户密码被重置`,
+        result: {
+        }
+      }
 
+    } catch (err) {
+      return ctx.app.emit('error', resetError, err)
+    }
+  }
+}
 module.exports = new UserController()
