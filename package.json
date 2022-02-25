@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "createModel": "node src/model/index.js",
     "createUserModel": "node src/model/user.model.js",
     "createArticalModel": "node src/model/article.model.js",
     "createPartitionModel": "node src/model/partition.model.js",
     "createCommentModel": "node src/model/comment.model.js",
+    "createLikeModel": "node src/model/like.model.js",
     "dev": "nodemon ./src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
