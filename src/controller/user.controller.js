@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 16:31:04
+ * @LastEditTime: 2022-02-25 16:50:32
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -16,6 +16,7 @@ const {
   tokenExpiredError,
   invalidToken,
   adminError,
+  findError,
   userChangeError,
   changeAdminError,
   changeNameError,
@@ -201,6 +202,23 @@ class UserController {
     catch (err) {
       return ctx.app.emit('error', adminError, err)
     }
+  }
+  async findone (ctx, next) {
+    try {
+      const { id } = ctx.request.query
+      let res = await getUserInfo({ id })
+      ctx.body = {
+        code: 0,
+        message: '查询成功',
+        result: {
+          user: res
+        }
+      }
+    }
+    catch (err) {
+      return ctx.app.emit('error', findError, err)
+    }
+
   }
   async blockade (ctx, next) {
     const { user_name, is_active } = ctx.request.body

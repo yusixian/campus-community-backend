@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 16:34:17
+ * @LastEditTime: 2022-02-25 16:48:59
  * @Description: 
  */
 module.exports = {
@@ -68,6 +68,10 @@ module.exports = {
   sexError: {
     code: 10014,
     message: '输入的性别不符合要求',
+  },
+  findError: {
+    code: 10015,
+    message: '查询错误！',
   },
   tokenExpiredError: {
     code: 10101,
