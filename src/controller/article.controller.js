@@ -1,12 +1,12 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-02-25 00:15:13
+ * @LastEditTime: 2022-02-25 12:36:13
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
-const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle} = require('../service/article.service')
+const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle} = require('../service/article.service')
 const { articleOperationError, articleCreateError, 
     articleDeleteError, articleParamsError, 
     articleDosNotExist, articleUpdateError, 
@@ -164,12 +164,12 @@ class ArticleController {
 
   
   /**
-   * @description:根据id获取文章
+   * @description: 根据过滤参数分页获取文章
    */
    async getByPages(ctx, next) {
     try {
       const filterOpt = ctx.state.filterOpt
-      console.log("filterOpt:", filterOpt)
+      // console.log("filterOpt:", filterOpt)
       const res = await filterArticle(filterOpt)
       const article_pages = res.page_nums
       const article_total = res.count
@@ -180,6 +180,29 @@ class ArticleController {
           code: 0,
           message: "获取文章成功！",
           result
+      }
+    } catch (err) {
+      console.error('获取文章失败！', err);
+      return ctx.app.emit('error', articleOperationError, ctx)
+    }
+  }
+  
+  /**
+   * @description: 根据过滤参数获取文章总数
+   */
+   async countByFilter(ctx, next) {
+    try {
+      const filterOpt = ctx.state.filterOpt
+      console.log("filterOpt:", filterOpt)
+      const count = await countArticle(filterOpt)
+      console.log("count: ",count)
+      ctx.body = {
+          code: 0,
+          message: "获取文章总数",
+          result: {
+            filterOpt,
+            count
+          }
       }
     } catch (err) {
       console.error('获取文章失败！', err);

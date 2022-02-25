@@ -1,14 +1,14 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:09:32
- * @LastEditTime: 2022-02-24 20:44:38
+ * @LastEditTime: 2022-02-25 12:36:34
  * @LastEditors: cos
  * @Description: 文章管理相关路由
  * @FilePath: \campus-community-backend\src\routers\article.route.js
  */
 const Router = require('koa-router')
 
-const { postArticle, deleteArticle, updateArticle, shieldArticle, restoreArticle, getAllArticle, getByID, getByPages } = require('../controller/article.controller')
+const { postArticle, deleteArticle, updateArticle, shieldArticle, restoreArticle, getAllArticle, getByID, getByPages, countByFilter } = require('../controller/article.controller')
 const { articleInfoValidate, articleIDValidate, articleExistValidate, articleFilterValidate } = require('../middleware/article.middleware')
 
 const { auth } = require('../middleware/auth.middleware')
@@ -23,6 +23,7 @@ router.delete('/shield', auth, verifyAdmin, articleIDValidate, articleExistValid
 router.patch('/update', auth, articleInfoValidate, articleIDValidate,articleExistValidate, updateArticle)
 router.get('/getlist', auth, verifyAdmin, getAllArticle)
 router.get('/getbyid', auth, articleIDValidate, articleExistValidate, getByID)
+router.get('/count', auth, articleFilterValidate, countByFilter)
 router.get('/page', auth, articleFilterValidate, getByPages)
 
 module.exports = router
