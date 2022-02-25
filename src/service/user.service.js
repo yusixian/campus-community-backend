@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:18:52
  * @LastEditors: 41
- * @LastEditTime: 2022-02-23 21:20:48
+ * @LastEditTime: 2022-02-25 10:28:10
  * @Description: 
  */
 const User = require('../model/user.model')
@@ -15,7 +15,7 @@ class UserService {
    * @param {*} user_name
    * @param {*} password
    */
-  async createUser (user_name, password, is_admin = 0, img = '', is_active = 1) {
+  async createUser (user_name, password, is_admin = 0, img = '', is_active = false) {
     // await表达式:promise对象的值
     const res = await User.create({
       // 表的字段 这里用了简写，属性名 属性值相同！

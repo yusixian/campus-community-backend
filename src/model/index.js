@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-25 09:50:54
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 10:20:04
+ * @LastEditTime: 2022-02-25 10:54:26
  * @Description: 
  */
 const User = require('./user.model')
@@ -15,4 +15,15 @@ const init = async () => {
   await Article.sync({ alter: true })
   await Comment.sync({ alter: true })
 }
-// init()
+const drop = async () => {
+  await Comment.drop()
+  await Article.drop()
+  await Partition.drop()
+  await User.drop()
+}
+const forceInit = async () => {
+  await drop()
+  await init()
+}
+// init() // 软更新
+// forceInit() // 硬更新
