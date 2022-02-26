@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-24 19:19:57
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 15:01:13
+ * @LastEditTime: 2022-02-25 19:01:38
  * @FilePath: \campus-community-backend\src\controller\commentReply.controller.js
  * @Description: 评论回复控制器
  */
@@ -17,8 +17,9 @@ class CommentReply {
    * @param {*} next 
    */
   async insertCommentReply(ctx, next) {
-    const { comment_id, comment_reply_id, comment_reply_content, to_user_id } = ctx.request.body
+    let { comment_id, comment_reply_id, comment_reply_content, to_user_id } = ctx.request.body
     console.log(comment_id, comment_reply_id, comment_reply_content, ctx.state.user.id, to_user_id)
+    // comment_reply_id = comment_reply_id ? comment_reply_id : 0
     try {
       const res = await createCommentReply(comment_id, comment_reply_id, comment_reply_content, ctx.state.user.id, to_user_id)
       ctx.body = {

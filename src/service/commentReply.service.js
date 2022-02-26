@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-24 16:17:34
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 15:57:19
+ * @LastEditTime: 2022-02-25 20:46:56
  * @FilePath: \campus-community-backend\src\service\commentReply.service.js
  * @Description: 评论回复服务层
  */
@@ -54,7 +54,10 @@ class CommentReplyService {
     const res =await CommentReply.findAll({
       where: {
         comment_id: id
-      }
+      },
+      order: [
+        ['comment_reply_id']
+      ]
     })
     return res
   }
