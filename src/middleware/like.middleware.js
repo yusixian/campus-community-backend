@@ -1,14 +1,16 @@
-const { likeParamsError, likeRepeatError, likeIdError, likeDosNotExistError } = require("../constant/err.type");
-const { validateLike, getLikeRecordByID } = require("../service/like.service");
-
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:08:14
- * @LastEditTime: 2022-02-25 17:12:55
+ * @LastEditTime: 2022-02-26 17:23:05
  * @LastEditors: cos
  * @Description: 点赞管理中间件
  * @FilePath: \campus-community-backend\src\middleware\like.middleware.js
  */
+const { likeParamsError, likeRepeatError, likeIdError, likeDosNotExistError, likeOwnError } = require("../constant/err.type");
+const { isRepeatLike: isRepeatLike, getLikeRecordByID, getLikeRecordByInfo } = require("../service/like.service");
+const checkUtil = require("../utils/checkUtil");
+
+// 验证点赞信息target_id、type有效性，并进行相应处理后挂上ctx.state.newLike
 const likeInfoValidate = async(ctx, next) => {
   console.log(ctx.request.body)
 
@@ -40,54 +42,71 @@ const likeInfoValidate = async(ctx, next) => {
   }
 }
 
-/**
- * @description: 验证点赞记录是否重复
- */
+// 验证点赞记录是否重复
 const likeNoExistValidate = async(ctx, next) => {
   const newLike = ctx.state.newLike
   try {
-    const isValid = await validateLike(newLike)
-    if(!isValid) throw Error()
+    const isRepeat = await isRepeatLike(newLike)
+    if(isRepeat) throw Error()
     await next()
   } catch(err) {
     console.error('无法重复点赞！', likeRepeatError);
     return ctx.app.emit('error', likeRepeatError, ctx)
   }
 }
+
+// 验证点赞记录的id有效性并挂到ctx.state.like_id上
 const likeIDValidate = async(ctx, next) => {
   const like_id = ctx.request.body.like_id || ctx.request.query.like_id;
+  // console.log("likeIDValidate:", like_id)
   try {
-    if(!like_id) 
-      throw Error('like_id不存在')
-    let id = parseInt(like_id) // 转换为数字
-    if(id !== id)   // 判断NaN
-      throw Error('like_id为NaN！')
+    const id = checkUtil.checkID(like_id)
+    if(!id) throw Error("id不合法！")
     ctx.state.like_id = id
     await next()
-    // console.log(ctx.state)
   } catch(err) {
-    console.log(err, likeIdError)
+    console.error('id不合法！', likeIdError);
     return ctx.app.emit('error', likeIdError, ctx)
   }
 }
 
-// 验证该点赞记录必须存在 将存在的点赞记录挂到ctx.state上
+// 验证该点赞记录必须存在 并将存在的点赞记录挂到ctx.state.existLike上
 const likeExistValidate = async (ctx, next) => {
   const like_id = ctx.state.like_id
+  console.log(like_id)
   try {
     const res = await getLikeRecordByID(like_id)
     // console.log(`searchID ${article_id}:`, res);
     if(!res) throw Error('数据库中不存在该点赞记录')
-    ctx.state.newLike = res
+    ctx.state.existLike = res
     await next()
   } catch(err) {
     console.log(err, likeDosNotExistError)
     return ctx.app.emit('error', likeDosNotExistError, ctx);
   }
 }
+
+// 验证该点赞记录必须为当前用户的，不会取消别人的，并将待取消点赞记录挂到ctx.state.existLike上
+const likeOwnValidate = async (ctx, next) => {
+  const newLike = ctx.state.newLike
+  try {
+    ctx.state.existLike = await getLikeRecordByInfo(newLike)
+    // console.log(ctx.state.existLike)
+    if(!ctx.state.existLike)  {
+      console.log(likeDosNotExistError)
+      return ctx.app.emit('error', likeDosNotExistError, ctx);
+    }
+    // console.log('验证成功！', ctx.state.existLike)
+    await next()
+  } catch(err) {
+    console.error('操作失败！不是自己的点赞！', likeOwnError);
+    return ctx.app.emit('error', likeOwnError, ctx)
+  }
+}
 module.exports = {
   likeInfoValidate,
   likeNoExistValidate,
   likeIDValidate,
-  likeExistValidate
+  likeExistValidate,
+  likeOwnValidate
 }

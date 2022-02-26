@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: cos
- * @LastEditTime: 2022-02-25 18:06:32
+ * @LastEditTime: 2022-02-26 16:41:52
  * @Description: 
  */
 module.exports = {
@@ -221,5 +221,9 @@ module.exports = {
   likeDosNotExistError: {
     code: 14005,
     message: '该点赞记录不存在！'
+  },
+  likeOwnError: {
+    code: 14006,
+    message: '操作失败！不是自己的点赞！'
   }
 }

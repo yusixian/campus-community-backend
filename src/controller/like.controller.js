@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:10:28
- * @LastEditTime: 2022-02-25 17:16:20
+ * @LastEditTime: 2022-02-26 17:22:14
  * @LastEditors: cos
  * @Description: 点赞相关控制器
  * @FilePath: \campus-community-backend\src\controller\like.controller.js
@@ -58,15 +58,15 @@ class LikeController {
   }
   async cancelLike(ctx, next) {
     try {
-      const newLike = ctx.state.newLike
-      console.log()
-      const { id, type } = newLike
-      const target_id = (type === 'comment') ? newLike.comment_id: newLike.article_id
+      const existLike = ctx.state.existLike
+      // console.log(existLike)
+      const { id, type } = existLike
+      const target_id = (type === 'comment') ? existLike.comment_id: existLike.article_id
       await deleteLike(id, target_id)
-      console.log('cancel!')
+      // console.log('cancel!')
       ctx.body = {
         code: 0,
-        message: "取消点赞记录成功！"
+        message: "取消点赞成功！"
       }
     } catch (err) {
       console.error('取消点赞失败！数据库中可能没有该条记录', err);

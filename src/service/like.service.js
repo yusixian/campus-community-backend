@@ -1,9 +1,9 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-02-25 17:25:22
+ * @LastEditTime: 2022-02-26 17:25:16
  * @LastEditors: cos
- * @Description: 
+ * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
  */
 
@@ -31,7 +31,7 @@ class LikeService {
    */
    async getLikeRecordByID(like_id) {
     const res = await Like.findOne({ where: { id: like_id } })
-    console.log('res:',res)
+    // console.log('res:',res)
     return res ? res.dataValues : null;
   }
 
@@ -76,10 +76,10 @@ class LikeService {
   /**
    * @description: 验证点赞是否重复
    * @param {Like} newLike
-   * @return {Boolean} 是否重复
+   * @return {Boolean} 是否重复 true 不重复 false重复
    */
-  async validateLike(newLike) {
-    let isValid = true
+  async isRepeatLike(newLike) {
+    let isRepeat = false
     const { user_id, type } = newLike
     const whereOpt = { user_id, type }
     if(type === 'comment') whereOpt.comment_id = newLike.comment_id
@@ -89,11 +89,31 @@ class LikeService {
     }
     const res = await Like.findAll({ where: whereOpt, raw: true })
     // console.log("res: ",res)
-    console.log("whereOpt: ",whereOpt)
-    isValid = !(res && res.length > 0)
-    console.log("res: ", res)
-    console.log("isValid: ", isValid)
-    return isValid
+    // console.log("whereOpt: ",whereOpt)
+    isRepeat = res && res.length > 0
+    return isRepeat
+  } 
+
+  /**
+   * @description: 获取点赞记录，根据user_id、type和target_id
+   * @param {Like} newLike
+   * @return {Like | null} 所得点赞记录 | null
+   */
+   async getLikeRecordByInfo(newLike) {
+    let isRepeat = false
+    const { user_id, type } = newLike
+    const whereOpt = { user_id, type }
+    if(type === 'comment') whereOpt.comment_id = newLike.comment_id
+    else { 
+      whereOpt.type = 'article'
+      whereOpt.article_id = newLike.article_id
+    }
+    const res = await Like.findAll({ where: whereOpt, raw: true })
+    // console.log("res: ",res)
+    // console.log("whereOpt: ",whereOpt)
+    isRepeat = res && res.length > 0
+    if(isRepeat) return res[0];
+    else return null
   } 
 
   /**
