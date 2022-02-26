@@ -1,11 +1,12 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-02-25 13:17:14
+ * @LastEditTime: 2022-02-26 19:57:05
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
+const path = require('path')
 const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle, incrementVisitsByID} = require('../service/article.service')
 const { articleOperationError, articleCreateError, 
     articleDeleteError, articleParamsError, 
@@ -210,6 +211,40 @@ class ArticleController {
     } catch (err) {
       console.error('获取文章失败！', err);
       return ctx.app.emit('error', articleOperationError, ctx)
+    }
+  }
+
+  // 上传文章图片
+  async upload (ctx, next) {
+    // console.log(ctx.request.files.file);
+    const id = ctx.state.user.id
+    const { file } = ctx.request.files
+    let imgPaths = []
+    try {
+      if (!file) throw Error()
+      if(Array.isArray(file)) {
+        console.log("img!")
+        file.forEach(element => {
+          let img = '/uploads/' + path.basename(element.path)
+          imgPaths.push(img)
+        });
+      } else {
+        console.log("file",file)
+        let img = '/uploads/' + path.basename(file.path)
+        console.log("img!", img)
+        imgPaths.push(img)
+      }
+      console.log(imgPaths)
+      ctx.body = {
+        code: 0,
+        message: '文章图片上传成功',
+        result: {
+          imgPaths
+        }
+      }
+    } catch(err) {
+      console.log(err)
+      return ctx.app.emit('error', fileUploadError, ctx)
     }
   }
 }
