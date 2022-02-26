@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:47:31
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 15:55:25
+ * @LastEditTime: 2022-02-26 20:16:22
  * @FilePath: \campus-community-backend\src\service\comment.service.js
  * @Description: 评论的业务逻辑层
  * 
@@ -80,11 +80,14 @@ class CommentService {
    * @param {*} id 
    * @returns 查询到的评论
    */
-  async selectCommentByArticleId(id) {
+  async selectCommentByArticleId(id, pageNo, pageSize) {
+    let start = (pageNo-1) * pageSize
     const res = await Comment.findAll({
       where:{
         article_id: id
-      }
+      },
+      offset: start,
+      limit: pageSize
     })
     return res
   }

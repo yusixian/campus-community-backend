@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 16:50:32
+ * @LastEditTime: 2022-02-25 17:25:59
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -21,7 +21,8 @@ const {
   changeAdminError,
   changeNameError,
   changeCityError,
-  changeSexError
+  changeSexError,
+  resetError
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 class UserController {
@@ -277,6 +278,27 @@ class UserController {
       }
     } catch (err) {
       return ctx.app.emit('error', changeAdminError, err)
+    }
+  }
+  async reset (ctx, next) {
+    const { user_name, password } = ctx.request.body
+    console.log(user_name, password);
+    if (user_name === "") {
+      ctx.app.emit('error', userDosNotExist, ctx)
+      return;
+    }
+    try {
+      const { id } = await getUserInfo({ user_name })
+      await updateById({ id, password })
+      ctx.body = {
+        code: 0,
+        message: `${user_name}用户密码被重置`,
+        result: {
+        }
+      }
+
+    } catch (err) {
+      return ctx.app.emit('error', resetError, err)
     }
   }
 }

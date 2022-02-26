@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 16:56:32
+ * @LastEditTime: 2022-02-26 20:28:11
  * @Description: 
  */
 module.exports = {
@@ -72,6 +72,10 @@ module.exports = {
   findError: {
     code: 10015,
     message: '查询错误！',
+  },
+  resetError: {
+    code: 10016,
+    message: '密码重置错误！',
   },
   tokenExpiredError: {
     code: 10101,
@@ -191,6 +195,10 @@ module.exports = {
     code: 13000,
     message: '资源上传失败',
   },
+  commPageQueryError: {
+    code: 13006,
+    message: '分页查询参数异常'
+  },
   // 评论回复表
   commentReplyValidatorError: {
     code: 14000,
@@ -207,6 +215,34 @@ module.exports = {
   commentReplyDelError: {
     code: 14003,
     message: '评论回复删除异常'
+  },
+  // 点赞 Like
+  likeIdError: {
+    code: 14000,
+    message: '点赞记录ID不合法！'
+  },
+  likeParamsError: {
+    code: 14001,
+    message: '点赞参数不合法！'
+  },
+  likeCreateError: {
+    code: 14002,
+    message: '添加点赞记录失败！'
+  },
+  likeRepeatError: {
+    code: 14003,
+    message: '点赞重复，该用户已点赞过！'
+  },
+  likeOperationError: {
+    code: 14004,
+    message: '点赞接口操作失败'
+  },
+  likeDosNotExistError: {
+    code: 14005,
+    message: '该点赞记录不存在！'
+  },
+  likeOwnError: {
+    code: 14006,
+    message: '操作失败！不是自己的点赞！'
   }
-
 }

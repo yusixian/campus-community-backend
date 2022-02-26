@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:52:58
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 10:56:30
+ * @LastEditTime: 2022-02-26 20:33:09
  * @FilePath: \campus-community-backend\src\middleware\comment.middleware.js
  * @Description: 评论的中间件
  * 
@@ -10,7 +10,7 @@
 
 const { } = require('../service/comment.service')
 
-const { commentCreateInfoFormateError, commentIdFormateError } = require('../constant/err.type')
+const { commentCreateInfoFormateError, commentIdFormateError, commPageQueryError } = require('../constant/err.type')
 
 /**
  * 判断评论是否合法
@@ -62,10 +62,27 @@ const commentDeleteBatchValidator = async (ctx, next) => {
   await next()
 }
 
+const commentPageQuery = async (ctx, next) => {
+  const {pageNo, pageSize} = ctx.request.query
+  if (!pageNo || !pageSize) {
+    ctx.app.emit('error', commPageQueryError, ctx)
+    return
+  }
+  let pageNoTemp = Number.parseInt(pageNo)
+  let pageSizeTemp = Number.parseInt(pageSize)
+
+  ctx.request.query.pageNo = pageNoTemp
+  ctx.request.query.pageSize = pageSizeTemp
+  await next()
+   
+}
+
+
 module.exports = {
   commentValidator,
   commentDeleteValidator,
-  commentDeleteBatchValidator
+  commentDeleteBatchValidator,
+  commentPageQuery
 }
 
 

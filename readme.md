@@ -1,8 +1,8 @@
 <!--
  * @Author: 41
  * @Date: 2022-02-15 14:52:44
- * @LastEditors: lihao
- * @LastEditTime: 2022-02-21 18:50:40
+ * @LastEditors: cos
+ * @LastEditTime: 2022-02-25 17:59:04
  * @Description: 项目说明、启动、功能介绍
 -->
 [toc]
@@ -19,18 +19,23 @@
 - 本项目的开发记录文档
 ***
 # 使用说明
+### 初始化
+```bash
+# 下载所需依赖
+npm install
+```
 ### 数据库的相关配置
 - 1.在本地打开数据库(一般都是默认打开的mysql)
 如果没有打开使用cmd命令`net start mysql`就可以了
 - 2.登录数据库后建立一个数据库,比如名字叫`schoolcommunity`
 当然你可以用`navicat`来创建,会简单不少
 - 3.在本项目的`.env`文件中更新mysql的相关配置
-- 4.在`model/user.model.js`中取消注释`// User.sync({ force: true })`
-- 5.使用命令`npm run createDB`来创建用户的数据表
-- 6.在`model/user.model.js`中重新注释`// User.sync({ force: true })`
+- 4.使用命令`npm run createModel`来创建所有的数据表
 
 ### 本地运行
-```BASH
+
+创建完数据库后
+```bash
 npm run dev
 或
 yarn dev
@@ -44,7 +49,7 @@ yarn dev
 
   - [ ] 主页 Home
 
-  - [ ] 用户管理 user
+  - [x] 用户管理 user
 
   - [x] 文章管理 article
 
@@ -75,7 +80,9 @@ yarn dev
     - [x] 帖子修改、删除功能
     - [x] 屏蔽、恢复功能
   - [ ] 可选功能
-    - [ ] 分版块
+    - [x] 分版块
     - [ ] 搜索支持
-    - [ ] 支持回帖、评论、点赞等
+    - [ ] 支持回帖
+    - [x] 支持点赞、评论
     - [ ] 支持发图片、视频
+    - [ ] 支持收藏

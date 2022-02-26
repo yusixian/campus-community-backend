@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 15:10:07
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-22 21:03:30
+ * @LastEditTime: 2022-02-26 20:33:19
  * @FilePath: \campus-community-backend\src\routers\comment.route.js
  * @Description: 评论的路由
  */
@@ -16,7 +16,7 @@ const { inserComment, deleleComment, restoreComment, queryCommentByArticleId, de
 
 // 导入鉴权中间件
 const { auth } = require('../middleware/auth.middleware')
-const { commentValidator, commentDeleteValidator, commentDeleteBatchValidator } = require('../middleware/comment.middleware')
+const { commentValidator, commentDeleteValidator, commentDeleteBatchValidator, commentPageQuery } = require('../middleware/comment.middleware')
 
 // 新增评论的接口
 router.post('/createComment', auth, commentValidator, inserComment)
@@ -28,7 +28,7 @@ router.delete('/deleteComment', auth, commentDeleteValidator, deleleComment)
 router.patch('/restoreComment', auth, commentDeleteValidator, restoreComment)
 
 // 根据文章id查询评论的接口
-router.get('/queryCommentByArticleId', auth, commentDeleteValidator, queryCommentByArticleId)
+router.get('/queryCommentByArticleId', auth, commentDeleteValidator, commentPageQuery, queryCommentByArticleId)
 
 // 批量删除评论
 router.delete('/delBatchCommentByIds', auth, commentDeleteBatchValidator, delBatchCommentByIds)

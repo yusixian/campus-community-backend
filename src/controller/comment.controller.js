@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 20:45:46
+ * @LastEditTime: 2022-02-26 20:32:48
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
@@ -83,9 +83,10 @@ class CommentContrller {
    * @param {*} next 
    */
   async queryCommentByArticleId(ctx, next) {
-    const { id } = ctx.request.query
+    const { id, pageNo, pageSize } = ctx.request.query
+    console.log('-----------', id, pageNo, pageSize);
     try {
-      let comment_res = await selectCommentByArticleId(id)
+      let comment_res = await selectCommentByArticleId(id, pageNo, pageSize)
       const userList = new Array()
       for (let index = 0; index < comment_res.length; index++) { // 遍历文章评论数组
         let comment_reply_res = await selectCommentReplyByCommentId(comment_res[index].id)
