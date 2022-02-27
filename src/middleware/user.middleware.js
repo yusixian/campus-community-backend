@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 17:24:30
+ * @LastEditTime: 2022-02-27 12:40:55
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -15,6 +15,7 @@ const {
   userLoginError,
   invalidPassword,
   sexError,
+  activeError,
   unAuthorizedError } = require('../constant/err.type')
 const userValidator = async (ctx, next) => {
   const { user_name, password } = ctx.request.body
@@ -91,9 +92,19 @@ const verifyAdmin = async (ctx, next) => {
 const verifySex = async (ctx, next) => {
   const { sex } = ctx.request.body
   console.log(sex);
-  if (sex !== '男' && sex !== '女' && sex !== '保密') {
+  if (sex !== '男' && sex !== '女' && sex !== '保密' && sex !== '') {
     console.error('输入性别错误！')
     return ctx.app.emit('error', sexError, ctx)
+  }
+  await next()
+}
+
+const verifyActive = async (ctx, next) => {
+  const { is_active } = ctx.state.user
+  console.log(is_active);
+  if (!is_active) {
+    console.error('账号被封禁！')
+    return ctx.app.emit('error', activeError, ctx)
   }
   await next()
 }
@@ -103,5 +114,6 @@ module.exports = {
   cryptPassword,
   verifyLogin,
   verifyAdmin,
-  verifySex
+  verifySex,
+  verifyActive
 }

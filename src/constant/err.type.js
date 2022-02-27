@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: lihao
- * @LastEditTime: 2022-02-26 20:28:11
+ * @LastEditors: 41
+ * @LastEditTime: 2022-02-27 12:31:03
  * @Description: 
  */
 module.exports = {
@@ -76,6 +76,10 @@ module.exports = {
   resetError: {
     code: 10016,
     message: '密码重置错误！',
+  },
+  activeError: {
+    code: 10017,
+    message: '账号已被封禁！',
   },
   tokenExpiredError: {
     code: 10101,

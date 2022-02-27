@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 17:25:59
+ * @LastEditTime: 2022-02-27 12:28:11
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -68,7 +68,13 @@ class UserController {
         message: "用户注册成功",
         result: {
           id: res.id,
-          user_name: res.user_name
+          user_name: res.user_name,
+          is_admin: res.is_admin,
+          img: res.img,
+          is_active: res.is_active,
+          name: res.name,
+          city: res.city,
+          sex: res.sex
         }
       }
     } catch (err) {
@@ -87,7 +93,8 @@ class UserController {
         code: 0,
         message: '用户登录成功',
         result: {
-          token: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' })
+          token: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' }),
+          user: res
         }
       }
     } catch (err) {

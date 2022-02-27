@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:18:24
  * @LastEditors: 41
- * @LastEditTime: 2022-02-25 17:25:08
+ * @LastEditTime: 2022-02-27 12:18:28
  * @Description: 
  */
 const Router = require('koa-router')
@@ -35,7 +35,7 @@ const {
 const { auth } = require('../middleware/auth.middleware')
 // GET /users/
 // 注册接口
-router.post('/register', userValidator, verifyUser, cryptPassword, register)
+router.post('/register', userValidator, verifyUser, cryptPassword, verifySex, register)
 // 登录接口
 router.post('/login', userValidator, verifyLogin, login)
 // 上传头像接口
