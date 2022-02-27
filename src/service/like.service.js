@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-02-26 17:25:16
+ * @LastEditTime: 2022-02-27 22:09:35
  * @LastEditors: cos
  * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
@@ -20,10 +20,11 @@ class LikeService {
     const res = await Like.create(newLike)
     // console.log(res.dataValues)
     const { type } = newLike
-    if(type !== 'comment') 
+    if(type !== 'comment' && type !== 'comment_reply' ) 
       await incrementLikesByID(newLike.article_id)
     return res.dataValues
   }
+
   /**
    * @description: 根据id查询单个点赞记录是否存在
    * @param {number} like_id
@@ -36,19 +37,86 @@ class LikeService {
   }
 
   /**
+   * @description: 
+   * @param {Like} nowLike 完整的点赞记录
+   * @return {TargetLike} 包括target_id和type
+   */
+  getTarget(nowLike) {
+    const { type} = nowLike
+    const targrtLike = { type }
+    switch (type) {
+      case 'comment':
+        targrtLike.target_id = nowLike.comment_id;
+        break;
+      case 'comment_reply':
+        targrtLike.target_id = nowLike.comment_reply_id;
+        break;
+      default:
+        targrtLike.type = 'article'
+        targrtLike.target_id = nowLike.article_id;
+        break;
+    }
+    console.log('target_like:', targrtLike)
+    return targrtLike
+  }
+
+  /**
+   * @description: 根据target_id和type返回完整的点赞记录
+   * @param {TargetLike} targetLike 包括target_id和type
+   * @return {Like} nowLike 完整的点赞记录
+   */
+   getNewLike(targetLike) {
+    const { type } = targetLike
+    const nowLike = { type }
+    switch (type) {
+      case 'comment':
+        nowLike.comment_id = targetLike.target_id;
+        break;
+      case 'comment_reply':
+        nowLike.comment_reply_id = targetLike.target_id;
+        break;
+      default:
+        nowLike.type = 'article'
+        nowLike.article_id = targetLike.target_id;
+        break;
+    }
+    console.log('nowLike:', nowLike)
+    return nowLike
+  }
+  
+  /**
+   * @description: 根据target_id和type返回whereOpt
+   * @param {TargetLike} targetLike 包括target_id和type
+   * @return {LikeWhereOpt} whereOpt 
+   */
+  getWhereOpt(targetLike) {
+    const { type, target_id } = targetLike
+    const whereOpt = { type }
+    switch (type) {
+      case 'comment':
+        whereOpt.type = 'comment';
+        whereOpt.comment_id = target_id;
+        break;
+      case 'comment_reply':
+        whereOpt.type = 'comment_reply';
+        whereOpt.comment_reply_id = target_id;
+        break;
+      default:
+        whereOpt.type = 'article';
+        whereOpt.article_id = target_id
+        break;
+    }
+    return whereOpt
+  }
+
+  /**
    * @description: 根据文章/评论id 查询并返回所有点赞
    * @param {number} target_id 目标id
    * @param {'article' | 'comment'} type 不填则为article
    * @return {number} cnt 查询所得数量
    */
    async countLikeByTargetID(target_id, type) {
-    const whereOpt = { type: 'article'}
-
-    if(type === 'comment') {
-      whereOpt.type = 'comment'
-      whereOpt.comment_id = target_id
-    } else whereOpt.article_id = target_id
-
+    const whereOpt = LikeService.prototype.getWhereOpt({ target_id, type })
     // console.log("article_id:", article_id);
     const cnt = await Like.count({ where: whereOpt, raw: true })
     // console.log(res)
@@ -56,17 +124,13 @@ class LikeService {
   }
 
   /**
-   * @description: 根据文章/评论id 查询并返回所有点赞
+   * @description: 根据文章/评论/评论回复id 查询并返回所有点赞
    * @param {number} target_id 目标id
    * @param {'article' | 'comment'} type 不填则为article
    * @return {Array<Like> | null} 查询所得结果 or null 
    */
   async getAllLikeByTargetID(target_id, type = 'article') {
-    const whereOpt = { type: 'article'}
-    if(type === 'comment') {
-      whereOpt.type = 'comment'
-      whereOpt.comment_id = target_id
-    } else whereOpt.article_id = target_id
+    const whereOpt = LikeService.prototype.getWhereOpt({ target_id, type })
     // console.log("article_id:", article_id);
     const res = await Like.findAll({ where: whereOpt, raw: true })
     // console.log(res)
@@ -81,12 +145,12 @@ class LikeService {
   async isRepeatLike(newLike) {
     let isRepeat = false
     const { user_id, type } = newLike
-    const whereOpt = { user_id, type }
-    if(type === 'comment') whereOpt.comment_id = newLike.comment_id
-    else { 
-      whereOpt.type = 'article'
-      whereOpt.article_id = newLike.article_id
-    }
+    const target_id = newLike.comment_id || newLike.comment_reply_id || newLike.article_id
+    const targetLike = { type, target_id }
+
+    const whereOpt = LikeService.prototype.getWhereOpt(targetLike)
+    whereOpt.user_id = user_id
+
     const res = await Like.findAll({ where: whereOpt, raw: true })
     // console.log("res: ",res)
     // console.log("whereOpt: ",whereOpt)
@@ -102,12 +166,12 @@ class LikeService {
    async getLikeRecordByInfo(newLike) {
     let isRepeat = false
     const { user_id, type } = newLike
-    const whereOpt = { user_id, type }
-    if(type === 'comment') whereOpt.comment_id = newLike.comment_id
-    else { 
-      whereOpt.type = 'article'
-      whereOpt.article_id = newLike.article_id
-    }
+    const target_id = newLike.comment_id || newLike.comment_reply_id || newLike.article_id
+    const targetLike = { type, target_id }
+
+    const whereOpt = LikeService.prototype.getWhereOpt(targetLike)
+    whereOpt.user_id = user_id
+    
     const res = await Like.findAll({ where: whereOpt, raw: true })
     // console.log("res: ",res)
     // console.log("whereOpt: ",whereOpt)
@@ -117,16 +181,15 @@ class LikeService {
   } 
 
   /**
-   * @description: 根据点赞记录id 删除点赞 同时减少该点赞对应文章/评论相应点赞数
+   * @description: 根据点赞记录id 删除点赞 同时减少该点赞对应文章相应点赞数
    * @param {number} like_id 点赞记录id
-   * @param {number} target_id 对应文章/评论id
+   * @param {number} article_id 对应文章id
    * @param {'article' | 'comment'} type 不填则为article
    * @return {number} 删除的实际数量 
    */
-  async deleteLike(like_id, target_id, type = 'article') {
+  async deleteLike(like_id, article_id) {
     await Like.destroy({ where: { id: like_id } })
-    if(type !== 'comment') 
-      await decrementLikesByID(target_id)
+    await decrementLikesByID(article_id)
   }
 }
 module.exports = new LikeService()

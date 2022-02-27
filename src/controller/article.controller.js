@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-02-26 19:57:05
+ * @LastEditTime: 2022-02-26 22:13:27
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -223,18 +223,18 @@ class ArticleController {
     try {
       if (!file) throw Error()
       if(Array.isArray(file)) {
-        console.log("img!")
+        // console.log("img!")
         file.forEach(element => {
           let img = '/uploads/' + path.basename(element.path)
           imgPaths.push(img)
         });
       } else {
-        console.log("file",file)
+        // console.log("file",file)
         let img = '/uploads/' + path.basename(file.path)
-        console.log("img!", img)
+        // console.log("img!", img)
         imgPaths.push(img)
       }
-      console.log(imgPaths)
+      // console.log(imgPaths)
       ctx.body = {
         code: 0,
         message: '文章图片上传成功',

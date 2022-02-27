@@ -1,21 +1,22 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:10:28
- * @LastEditTime: 2022-02-26 17:22:14
+ * @LastEditTime: 2022-02-27 21:54:36
  * @LastEditors: cos
  * @Description: 点赞相关控制器
  * @FilePath: \campus-community-backend\src\controller\like.controller.js
  */
 const { likeCreateError, likeOperationError } = require("../constant/err.type");
-const { createLike, countLikeByTargetID, deleteLike } = require("../service/like.service")
+const { createLike, countLikeByTargetID, deleteLike, getTarget } = require("../service/like.service")
 class LikeController {
   async addLike(ctx, next) {
     try {
-      const res = await createLike(ctx.state.newLike)
-      const { user_id, type } = res
-      let target_id
-      if(type === 'comment') target_id = res.comment_id
-      else target_id = res.article_id
+      const newLike = ctx.state.newLike
+      console.log('addLike:', ctx.state.newLike)
+      const res = await createLike(newLike)
+      const targrtLike = getTarget(res)
+      const { user_id } = newLike
+      const { type, target_id } = targrtLike
       ctx.body = {
           code: 0,
           message: "点赞成功！",
@@ -34,13 +35,8 @@ class LikeController {
   async countLike(ctx, next) {
     try {
       const newLike = ctx.state.newLike
-      let { type } = newLike
-      let target_id
-      if(type === 'comment') target_id = newLike.comment_id
-      else {
-        type = 'article'
-        target_id = newLike.article_id
-      }
+      const targrtLike = getTarget(newLike)
+      const { type, target_id } = targrtLike
       const cnt = await countLikeByTargetID(target_id, type)
       ctx.body = {
         code: 0,
@@ -60,9 +56,9 @@ class LikeController {
     try {
       const existLike = ctx.state.existLike
       // console.log(existLike)
-      const { id, type } = existLike
-      const target_id = (type === 'comment') ? existLike.comment_id: existLike.article_id
-      await deleteLike(id, target_id)
+      const targrtLike = getTarget(existLike)
+      const { type, target_id } = targrtLike
+      if(type === 'article') await deleteLike(id, target_id)
       // console.log('cancel!')
       ctx.body = {
         code: 0,
