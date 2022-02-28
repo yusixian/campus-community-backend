@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-26 20:32:48
+ * @LastEditTime: 2022-02-27 15:26:16
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
@@ -84,7 +84,6 @@ class CommentContrller {
    */
   async queryCommentByArticleId(ctx, next) {
     const { id, pageNo, pageSize } = ctx.request.query
-    console.log('-----------', id, pageNo, pageSize);
     try {
       let comment_res = await selectCommentByArticleId(id, pageNo, pageSize)
       const userList = new Array()

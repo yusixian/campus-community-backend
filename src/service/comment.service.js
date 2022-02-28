@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:47:31
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-26 20:16:22
+ * @LastEditTime: 2022-02-27 16:26:01
  * @FilePath: \campus-community-backend\src\service\comment.service.js
  * @Description: 评论的业务逻辑层
  * 
@@ -11,6 +11,7 @@
 const Comment = require('../model/comment.model')
 
 const { Op } = require("sequelize");
+const { resolve } = require('path');
 
 
 class CommentService {
@@ -88,6 +89,21 @@ class CommentService {
       },
       offset: start,
       limit: pageSize
+    })
+    return res
+  }
+  /**
+   * 查询评论是否属于当前用户
+   * @param {*} uid 用户id
+   * @param {*} cid 评论id
+   * @returns 
+   */
+  async selectCommentByUidAndCid(uid, cid) {
+    const res = await Comment.count({
+      where: {
+        id: cid,
+        usser_id: uid, 
+      }
     })
     return res
   }

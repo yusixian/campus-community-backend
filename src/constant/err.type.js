@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: 41
- * @LastEditTime: 2022-02-27 12:31:03
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-02-27 16:32:11
  * @Description: 
  */
 module.exports = {
@@ -202,6 +202,10 @@ module.exports = {
   commPageQueryError: {
     code: 13006,
     message: '分页查询参数异常'
+  },
+  commentOwnError: {
+    code: 13007,
+    message: '操作失败！不是自己的评论！'
   },
   // 评论回复表
   commentReplyValidatorError: {
