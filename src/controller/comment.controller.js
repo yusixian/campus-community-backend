@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-27 15:26:16
+ * @LastEditTime: 2022-02-28 16:29:14
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
@@ -15,6 +15,9 @@ const { commentCreateError, commentDeleteFailedError, unAuthorizedError, comment
 const { getUserInfo } = require('../service/user.service')
 
 const { selectCommentReplyByCommentId } = require('../service/commentReply.service')
+
+const { getLikeRecordByInfo, countLikeByTargetID } = require('../service/like.service')
+
 class CommentContrller {
   /**
    * 新增评论
@@ -90,30 +93,34 @@ class CommentContrller {
       for (let index = 0; index < comment_res.length; index++) { // 遍历文章评论数组
         let comment_reply_res = await selectCommentReplyByCommentId(comment_res[index].id)
         let c_uid = comment_res[index].user_id // 获取评论者的id
-        let c_userinfo = await getUserInfo({c_uid}) 
+        let c_userinfo = await getUserInfo({ c_uid })
         if (!userList[`${c_uid}s`]) { // 做用户信息的缓存处理减少数据库的查询次数
-          c_userinfo = await getUserInfo({c_uid})
+          c_userinfo = await getUserInfo({ c_uid })
           userList[`${c_uid}s`] = c_userinfo
-        }else{
+        } else {
           c_userinfo = userList[`${c_uid}s`]
         }
+        let comment_good = await countLikeByTargetID(comment_res[index].id, 'comment')
+        let comment_isGood = await getLikeRecordByInfo({ user_id: ctx.state.user.id, type: 'comment', comment_id: comment_res[index].id })
         for (let j = 0; j < comment_reply_res.length; j++) { // 遍历评论回复数组
           let f_uid = comment_reply_res[j].from_user_id // 获取回复者的id
           let t_uid = comment_reply_res[j].to_user_id  // 获取目标用户的id
           let f_userinfo = null // 回复者的信息
           let t_userinfo = null // 目标用户的信息
           if (!userList[`${f_uid}s`]) { // 做用户信息的缓存处理减少数据库的查询次数
-            f_userinfo = await getUserInfo({f_uid})
+            f_userinfo = await getUserInfo({ f_uid })
             userList[`${f_uid}s`] = f_userinfo
-          }else{
+          } else {
             f_userinfo = userList[`${f_uid}s`]
           }
           if (!userList[`${t_uid}s`]) { //同理
-            t_userinfo = await getUserInfo({t_uid})
+            t_userinfo = await getUserInfo({ t_uid })
             userList[`${t_uid}s`] = t_userinfo
-          }else{
+          } else {
             t_userinfo = userList[`${t_uid}s`]
           }
+          let comment_reply_good = await countLikeByTargetID(comment_reply_res[j].id, 'comment_reply')
+          let comment_reply_isGood = await getLikeRecordByInfo({ user_id: ctx.state.user.id, type: 'comment_reply', comment_reply_id: comment_reply_res[j].id })
           comment_reply_res[j].dataValues.from_user = { // 回复者信息
             avatar: f_userinfo.img,
             name: f_userinfo.user_name
@@ -122,6 +129,18 @@ class CommentContrller {
             avatar: t_userinfo.img,
             name: t_userinfo.user_name
           }
+          comment_reply_res[j].dataValues.reply_good = comment_reply_good
+          if (comment_reply_isGood != null) {
+            comment_reply_res[j].dataValues.reply_isGood = Object.keys(comment_reply_isGood).length > 0
+          }else {
+            comment_reply_res[j].dataValues.reply_isGood = false
+          }
+        }
+        comment_res[index].dataValues.comment_good = comment_good
+        if (comment_isGood != null) {
+          comment_res[index].dataValues.comment_isGood = Object.keys(comment_isGood).length > 0
+        }else {
+          comment_res[index].dataValues.comment_isGood = false
         }
         comment_res[index].dataValues.comment_user = { // 评论者信息
           avatar: c_userinfo.img,

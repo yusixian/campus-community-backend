@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-27 16:32:11
+ * @LastEditTime: 2022-02-28 15:38:08
  * @Description: 
  */
 module.exports = {
@@ -252,5 +252,11 @@ module.exports = {
   likeOwnError: {
     code: 14006,
     message: '操作失败！不是自己的点赞！'
+  },
+
+  // 搜索相关错误
+  searchError: {
+    code: 15000,
+    message: '搜索失败！'
   }
 }

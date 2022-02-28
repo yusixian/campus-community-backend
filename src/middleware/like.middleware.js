@@ -1,13 +1,13 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:08:14
- * @LastEditTime: 2022-02-26 17:23:05
+ * @LastEditTime: 2022-02-27 21:46:22
  * @LastEditors: cos
  * @Description: 点赞管理中间件
  * @FilePath: \campus-community-backend\src\middleware\like.middleware.js
  */
 const { likeParamsError, likeRepeatError, likeIdError, likeDosNotExistError, likeOwnError } = require("../constant/err.type");
-const { isRepeatLike: isRepeatLike, getLikeRecordByID, getLikeRecordByInfo } = require("../service/like.service");
+const { isRepeatLike: isRepeatLike, getLikeRecordByID, getLikeRecordByInfo, getNewLike } = require("../service/like.service");
 const checkUtil = require("../utils/checkUtil");
 
 // 验证点赞信息target_id、type有效性，并进行相应处理后挂上ctx.state.newLike
@@ -16,25 +16,16 @@ const likeInfoValidate = async(ctx, next) => {
 
   const target_id = ctx.request.body.target_id || ctx.request.query.target_id;
   const type = ctx.request.body.type || ctx.request.query.type;
-
-  ctx.state.newLike = {}
-  const newLike = ctx.state.newLike
   try {
-    if(!target_id) throw Error('target_id不存在！')
-    let id = parseInt(target_id) // 转换为数字
-    if(id !== id) // id为NaN
-      throw Error('target_id为NaN!')
-
-    if(type === "comment") 
-      Object.assign(newLike, { 
-        type: "comment", 
-        comment_id:target_id 
-      })
-    else 
-      Object.assign(newLike, { article_id: target_id })
+    if(!checkUtil.checkID(target_id)) 
+      throw Error("target_id不合法！")
       
+    const targetLike = { type, target_id }
+    ctx.state.newLike = getNewLike(targetLike)
+    const newLike = ctx.state.newLike
     newLike.user_id = ctx.state.user.id
-    // console.log("newLike:", newLike)
+    
+    console.log("newLike:", newLike)
     await next()
   } catch(err) {
     console.error(err, likeParamsError)
@@ -60,9 +51,9 @@ const likeIDValidate = async(ctx, next) => {
   const like_id = ctx.request.body.like_id || ctx.request.query.like_id;
   // console.log("likeIDValidate:", like_id)
   try {
-    const id = checkUtil.checkID(like_id)
-    if(!id) throw Error("id不合法！")
-    ctx.state.like_id = id
+    if(!checkUtil.checkID(like_id)) 
+      throw Error("like_id不合法！")
+    ctx.state.like_id = like_id
     await next()
   } catch(err) {
     console.error('id不合法！', likeIdError);
