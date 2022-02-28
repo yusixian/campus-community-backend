@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: 41
- * @LastEditTime: 2022-02-27 12:31:03
+ * @LastEditors: cos
+ * @LastEditTime: 2022-02-28 13:34:37
  * @Description: 
  */
 module.exports = {
@@ -248,5 +248,11 @@ module.exports = {
   likeOwnError: {
     code: 14006,
     message: '操作失败！不是自己的点赞！'
+  },
+
+  // 搜索相关错误
+  searchError: {
+    code: 15000,
+    message: '搜索失败！'
   }
 }

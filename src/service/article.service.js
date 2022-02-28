@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-02-25 16:22:05
+ * @LastEditTime: 2022-02-28 13:10:32
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -149,7 +149,7 @@ class ArticleService {
    * @return {boolean} ParanoidOpt 偏执表选项
    * @description: 
    */
-  async getParanoidOpt(status) {
+  getParanoidOpt(status) {
     let paranoidOpt = true
     switch (status) {
       case 0: 
@@ -166,7 +166,7 @@ class ArticleService {
    * @return {WhereOpt} 提取过滤参数到whereOpt
    * @description: 
    */
-  async getWhereOpt(filterOpt) {
+  getWhereOpt(filterOpt) {
     const whereOpt = {}
     const { partition_id, status, start_time, end_time, user_id } = filterOpt
     // console.log("status:", status)
@@ -192,20 +192,19 @@ class ArticleService {
   /**
    * @param {FilterOption} filterOpt 过滤参数
    * @param {OrderOption} orderOpt 排序参数 
-   * @return {Array<Article>} article_list or null
-   * @description: filterOpt、
+   * @return {FilterList} 返回{page_nums, count, rows} 总页数 查询所得总数 当前页列表
+   * @description: 过滤文章 返回{page_nums, count, rows}
    */
   async filterArticle(filterOpt, orderOpt) {
     const current = filterOpt.current || 1
     const size = filterOpt.size || 10
-
-    const whereOpt = await ArticleService.prototype.getWhereOpt(filterOpt)
+    const whereOpt = ArticleService.prototype.getWhereOpt(filterOpt)
     const { status } = filterOpt
-    const paranoidOpt = await ArticleService.prototype.getParanoidOpt(status)
+    const paranoidOpt = ArticleService.prototype.getParanoidOpt(status)
 
     console.log("whereOpt:",whereOpt, 'paranoidOpt:', paranoidOpt)
     // const start_time = filterOpt.start_time
-    const { count, rows } = await Article.findAndCountAll({
+    const { count, rows } = Article.findAndCountAll({
       where: whereOpt,
       // order: orderOpt,
       offset: (current-1)*size,
@@ -225,11 +224,10 @@ class ArticleService {
    * @description: filterOpt、
    */
   async countArticle(filterOpt) {
-    const whereOpt = await ArticleService.prototype.getWhereOpt(filterOpt)
+    const whereOpt = ArticleService.prototype.getWhereOpt(filterOpt)
     const { status } = filterOpt
-    const paranoidOpt = await ArticleService.prototype.getParanoidOpt(status)
-    console.log("whereOpt:",whereOpt)
-    // const start_time = filterOpt.start_time
+    const paranoidOpt = ArticleService.prototype.getParanoidOpt(status)
+    // console.log("whereOpt:",whereOpt)
     const count = await Article.count({
       paranoid: paranoidOpt,
       where: whereOpt
