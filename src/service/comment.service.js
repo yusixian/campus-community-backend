@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:47:31
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-27 16:26:01
+ * @LastEditTime: 2022-03-01 19:08:03
  * @FilePath: \campus-community-backend\src\service\comment.service.js
  * @Description: 评论的业务逻辑层
  * 
@@ -103,6 +103,19 @@ class CommentService {
       where: {
         id: cid,
         usser_id: uid, 
+      }
+    })
+    return res
+  }
+  /**
+   * 根据文章id查询评论数量
+   * @param {*} aid 
+   * @returns 
+   */
+  async selectCommentCountByAid(aid){
+    const res = await Comment.count({
+      where: {
+        article_id: aid
       }
     })
     return res

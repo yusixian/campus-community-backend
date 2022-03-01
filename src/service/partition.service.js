@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:02:42
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 10:56:29
+ * @LastEditTime: 2022-02-28 19:48:00
  * @FilePath: \campus-community-backend\src\service\partition.service.js
  * @Description: 分区管理 partition
  */
@@ -16,11 +16,12 @@ class PartitionService {
    * @param {*} cre_user_id 创建分区的用户id
    * @returns 
    */
-  async createPartition(partition_name, partition_desc, cre_user_id) {
+  async createPartition(partition_name, partition_desc, cre_user_id, icon) {
     const res = await Partition.create({
       partition_name,
       partition_desc, 
-      cre_user_id
+      cre_user_id,
+      icon
     })
     return res.dataValues 
   }

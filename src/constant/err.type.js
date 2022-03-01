@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-28 15:38:08
+ * @LastEditTime: 2022-03-01 19:13:04
  * @Description: 
  */
 module.exports = {
@@ -194,6 +194,10 @@ module.exports = {
   commentSelectByArticleIdFailedError: {
     code: 13005,
     message: '查询评论失败',
+  },
+  commentSelectCountError: {
+    code: 13006,
+    message: '查询评论数量失败'
   },
   fileUploadError: {
     code: 13000,

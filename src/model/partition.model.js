@@ -1,7 +1,7 @@
 /*
  * @Author: lihao
  * @Date: 2022-02-19 14:31:15
- * @LastEditTime: 2022-02-25 16:50:42
+ * @LastEditTime: 2022-02-28 19:38:57
  * @LastEditors: lihao
  * @Description: 分区管理 partition
  * @FilePath: \campus-community-backend\src\model\partition.model.js
@@ -29,6 +29,11 @@ const Partition = seq.define('sc_Partition', {
     type: DataTypes.INTEGER,
     allowNull: false,
     comment: '创建分区的用户id'
+  },
+  icon: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    comment: '分区的图标'
   }
 })
 Partition.belongsTo(User, {

@@ -2,13 +2,13 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:26:12
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 10:58:41
+ * @LastEditTime: 2022-02-28 20:46:40
  * @FilePath: \campus-community-backend\src\controller\partition.controller.js
  * @Description:分区管理 partition
  */
-
+const path = require("path")
 const { createPartition, delPartitionById, selectAllPartition } = require('../service/partition.service')
-const { partitionCreateErr, partitionDeleteError, partitionQueryALLError } = require('../constant/err.type')
+const { partitionCreateErr, partitionDeleteError, partitionQueryALLError, fileUploadError } = require('../constant/err.type')
 
 class PartitionController {
   /**
@@ -17,9 +17,12 @@ class PartitionController {
    * @param {*} next 
    */
   async insertPartition(ctx, next) {
-    const { partition_name, partition_desc } = ctx.request.body;
+    let { partition_name, partition_desc, icon } = ctx.request.body;
+    if (!icon) {
+      icon = "apps-o"
+    }
     try {
-      const res = await createPartition(partition_name, partition_desc, ctx.state.user.id)
+      const res = await createPartition(partition_name, partition_desc, ctx.state.user.id, icon)
       ctx.body = {
         code: 0,
         message: "分区创建成功"
@@ -64,6 +67,29 @@ class PartitionController {
     } catch (err) {
       console.log(err);
       ctx.app.emit('error', partitionQueryALLError, ctx)
+    }
+  }
+  /**
+   * 上传分区图片
+   * @param {*} ctx 
+   * @param {*} next 
+   * @returns 
+   */
+  async uploadPartitionIcon(ctx, next) {
+    const {file} = ctx.request.files
+    console.log(file);
+    try{
+      let imgPath =  '/uploads/' + path.basename(file.path)
+      ctx.body = {
+        code: 0,
+        message: "分区图片上传成功！",
+        result: {
+          imgPath
+        }
+      }
+    }catch(err) {
+      console.log(err);
+      return ctx.app.emit('error', fileUploadError, ctx)
     }
   }
 }

@@ -2,15 +2,15 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-28 16:29:14
+ * @LastEditTime: 2022-03-01 23:31:57
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
  */
 
-const { createComment, delCommentById, restoreCommentById, selectCommentByArticleId, delCommentBatchByIds } = require('../service/comment.service')
+const { createComment, delCommentById, restoreCommentById, selectCommentByArticleId, delCommentBatchByIds, selectCommentCountByAid } = require('../service/comment.service')
 
-const { commentCreateError, commentDeleteFailedError, unAuthorizedError, commentSelectByArticleIdFailedError } = require('../constant/err.type')
+const { commentCreateError, commentDeleteFailedError, unAuthorizedError, commentSelectByArticleIdFailedError, commentSelectCountError } = require('../constant/err.type')
 
 const { getUserInfo } = require('../service/user.service')
 
@@ -132,14 +132,14 @@ class CommentContrller {
           comment_reply_res[j].dataValues.reply_good = comment_reply_good
           if (comment_reply_isGood != null) {
             comment_reply_res[j].dataValues.reply_isGood = Object.keys(comment_reply_isGood).length > 0
-          }else {
+          } else {
             comment_reply_res[j].dataValues.reply_isGood = false
           }
         }
         comment_res[index].dataValues.comment_good = comment_good
         if (comment_isGood != null) {
           comment_res[index].dataValues.comment_isGood = Object.keys(comment_isGood).length > 0
-        }else {
+        } else {
           comment_res[index].dataValues.comment_isGood = false
         }
         comment_res[index].dataValues.comment_user = { // 评论者信息
@@ -175,6 +175,27 @@ class CommentContrller {
     } catch (err) {
       console.log(err);
       ctx.app.emit('error', commentDeleteFailedError, ctx)
+    }
+  }
+  /**
+   * 通过文章id查询评论数量
+   * @param {*} ctx 
+   * @param {*} next 
+   */
+  async queryCommentCountByAid(ctx, next) {
+    const { id } = ctx.request.query
+    try {
+      const res = await selectCommentCountByAid(id)
+      ctx.body = {
+        code: 0,
+        message: '文章评论数量查询成功',
+        result: {
+          commentCount: res
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      ctx.app.emit('error', commentSelectCountError, ctx)
     }
   }
 
