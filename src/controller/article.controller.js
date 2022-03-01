@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-02-26 22:13:27
+ * @LastEditTime: 2022-03-01 11:29:33
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -11,7 +11,7 @@ const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, res
 const { articleOperationError, articleCreateError, 
     articleDeleteError, articleParamsError, 
     articleDosNotExist, articleUpdateError, 
-    articleShieldError, articleRestoreError
+    articleShieldError, articleRestoreError, fileUploadError
 } = require('../constant/err.type');
 
 class ArticleController {

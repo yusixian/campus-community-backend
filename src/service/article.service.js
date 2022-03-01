@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-02-28 13:10:32
+ * @LastEditTime: 2022-02-28 18:04:26
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -174,7 +174,9 @@ class ArticleService {
       case 0: whereOpt.status = 0; break
       case 1: whereOpt.status = 1; break
       case 2: whereOpt.status = 2; break
-      default: break
+      default: 
+      
+      break
     }
     partition_id && Object.assign(whereOpt, { partition_id })
     user_id && Object.assign(whereOpt, { user_id })
@@ -204,7 +206,7 @@ class ArticleService {
 
     console.log("whereOpt:",whereOpt, 'paranoidOpt:', paranoidOpt)
     // const start_time = filterOpt.start_time
-    const { count, rows } = Article.findAndCountAll({
+    const { count, rows } = await Article.findAndCountAll({
       where: whereOpt,
       // order: orderOpt,
       offset: (current-1)*size,
