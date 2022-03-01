@@ -1,14 +1,15 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-02-28 18:04:26
+ * @LastEditTime: 2022-03-01 17:24:38
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
  */
 const { Op } = require("sequelize");
 const moment = require('moment');
-const Article = require('../model/article.model')
+const Article = require('../model/article.model');
+const seq = require("../db/seq");
 class ArticleService {
   /**
    * @description: 生成新文章插入数据库
@@ -79,7 +80,8 @@ class ArticleService {
    */
   async getArticleList() {
     // console.log("article_id:", article_id);
-    const res = await Article.findAll({ raw: true })
+    const attributes = ArticleService.prototype.getElseAttribute()
+    const res = await Article.findAll({ attributes, raw: true })
     // console.log(res)
     return res
   }
@@ -122,7 +124,9 @@ class ArticleService {
     console.log("article_id:", article_id);
     let whereOpt = { id: article_id }
     if(!showSheid) whereOpt.status = 0
+    const attributes = ArticleService.prototype.getElseAttribute()
     const res = await Article.findOne({
+        attributes,
         where: whereOpt,
         paranoid: !showDel   // paranoid为false则会检索到被软删除的
       })
@@ -192,6 +196,25 @@ class ArticleService {
   }
 
   /**
+   * @description: 子查询 返回添加一些额外的属性 如通过用户id查询用户名
+   * @return { Attributes } 额外属性 user_name
+   */
+  getElseAttribute() {
+    const attributes =  {
+        include: [
+            [
+                seq.literal(`( 
+                    SELECT user_name 
+                    FROM sc_Users as a 
+                    WHERE  a.id = sc_Article.user_id 
+                )`), 'user_name'
+            ]
+        ]
+    }
+    return attributes
+  }
+
+  /**
    * @param {FilterOption} filterOpt 过滤参数
    * @param {OrderOption} orderOpt 排序参数 
    * @return {FilterList} 返回{page_nums, count, rows} 总页数 查询所得总数 当前页列表
@@ -203,16 +226,17 @@ class ArticleService {
     const whereOpt = ArticleService.prototype.getWhereOpt(filterOpt)
     const { status } = filterOpt
     const paranoidOpt = ArticleService.prototype.getParanoidOpt(status)
-
+    const attributes = ArticleService.prototype.getElseAttribute()
     console.log("whereOpt:",whereOpt, 'paranoidOpt:', paranoidOpt)
     // const start_time = filterOpt.start_time
     const { count, rows } = await Article.findAndCountAll({
-      where: whereOpt,
-      // order: orderOpt,
-      offset: (current-1)*size,
-      limit: size,
-      paranoid: paranoidOpt,
-      raw: true
+        attributes,
+        where: whereOpt,
+        // order: orderOpt,
+        offset: (current-1)*size,
+        limit: size,
+        paranoid: paranoidOpt,
+        raw: true
     })
     const page_nums = Math.ceil(count/size)
     // console.log({ page_nums, count, rows })
