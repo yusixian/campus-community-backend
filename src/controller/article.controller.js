@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-02-26 22:13:27
+ * @LastEditTime: 2022-03-01 17:57:01
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -11,7 +11,7 @@ const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, res
 const { articleOperationError, articleCreateError, 
     articleDeleteError, articleParamsError, 
     articleDosNotExist, articleUpdateError, 
-    articleShieldError, articleRestoreError
+    articleShieldError, articleRestoreError, fileUploadError
 } = require('../constant/err.type');
 
 class ArticleController {
@@ -168,7 +168,7 @@ class ArticleController {
 
   
   /**
-   * @description: 根据过滤参数分页获取文章
+   * @description: (后台)根据过滤参数分页获取文章
    */
    async getByPages(ctx, next) {
     try {
@@ -245,6 +245,31 @@ class ArticleController {
     } catch(err) {
       console.log(err)
       return ctx.app.emit('error', fileUploadError, ctx)
+    }
+  }
+
+  /**
+   * @description: 根据过滤参数分页获取文章
+   */
+   async getByPublicPages(ctx, next) {
+    try {
+      const filterOpt = ctx.state.filterOpt
+      filterOpt.status = 0
+      console.log("filterOpt:", filterOpt)
+      const res = await filterArticle(filterOpt)
+      const article_pages = res.page_nums
+      const article_total = res.count
+      const article_list = res.rows
+      const result = { article_total , article_pages, article_list }
+      console.log(result)
+      ctx.body = {
+          code: 0,
+          message: "获取文章成功！",
+          result
+      }
+    } catch (err) {
+      console.error('获取文章失败！', err);
+      return ctx.app.emit('error', articleOperationError, ctx)
     }
   }
 }

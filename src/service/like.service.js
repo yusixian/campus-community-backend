@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-02-27 22:09:35
+ * @LastEditTime: 2022-03-01 18:22:18
  * @LastEditors: cos
  * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
@@ -188,8 +188,9 @@ class LikeService {
    * @return {number} 删除的实际数量 
    */
   async deleteLike(like_id, article_id) {
+    // console.log("delete:", like_id, article_id)
     await Like.destroy({ where: { id: like_id } })
-    await decrementLikesByID(article_id)
+    if(article_id) await decrementLikesByID(article_id)
   }
 }
 module.exports = new LikeService()

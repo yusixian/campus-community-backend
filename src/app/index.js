@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-15 17:29:53
- * @LastEditors: lihao
- * @LastEditTime: 2022-02-24 20:18:56
+ * @LastEditors: 41
+ * @LastEditTime: 2022-03-01 13:36:08
  * @Description: 
  */
 // 导入包
@@ -15,6 +15,7 @@ const serve = require('koa-static')
 
 // 导入封装好的路由
 const router = require('../routers/index')
+// 引入websocket
 // 导入统一的错误处理函数
 const errHandler = require('./errHandler')
 // 创建app实例

@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:10:28
- * @LastEditTime: 2022-02-27 21:54:36
+ * @LastEditTime: 2022-03-01 18:16:04
  * @LastEditors: cos
  * @Description: 点赞相关控制器
  * @FilePath: \campus-community-backend\src\controller\like.controller.js
@@ -55,10 +55,12 @@ class LikeController {
   async cancelLike(ctx, next) {
     try {
       const existLike = ctx.state.existLike
+      const { id } = existLike
       // console.log(existLike)
       const targrtLike = getTarget(existLike)
       const { type, target_id } = targrtLike
       if(type === 'article') await deleteLike(id, target_id)
+      else await deleteLike(id)
       // console.log('cancel!')
       ctx.body = {
         code: 0,

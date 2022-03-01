@@ -1,14 +1,14 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:09:32
- * @LastEditTime: 2022-02-26 19:03:24
+ * @LastEditTime: 2022-03-01 17:51:31
  * @LastEditors: cos
  * @Description: 文章管理相关路由
  * @FilePath: \campus-community-backend\src\routers\article.route.js
  */
 const Router = require('koa-router')
 
-const { postArticle, deleteArticle, updateArticle, shieldArticle, restoreArticle, getAllArticle, getByID, getByPages, countByFilter, upload } = require('../controller/article.controller')
+const { postArticle, deleteArticle, updateArticle, shieldArticle, restoreArticle, getAllArticle, getByID, getByPages, countByFilter, upload, getByPublicPages } = require('../controller/article.controller')
 const { articleInfoValidate, articleIDValidate, articleExistValidate, articleFilterValidate } = require('../middleware/article.middleware')
 const { verifyActive } = require('../middleware/user.middleware')
 const { auth } = require('../middleware/auth.middleware')
@@ -25,6 +25,7 @@ router.patch('/update', auth, articleInfoValidate, articleIDValidate,articleExis
 router.get('/getlist', auth, verifyAdmin, verifyActive,getAllArticle)
 router.get('/getbyid', auth, articleIDValidate, articleExistValidate, verifyActive,getByID)
 router.get('/count', auth, articleFilterValidate, verifyActive,countByFilter)
-router.get('/page', auth, articleFilterValidate, verifyActive,getByPages)
+router.get('/page', auth, verifyAdmin, articleFilterValidate, verifyActive,getByPages)
+router.get('/public/page', articleFilterValidate, getByPublicPages)
 
 module.exports = router
