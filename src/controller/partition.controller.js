@@ -2,14 +2,14 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:26:12
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-02 17:52:40
+ * @LastEditTime: 2022-03-02 18:06:41
  * @FilePath: \campus-community-backend\src\controller\partition.controller.js
  * @Description:分区管理 partition
  */
 const path = require("path")
 const { createPartition, delPartitionById, selectAllPartition, updatePartitionById } = require('../service/partition.service')
 const { partitionCreateErr, partitionDeleteError, partitionQueryALLError, fileUploadError, updatePartitionByIdError } = require('../constant/err.type')
-const { upToQiniu } = require('../utils/oos/oosUtils')
+const { upToQiniu } = require('../utils/oss/ossUtils')
 class PartitionController {
   /**
    * 创建分区

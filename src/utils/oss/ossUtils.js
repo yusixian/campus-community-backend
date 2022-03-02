@@ -2,8 +2,8 @@
  * @Author: lihao
  * @Date: 2022-03-02 16:23:38
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-02 17:59:01
- * @FilePath: \campus-community-backend\src\utils\oos\oosUtils.js
+ * @LastEditTime: 2022-03-02 18:06:52
+ * @FilePath: \campus-community-backend\src\utils\oss\ossUtils.js
  * @Description: 
  * 
  * Copyright (c) 2022 by 用户/公司名, All Rights Reserved. 
@@ -13,7 +13,7 @@
 let qiniu = require('qiniu'); // 需要加载qiniu模块的
 const fs = require('fs')
 // 引入key文件
-const QINIU = require('./oosConfig')
+const QINIU = require('./ossConfig')
 
 /**
  * 
