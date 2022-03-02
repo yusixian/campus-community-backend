@@ -33,6 +33,7 @@
     "moment": "^2.29.1",
     "mysql2": "^2.3.3",
     "path": "^0.12.7",
+    "qiniu": "^7.4.0",
     "sequelize": "^6.16.1"
   },
   "devDependencies": {
