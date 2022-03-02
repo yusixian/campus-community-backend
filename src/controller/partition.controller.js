@@ -2,14 +2,14 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:26:12
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-02 12:27:09
+ * @LastEditTime: 2022-03-02 18:06:41
  * @FilePath: \campus-community-backend\src\controller\partition.controller.js
  * @Description:分区管理 partition
  */
 const path = require("path")
 const { createPartition, delPartitionById, selectAllPartition, updatePartitionById } = require('../service/partition.service')
 const { partitionCreateErr, partitionDeleteError, partitionQueryALLError, fileUploadError, updatePartitionByIdError } = require('../constant/err.type')
-
+const { upToQiniu } = require('../utils/oss/ossUtils')
 class PartitionController {
   /**
    * 创建分区
@@ -77,14 +77,14 @@ class PartitionController {
    */
   async uploadPartitionIcon(ctx, next) {
     const { file } = ctx.request.files
-    console.log(file);
+    console.log(file.name);
     try {
-      let imgPath = '/uploads/' + path.basename(file.path)
+      const res = await upToQiniu(file)
       ctx.body = {
         code: 0,
         message: "分区图片上传成功！",
         result: {
-          imgPath
+          imgPath: res
         }
       }
     } catch (err) {
@@ -106,7 +106,6 @@ class PartitionController {
         code: 0,
         message: "修改分区成功"
       }
-
     } catch (err) {
       console.log(err);
       ctx.app.emit('error', updatePartitionByIdError, ctx)

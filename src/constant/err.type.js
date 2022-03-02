@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-02 12:13:03
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-02 12:40:29
  * @Description: 
  */
 module.exports = {
@@ -266,5 +266,35 @@ module.exports = {
   searchError: {
     code: 15000,
     message: '搜索失败！'
-  }
+  },
+  
+  // 收藏相关错误码
+  collectionIdError: {
+    code: 16000,
+    message: '收藏ID不合法！'
+  },
+  collectionParamsError: {
+    code: 16001,
+    message: '收藏参数不合法！'
+  },
+  collectionCreateError: {
+    code: 16002,
+    message: '添加收藏失败！'
+  },
+  collectionRepeatError: {
+    code: 16003,
+    message: '重复收藏，该用户已收藏过该文章！'
+  },
+  collectionOperationError: {
+    code: 16004,
+    message: '收藏接口操作失败'
+  },
+  collectionDosNotExistError: {
+    code: 16005,
+    message: '该收藏记录不存在！'
+  },
+  collectionOwnError: {
+    code: 16006,
+    message: '操作失败！不是自己的收藏！'
+  },
 }
