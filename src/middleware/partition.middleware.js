@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 16:40:39
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 10:56:24
+ * @LastEditTime: 2022-03-02 12:23:27
  * @FilePath: \campus-community-backend\src\middleware\partition.middleware.js
  * @Description: partition 中间件
  */
@@ -32,7 +32,7 @@ const partitionIsUni = async (ctx, next) => {
 }
 // 判断分区id是否合法
 const partitionIdIsNull = async (ctx, next) => {
-  const { id } = ctx.request.query
+  const id  = ctx.request.query.id || ctx.request.body.id
   if (!id) {
     ctx.app.emit('error', partitionIdError, ctx)
     return

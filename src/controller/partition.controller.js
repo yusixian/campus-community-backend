@@ -2,13 +2,13 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:26:12
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-28 20:46:40
+ * @LastEditTime: 2022-03-02 12:27:09
  * @FilePath: \campus-community-backend\src\controller\partition.controller.js
  * @Description:分区管理 partition
  */
 const path = require("path")
-const { createPartition, delPartitionById, selectAllPartition } = require('../service/partition.service')
-const { partitionCreateErr, partitionDeleteError, partitionQueryALLError, fileUploadError } = require('../constant/err.type')
+const { createPartition, delPartitionById, selectAllPartition, updatePartitionById } = require('../service/partition.service')
+const { partitionCreateErr, partitionDeleteError, partitionQueryALLError, fileUploadError, updatePartitionByIdError } = require('../constant/err.type')
 
 class PartitionController {
   /**
@@ -19,7 +19,7 @@ class PartitionController {
   async insertPartition(ctx, next) {
     let { partition_name, partition_desc, icon } = ctx.request.body;
     if (!icon) {
-      icon = "apps-o"
+      icon = "http://dummyimage.com/100x100"
     }
     try {
       const res = await createPartition(partition_name, partition_desc, ctx.state.user.id, icon)
@@ -44,7 +44,7 @@ class PartitionController {
       ctx.body = {
         code: 0,
         message: "分区删除成功",
-        
+
       }
     } catch (err) {
       console.log(err);
@@ -76,10 +76,10 @@ class PartitionController {
    * @returns 
    */
   async uploadPartitionIcon(ctx, next) {
-    const {file} = ctx.request.files
+    const { file } = ctx.request.files
     console.log(file);
-    try{
-      let imgPath =  '/uploads/' + path.basename(file.path)
+    try {
+      let imgPath = '/uploads/' + path.basename(file.path)
       ctx.body = {
         code: 0,
         message: "分区图片上传成功！",
@@ -87,9 +87,29 @@ class PartitionController {
           imgPath
         }
       }
-    }catch(err) {
+    } catch (err) {
       console.log(err);
       return ctx.app.emit('error', fileUploadError, ctx)
+    }
+  }
+
+  async updatePartitionByPid(ctx, next) {
+    const { id, partition_name, partition_desc, icon } = ctx.request.body
+    let cre_user_id = ctx.state.user.id
+    const newPartition = { cre_user_id }
+    partition_name && Object.assign(newPartition, { partition_name })
+    partition_desc && Object.assign(newPartition, { partition_desc })
+    icon && Object.assign(newPartition, { icon })
+    try {
+      const res = await updatePartitionById(id, newPartition)
+      ctx.body = {
+        code: 0,
+        message: "修改分区成功"
+      }
+
+    } catch (err) {
+      console.log(err);
+      ctx.app.emit('error', updatePartitionByIdError, ctx)
     }
   }
 }

@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-01 19:13:04
+ * @LastEditTime: 2022-03-02 12:13:03
  * @Description: 
  */
 module.exports = {
@@ -159,6 +159,10 @@ module.exports = {
     code: 12005,
     message: '分区id为空',
 
+  },
+  updatePartitionByIdError: {
+    code: 12006,
+    message: "分区更新失败"
   },
   partitionQueryALLError: {
     code: 12006,

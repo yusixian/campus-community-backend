@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-19 15:02:42
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-28 19:48:00
+ * @LastEditTime: 2022-03-02 12:13:08
  * @FilePath: \campus-community-backend\src\service\partition.service.js
  * @Description: 分区管理 partition
  */
@@ -19,11 +19,11 @@ class PartitionService {
   async createPartition(partition_name, partition_desc, cre_user_id, icon) {
     const res = await Partition.create({
       partition_name,
-      partition_desc, 
+      partition_desc,
       cre_user_id,
       icon
     })
-    return res.dataValues 
+    return res.dataValues
   }
   /**
    * 分区是否存在
@@ -62,7 +62,7 @@ class PartitionService {
   async selectAllPartition() {
     const res = await Partition.findAll()
     return res
-  } 
+  }
   /**
    * 根据分区id查询id是否存在
    * @param {*} id 被查询的分区id
@@ -70,12 +70,22 @@ class PartitionService {
    */
   async selectPartitionCountById(id) {
     const res = await Partition.count({
-      where:{
+      where: {
         id: {
           [Op.eq]: id
         }
       }
     })
+    return res
+  }
+  /**
+   * 根据分区id更新分区对象
+   * @param {*} id 更新的分区id
+   * @param {*} newPartition 更新的分区对象
+   * @returns 
+   */
+  async updatePartitionById(id, newPartition) {
+    const res = await Partition.update(newPartition, { where: { id } })
     return res
   }
 }
