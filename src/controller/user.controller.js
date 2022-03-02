@@ -2,10 +2,11 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-02 09:08:10
+ * @LastEditTime: 2022-03-02 21:50:03
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const path = require('path')
 const { createUser, getUserInfo, updateById, getAllInfo } = require('../service/user.service')
 const {
@@ -15,6 +16,7 @@ const {
   fileUploadError,
   tokenExpiredError,
   invalidToken,
+  invalidPassword,
   adminError,
   findError,
   userChangeError,
@@ -106,14 +108,25 @@ class UserController {
   async changePassword (ctx, next) {
     // 1.获取数据
     const id = ctx.state.user.id
-    const password = ctx.request.body.password
-    console.log(id, password);
-    // 2.操作数据库
+    const { password, old } = ctx.request.body
+    // console.log(id, password, old);
+    // 2.判断旧密码是否正确
+    let res = await getUserInfo({ id })
+    // console.log(res);
+    // 2.密码是否匹配(不匹配报错)
+    if (!bcrypt.compareSync(old, res.password)) {
+      ctx.app.emit('error', invalidPassword, ctx)
+      return
+    }
+    // 3.操作数据库
     if (await updateById({ id, password })) {
       ctx.body = {
         code: 0,
         message: '修改密码成功',
-        result: ''
+        result: {
+          password,
+          old
+        }
       }
     } else {
       ctx.app.emit('error', changePasswordError

@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-02-27 12:40:55
+ * @LastEditTime: 2022-03-02 21:47:55
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -69,6 +69,7 @@ const verifyLogin = async (ctx, next) => {
       ctx.app.emit('error', userDosNotExist, ctx)
       return
     }
+    console.log(password, res.password);
     // 2.密码是否匹配(不匹配报错)
     if (!bcrypt.compareSync(password, res.password)) {
       ctx.app.emit('error', invalidPassword, ctx)
