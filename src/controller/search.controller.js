@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
- * @LastEditors: cos
- * @LastEditTime: 2022-02-28 13:35:28
+ * @LastEditors: 41
+ * @LastEditTime: 2022-03-02 09:00:50
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
@@ -14,11 +14,17 @@ class searchController {
       let { like_name } = ctx.request.query
       console.log(like_name);
       let res = await searchLikeUser(like_name)
+      let users = []
+      for (let i = 0; i < res.length; i++) {
+        let { password, ...ans } = res[i]
+        users.push(ans)
+        // console.log(ans);
+      }
       ctx.body = {
         code: 0,
         message: '查询成功',
         result: {
-          res
+          users
         }
       }
     } catch (err) {

@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-02-27 12:28:11
+ * @LastEditTime: 2022-03-02 09:03:32
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -198,12 +198,16 @@ class UserController {
   async findall (ctx, next) {
     try {
       let res = await getAllInfo()
-
+      let users = []
+      for (let i = 0; i < res.length; i++) {
+        let { password, ...ans } = res[i]
+        users.push(ans)
+      }
       ctx.body = {
         code: 0,
         message: '查询成功',
         result: {
-          user: res
+          users
         }
       }
     }
@@ -215,11 +219,12 @@ class UserController {
     try {
       const { id } = ctx.request.query
       let res = await getUserInfo({ id })
+      let { password, ...user } = res
       ctx.body = {
         code: 0,
         message: '查询成功',
         result: {
-          user: res
+          user
         }
       }
     }
