@@ -1,14 +1,14 @@
 /*
  * @Author: cos
  * @Date: 2022-03-02 12:11:30
- * @LastEditTime: 2022-03-02 19:05:19
+ * @LastEditTime: 2022-03-02 19:40:40
  * @LastEditors: cos
  * @Description: 收藏相关控制器
  * @FilePath: \campus-community-backend\src\controller\collection.controller.js
  */
 const { collectionCreateError, articleDosNotExist, collectionOperationError } = require("../constant/err.type")
 const { searchArticleByID } = require("../service/article.service")
-const { createCollection, countCollections, getCollectionsByUser, deleteCollectionByInfo, deleteCollectionByID } = require("../service/Collection.service")
+const { createCollection, countCollections, getCollectionsByUser, deleteCollectionByInfo, deleteCollectionByID } = require("../service/collection.service")
 class CollectionController {
   async addCollection(ctx, next) {
     const newCollection = ctx.state.newCollection
