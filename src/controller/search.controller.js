@@ -2,11 +2,13 @@
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
  * @LastEditors: 41
- * @LastEditTime: 2022-03-02 09:00:50
+ * @LastEditTime: 2022-03-02 14:08:59
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
 const { searchLikeUser, searchLikeArticle } = require('../service/search.service')
+const { getUserInfo } = require('../service/user.service')
+
 class searchController {
   async searchUser (ctx, next) {
     try {
@@ -38,6 +40,16 @@ class searchController {
       let { wd } = ctx.request.query
       console.log("wd:", wd);
       let res = await searchLikeArticle(wd, filterOpt)
+      let { rows } = res
+      for (let i = 0; i < rows.length; i++) {
+        let { user_id } = rows[0]
+        let id = user_id
+        let tempinfo = await getUserInfo({ id })
+        let { user_name } = tempinfo
+        // console.log(user_name);
+        rows[i]['user_name'] = user_name
+      }
+      // console.log(rows);
       ctx.body = {
         code: 0,
         message: '查询成功',
