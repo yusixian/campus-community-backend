@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:08:14
- * @LastEditTime: 2022-02-27 21:46:22
+ * @LastEditTime: 2022-03-02 18:54:37
  * @LastEditors: cos
  * @Description: 点赞管理中间件
  * @FilePath: \campus-community-backend\src\middleware\like.middleware.js
@@ -14,10 +14,11 @@ const checkUtil = require("../utils/checkUtil");
 const likeInfoValidate = async(ctx, next) => {
   console.log(ctx.request.body)
 
-  const target_id = ctx.request.body.target_id || ctx.request.query.target_id;
+  const t_id = ctx.request.body.target_id || ctx.request.query.target_id;
   const type = ctx.request.body.type || ctx.request.query.type;
   try {
-    if(!checkUtil.checkID(target_id)) 
+    const target_id = checkUtil.checkID(t_id)
+    if(!target_id) 
       throw Error("target_id不合法！")
       
     const targetLike = { type, target_id }
@@ -48,10 +49,11 @@ const likeNoExistValidate = async(ctx, next) => {
 
 // 验证点赞记录的id有效性并挂到ctx.state.like_id上
 const likeIDValidate = async(ctx, next) => {
-  const like_id = ctx.request.body.like_id || ctx.request.query.like_id;
+  const l_id = ctx.request.body.like_id || ctx.request.query.like_id;
   // console.log("likeIDValidate:", like_id)
   try {
-    if(!checkUtil.checkID(like_id)) 
+    const like_id = checkUtil.checkID(l_id)
+    if(!like_id) 
       throw Error("like_id不合法！")
     ctx.state.like_id = like_id
     await next()

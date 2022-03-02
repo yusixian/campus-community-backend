@@ -77,3 +77,38 @@ console.log(ctx.request.query)    // [Object: null prototype] { status: '0' }
 const { status } = ctx.request.query    //Error
 [Object: null prototype] { status: '0' }
 ```
+
+## 19. 异步map
+
+今天处理一个map里异步的问题，顺带知道了Promise.all的用法之一了23333
+
+查阅博客：[如何正确的在 Array.map 使用 async - luckrain7 - 博客园 (cnblogs.com)](https://www.cnblogs.com/luckrain7/p/12750424.html)
+
+错误示范：
+
+````js
+temp = res.map(async(val) => {
+    // console.log("val:", val)
+    const { user_id, article_id } = val
+    const userInfo = await User.findOne({ attributes: [['img', 'avator'], 'user_name'], where: { id:user_id }, raw: true})
+    const articleInfo = await Article.findOne({ attributes: { exclude: ['status', 'deleteAt'] }, where: { id:article_id }, raw: true})
+    userInfo && Object.assign(val, { userInfo })
+    articleInfo && Object.assign(val, { articleInfo })
+    return val
+})
+````
+
+正确示范：将每个项目映射到具有新值的 `Promise`，这是`async`在函数执行之前添加的内容。其次，它需要等待所有`Promises`，然后将结果收集到Array中。
+
+```js
+temp = await Promise.all( res.map(async(val) => {
+    // console.log("val:", val)
+    const { user_id, article_id } = val
+    const userInfo = await User.findOne({ attributes: [['img', 'avator'], 'user_name'], where: { id:user_id }, raw: true})
+    const articleInfo = await Article.findOne({ attributes: { exclude: ['status', 'deleteAt'] }, where: { id:article_id }, raw: true})
+    userInfo && Object.assign(val, { userInfo })
+    articleInfo && Object.assign(val, { articleInfo })
+    return val
+}) ) 
+```
+

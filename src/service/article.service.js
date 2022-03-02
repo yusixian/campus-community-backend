@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-03-02 00:33:10
+ * @LastEditTime: 2022-03-02 18:38:02
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -208,13 +208,28 @@ class ArticleService {
                     FROM sc_Users as a 
                     WHERE  a.id = sc_Article.user_id 
                 )`), 'user_name'
-            ], [
+            ], 
+            [
                 seq.literal(`( 
                     SELECT COUNT(*) 
                     FROM sc_Comments as a 
                     WHERE  a.article_id = sc_Article.id 
                 )`), 'comments'
-            ]
+            ], 
+            [
+                seq.literal(`( 
+                    SELECT img 
+                    FROM sc_Users as a 
+                    WHERE  a.id = sc_Article.user_id 
+                )`), 'avator'
+            ], 
+            [
+                seq.literal(`( 
+                    SELECT partition_name 
+                    FROM sc_Partitions as a 
+                    WHERE  a.id = sc_Article.partition_id 
+                )`), 'partition_name'
+            ] 
         ]
     }
     return attributes
