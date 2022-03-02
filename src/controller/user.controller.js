@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-02 09:03:32
+ * @LastEditTime: 2022-03-02 09:08:10
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -39,7 +39,8 @@ class UserController {
         message: 'token更新成功',
         result: {
           oldtoken: token,
-          newtoken: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' })
+          newtoken: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' }),
+          res
         }
       }
     } catch (err) {
