@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-03 21:17:03
+ * @LastEditTime: 2022-03-03 22:03:22
  * @Description: 
  */
 module.exports = {
@@ -95,6 +95,10 @@ module.exports = {
     code: 10103,
     message: '未授权,当前请求需要管理员权限',
 
+  },
+  followedError: {
+    code: 10104,
+    message: '已经关注该用户',
   },
   // 文章相关errorType
   articleIDError: {

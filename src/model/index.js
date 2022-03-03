@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-25 09:50:54
- * @LastEditors: cos
- * @LastEditTime: 2022-03-02 11:43:40
+ * @LastEditors: 41
+ * @LastEditTime: 2022-03-03 16:05:35
  * @Description: 
  */
 const User = require('./user.model')
@@ -12,6 +12,7 @@ const Comment = require('./comment.model')
 const CommentReply = require('./commentReply.model')
 const Like = require('./like.model')
 const Collection = require('./collection.model')
+const Follow = require('./follow.model')
 const init = async () => {
   await User.sync({ alter: true })
   await Partition.sync({ alter: true })
@@ -20,6 +21,7 @@ const init = async () => {
   await Comment.sync({ alter: true })
   await CommentReply.sync({ alter: true })
   await Like.sync({ alter: true })
+  await Follow.sync({ alter: true })
 }
 const drop = async () => {
   await Like.drop()
@@ -29,6 +31,7 @@ const drop = async () => {
   await Article.drop()
   await Partition.drop()
   await User.drop()
+  await Follow.drop()
 }
 const forceInit = async () => {
   await drop()
