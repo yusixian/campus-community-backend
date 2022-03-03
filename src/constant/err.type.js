@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: 41
- * @LastEditTime: 2022-03-03 18:22:18
+ * @LastEditTime: 2022-03-03 18:26:41
  * @Description: 
  */
 module.exports = {
@@ -206,6 +206,10 @@ module.exports = {
   commentSelectCountError: {
     code: 13006,
     message: '查询评论数量失败'
+  },
+  commentSelectFailedByArticleError: {
+    code: 13007,
+    message: '文章异常，查询评论失败'
   },
   fileUploadError: {
     code: 13000,
