@@ -11,6 +11,7 @@
     "createCommentModel": "node src/model/comment.model.js",
     "createReply": "node src/model/commentReply.model.js",
     "createLikeModel": "node src/model/like.model.js",
+    "createCollectionModel": "node src/model/collection.model.js",
     "dev": "nodemon ./src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

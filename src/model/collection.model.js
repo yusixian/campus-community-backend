@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-03-02 11:29:50
- * @LastEditTime: 2022-03-02 11:43:14
- * @LastEditors: cos
+ * @LastEditTime: 2022-03-03 14:34:02
+ * @LastEditors: lihao
  * @Description: 收藏
  * @FilePath: \campus-community-backend\src\model\collection.model.js
  */
@@ -33,4 +33,7 @@ Collection.belongsTo(User, {
 Collection.belongsTo(Article, {
   foreignKey: 'article_id'
 })
+
+// 轻质同步数据库(创建数据表)
+// Collection.sync({ force: true })
 module.exports = Collection
