@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: cos
- * @LastEditTime: 2022-03-02 12:40:29
+ * @LastEditors: 41
+ * @LastEditTime: 2022-03-03 18:22:18
  * @Description: 
  */
 module.exports = {
@@ -95,6 +95,10 @@ module.exports = {
     code: 10103,
     message: '未授权,当前请求需要管理员权限',
 
+  },
+  followedError: {
+    code: 10104,
+    message: '已经关注该用户',
   },
   // 文章相关errorType
   articleIDError: {
@@ -267,7 +271,7 @@ module.exports = {
     code: 15000,
     message: '搜索失败！'
   },
-  
+
   // 收藏相关错误码
   collectionIdError: {
     code: 16000,
