@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-03 15:17:41
+ * @LastEditTime: 2022-03-03 21:17:03
  * @Description: 
  */
 module.exports = {
@@ -271,7 +271,7 @@ module.exports = {
     code: 15000,
     message: '搜索失败！'
   },
-  
+
   // 收藏相关错误码
   collectionIdError: {
     code: 16000,
@@ -301,4 +301,12 @@ module.exports = {
     code: 16006,
     message: '操作失败！不是自己的收藏！'
   },
+  wsGetOnlineUserError: {
+    code: 17001,
+    message: '获取在线用户失败'
+  },
+  wsSendMessageError: {
+    code: 17002,
+    message: '发送消息失败'
+  }
 }
