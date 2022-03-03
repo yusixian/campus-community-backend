@@ -2,11 +2,13 @@
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
  * @LastEditors: cos
- * @LastEditTime: 2022-03-03 22:45:09
+ * @LastEditTime: 2022-03-03 23:54:10
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
+const { filterArticle } = require('../service/article.service');
 const { selectCommentCountByAid } = require('../service/comment.service');
+const { filterLike } = require('../service/like.service');
 const { searchLikeUser, searchLikeArticle } = require('../service/search.service')
 const { getUserInfo } = require('../service/user.service')
 
@@ -58,6 +60,41 @@ class searchController {
         result: {
           res
         }
+      }
+    } catch (err) {
+      console.error(err, searchError)
+      return ctx.app.emit('error', searchError, ctx);
+    }
+  }
+  async searchByUser(ctx, next) {
+    try {
+      const { user_id, page, type } = ctx.state.searchInfo
+      console.log({user_id, page, type})
+      let result
+      if(type === 'article') {
+        const { page_nums, count, rows } = await filterArticle({current: page, user_id})
+        result = {
+          current_page: page,
+          page_nums,
+          article_total: count,
+          article_list: rows
+        }
+      } else if(type === 'comment') {
+        // 返回用户评论文章列表
+        
+      } else if(type === 'like') {
+        const { page_nums, count, rows } = await filterLike({current: page, user_id})
+        result = {
+          current_page: page,
+          page_nums,
+          article_total: count,
+          article_list: rows
+        }
+      }
+      return ctx.body = {
+        code: 0,
+        message: '查询成功',
+        result
       }
     } catch (err) {
       console.error(err, searchError)
