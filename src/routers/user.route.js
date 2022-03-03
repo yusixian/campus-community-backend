@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:18:24
  * @LastEditors: 41
- * @LastEditTime: 2022-02-27 12:18:28
+ * @LastEditTime: 2022-03-03 14:50:17
  * @Description: 
  */
 const Router = require('koa-router')
@@ -57,8 +57,8 @@ router.patch('/sex', auth, verifySex, changeSex)
 // token更新接口
 router.get('/updatetoken', updatetoken)
 // 查询所有用户信息的接口
-router.get('/info', auth, verifyAdmin, findall)
+router.get('/info', auth, findall)
 // 根据id查询用户信息的接口
-router.get('/searchbyid', auth, verifyAdmin, findone)
+router.get('/searchbyid', auth, findone)
 
 module.exports = router
