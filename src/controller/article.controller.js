@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-04 12:36:03
+ * @LastEditTime: 2022-03-04 13:28:58
  * @LastEditors: 41
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -190,8 +190,15 @@ class ArticleController {
       const article_pages = res.page_nums
       const article_total = res.count
       const article_list = res.rows
+      for (let i = 0; i < article_list.length; i++) {
+        // console.log('**********' + article_list[i].user_id);
+        let id = article_list[i].user_id
+        let temp = await getUserInfo({ id })
+        article_list[i]['name'] = temp.name
+        // console.log(temp.name);
+      }
       const result = { article_total, article_pages, article_list }
-      console.log(result)
+      // console.log(result)
       ctx.body = {
         code: 0,
         message: "获取文章成功！",
@@ -272,6 +279,12 @@ class ArticleController {
       const article_pages = res.page_nums
       const article_total = res.count
       const article_list = res.rows
+      for (let i = 0; i < article_list.length; i++) {
+        console.log(article_list[i].user_id);
+        let id = article_list[i].user_id
+        let temp = await getUserInfo({ id })
+        article_list[i]['name'] = temp.name
+      }
       const result = { article_total, article_pages, article_list }
       console.log(result)
       ctx.body = {
