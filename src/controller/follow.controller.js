@@ -2,9 +2,10 @@
  * @Author: 41
  * @Date: 2022-03-03 16:34:59
  * @LastEditors: 41
- * @LastEditTime: 2022-03-04 15:12:16
+ * @LastEditTime: 2022-03-04 15:40:20
  * @Description: 
  */
+const { getUserInfo } = require('../service/user.service')
 const { createFollow, getFollowInfo, delFollow } = require('../service/follow.service')
 class FollowController {
   async addfollow (ctx, next) {
@@ -75,6 +76,27 @@ class FollowController {
       return
     }
 
+  }
+  async getfollowList (ctx, next) {
+    const { follow_id } = ctx.request.query
+    // console.log(follow_id);
+    let user = await getFollowInfo({ follow_id })
+    let res = []
+    for (let i = 0; i < user.length; i++) {
+      let id = user[i].user_id
+      let temp = await getUserInfo({ id })
+      res[i] = {}
+      res[i]['id'] = temp.id
+      res[i]['name'] = temp.name
+      res[i]['user_name'] = temp.user_name
+      res[i]['img'] = temp.img
+      // console.log(res);
+    }
+    ctx.body = {
+      code: 0,
+      message: '查询成功',
+      res
+    }
   }
 }
 
