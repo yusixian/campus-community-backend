@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-04 15:38:30
+ * @LastEditTime: 2022-03-04 16:34:37
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -15,6 +15,7 @@ const { articleOperationError, articleCreateError,
   articleShieldError, articleRestoreError, fileUploadError
 } = require('../constant/err.type');
 const { upToQiniu } = require('../utils/oss/ossUtils');
+const { getAllLikeByTargetID, isRepeatLike } = require('../service/like.service');
 
 class ArticleController {
   /**
@@ -168,6 +169,7 @@ class ArticleController {
       const user = await getUserInfo({ id })
       // console.log('name', user.name);
       article['name'] = user.name
+      article['isLiked'] = await isRepeatLike({ user_id: id, article_id })
       ctx.body = {
         code: 0,
         message: "获取文章成功！",
