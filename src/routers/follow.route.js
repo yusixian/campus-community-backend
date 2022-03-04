@@ -10,10 +10,11 @@ const Router = require('koa-router')
 const router = new Router({ prefix: '/follows' })
 
 // 导入controller
-const { addfollow, findfollow } = require('../controller/follow.controller')
+const { addfollow, findfollow, delfollow } = require('../controller/follow.controller')
 const { auth } = require('../middleware/auth.middleware')
 const { iffollow } = require('../middleware/follow.middleware')
 // GET 
 router.post('/addfollow', auth, iffollow, addfollow)
 router.get('/findfollow', findfollow)
+router.post('/delfollow', auth, delfollow)
 module.exports = router

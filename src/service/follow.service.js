@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-03-03 16:16:24
  * @LastEditors: 41
- * @LastEditTime: 2022-03-04 09:27:00
+ * @LastEditTime: 2022-03-04 09:50:32
  * @Description: 
  */
 const { Op } = require("sequelize");
@@ -32,6 +32,14 @@ class FollowService {
         }
       },
       raw: true
+    })
+  }
+  async delFollow ({ user_id, follow_id }) {
+    return Follow.destroy({
+      where: {
+        user_id,
+        follow_id
+      }
     })
   }
 }
