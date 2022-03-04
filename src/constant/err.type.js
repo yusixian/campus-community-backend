@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: 41
- * @LastEditTime: 2022-03-03 18:26:41
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-03-03 22:03:22
  * @Description: 
  */
 module.exports = {
@@ -305,4 +305,12 @@ module.exports = {
     code: 16006,
     message: '操作失败！不是自己的收藏！'
   },
+  wsGetOnlineUserError: {
+    code: 17001,
+    message: '获取在线用户失败'
+  },
+  wsSendMessageError: {
+    code: 17002,
+    message: '发送消息失败'
+  }
 }

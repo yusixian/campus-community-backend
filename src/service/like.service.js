@@ -1,15 +1,16 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-03-01 18:22:18
+ * @LastEditTime: 2022-03-03 23:45:35
  * @LastEditors: cos
  * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
  */
 
-const Comment = require('../model/comment.model')
+const Article = require('../model/article.model')
 const Like = require('../model/like.model')
-const { incrementLikesByID, decrementLikesByID } = require('./article.service')
+const { incrementLikesByID, decrementLikesByID, searchArticleByID } = require('./article.service')
+const seq = require("../db/seq");
 class LikeService {
   /**
    * @description: 生成新的点赞记录插入数据库
@@ -192,5 +193,49 @@ class LikeService {
     await Like.destroy({ where: { id: like_id } })
     if(article_id) await decrementLikesByID(article_id)
   }
+  
+  /**
+   * @param {FilterOption} filterOpt 过滤参数
+   * @return {FilterList} 返回{page_nums, count, rows} 总页数 查询所得总数 当前页列表
+   * @description: 过滤点赞记录 返回{page_nums, count, rows}, row包括所点赞的文章列表
+   */
+   async filterLike(filterOpt, orderOpt) {
+    const { current = 1, size = 10, user_id } = filterOpt
+    const whereOpt = { user_id, type: 'article',  }
+    let { count, rows } = await Like.findAndCountAll({
+        attributes: ['article_id', ['createdAt', 'releaseAt']],
+        where: whereOpt,
+        // order: orderOpt,
+        offset: (current-1)*size,
+        limit: size,
+        raw: true
+    })
+    rows = await Promise.all(rows.map(async(val) => {
+      val.articleInfo = await Article.findOne({
+        attributes: [
+          ['user_id', 'author_id'],
+          'title',
+          'summary',
+          'cover_url',
+          'likes',
+          [ seq.literal(`( 
+                SELECT COUNT(*) 
+                FROM sc_Comments as a 
+                WHERE  a.article_id = sc_Article.id 
+            )`), 'comments'
+          ], 
+          'visits'
+        ],
+        where: { id: val.article_id },
+        raw: true
+      })
+      return val
+    }))
+    console.log('row:', rows)
+    const page_nums = Math.ceil(count/size)
+    // console.log({ page_nums, count, rows })
+    return { page_nums, count, rows }
+  }
+  
 }
 module.exports = new LikeService()

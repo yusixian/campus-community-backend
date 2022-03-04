@@ -1,11 +1,14 @@
 /*
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
- * @LastEditors: 41
- * @LastEditTime: 2022-03-02 14:08:59
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-03 23:54:10
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
+const { filterArticle } = require('../service/article.service');
+const { selectCommentCountByAid } = require('../service/comment.service');
+const { filterLike } = require('../service/like.service');
 const { searchLikeUser, searchLikeArticle } = require('../service/search.service')
 const { getUserInfo } = require('../service/user.service')
 
@@ -38,16 +41,17 @@ class searchController {
     try {
       const filterOpt = ctx.state.filterOpt
       let { wd } = ctx.request.query
-      console.log("wd:", wd);
       let res = await searchLikeArticle(wd, filterOpt)
       let { rows } = res
       for (let i = 0; i < rows.length; i++) {
-        let { user_id } = rows[0]
-        let id = user_id
-        let tempinfo = await getUserInfo({ id })
+        // console.log(`rows[${i}]`,rows[i])
+        let { user_id, id } = rows[i]
+        // console.log(id)
+        let tempinfo = await getUserInfo({ id:user_id })
         let { user_name } = tempinfo
         // console.log(user_name);
         rows[i]['user_name'] = user_name
+        rows[i]['comments'] = await selectCommentCountByAid(id);
       }
       // console.log(rows);
       ctx.body = {
@@ -56,6 +60,41 @@ class searchController {
         result: {
           res
         }
+      }
+    } catch (err) {
+      console.error(err, searchError)
+      return ctx.app.emit('error', searchError, ctx);
+    }
+  }
+  async searchByUser(ctx, next) {
+    try {
+      const { user_id, page, type } = ctx.state.searchInfo
+      console.log({user_id, page, type})
+      let result
+      if(type === 'article') {
+        const { page_nums, count, rows } = await filterArticle({current: page, user_id})
+        result = {
+          current_page: page,
+          page_nums,
+          article_total: count,
+          article_list: rows
+        }
+      } else if(type === 'comment') {
+        // 返回用户评论文章列表
+        
+      } else if(type === 'like') {
+        const { page_nums, count, rows } = await filterLike({current: page, user_id})
+        result = {
+          current_page: page,
+          page_nums,
+          article_total: count,
+          article_list: rows
+        }
+      }
+      return ctx.body = {
+        code: 0,
+        message: '查询成功',
+        result
       }
     } catch (err) {
       console.error(err, searchError)
