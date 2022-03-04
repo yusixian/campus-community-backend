@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-04 13:28:58
- * @LastEditors: 41
+ * @LastEditTime: 2022-03-04 15:38:30
+ * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
@@ -14,6 +14,7 @@ const { articleOperationError, articleCreateError,
   articleDosNotExist, articleUpdateError,
   articleShieldError, articleRestoreError, fileUploadError
 } = require('../constant/err.type');
+const { upToQiniu } = require('../utils/oss/ossUtils');
 
 class ArticleController {
   /**
@@ -243,15 +244,14 @@ class ArticleController {
       if (!file) throw Error()
       if (Array.isArray(file)) {
         // console.log("img!")
-        file.forEach(element => {
-          let img = '/uploads/' + path.basename(element.path)
-          imgPaths.push(img)
-        });
+        for(let i in file) {
+          console.log(`file[${i}]: `, file[i])
+          const res = await upToQiniu(file[i])
+          imgPaths.push(res)
+        }
       } else {
-        // console.log("file",file)
-        let img = '/uploads/' + path.basename(file.path)
-        // console.log("img!", img)
-        imgPaths.push(img)
+        const res = await upToQiniu(file)
+        imgPaths.push(res)
       }
       // console.log(imgPaths)
       ctx.body = {
