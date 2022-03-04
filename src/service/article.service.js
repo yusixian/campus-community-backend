@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-03-04 12:23:19
- * @LastEditors: 41
+ * @LastEditTime: 2022-03-04 15:02:32
+ * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
  */
@@ -197,7 +197,7 @@ class ArticleService {
 
   /**
    * @description: 子查询 返回添加一些额外的属性 如通过用户id查询用户名
-   * @return { Attributes } 额外属性 user_name
+   * @return { Attributes } 额外属性 
    */
   getElseAttribute () {
     const attributes = {
@@ -208,6 +208,13 @@ class ArticleService {
                     FROM sc_Users as a 
                     WHERE  a.id = sc_Article.user_id 
                 )`), 'user_name'
+        ],
+        [
+          seq.literal(`( 
+                    SELECT name 
+                    FROM sc_Users as a 
+                    WHERE  a.id = sc_Article.user_id 
+                )`), 'name'
         ],
         [
           seq.literal(`( 
