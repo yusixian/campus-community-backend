@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-04 10:40:31
+ * @LastEditors: 41
+ * @LastEditTime: 2022-03-04 12:15:37
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
@@ -47,9 +47,10 @@ class searchController {
         // console.log(`rows[${i}]`,rows[i])
         let { user_id, id } = rows[i]
         // console.log(id)
-        let tempinfo = await getUserInfo({ id:user_id })
-        let { user_name } = tempinfo
+        let tempinfo = await getUserInfo({ id: user_id })
+        let { user_name, name } = tempinfo
         // console.log(user_name);
+        rows[i]['name'] = name
         rows[i]['user_name'] = user_name
         rows[i]['comments'] = await selectCommentCountByAid(id);
       }
@@ -66,22 +67,22 @@ class searchController {
       return ctx.app.emit('error', searchError, ctx);
     }
   }
-  async searchByUser(ctx, next) {
+  async searchByUser (ctx, next) {
     try {
       const { user_id, page, type } = ctx.state.searchInfo
-      console.log({user_id, page, type})
+      console.log({ user_id, page, type })
       let result
-      if(type === 'article') {
-        const { page_nums, count, rows } = await filterArticle({current: page, user_id})
+      if (type === 'article') {
+        const { page_nums, count, rows } = await filterArticle({ current: page, user_id })
         result = {
           current_page: page,
           page_nums,
           article_total: count,
           article_list: rows
         }
-      } else if(type === 'comment') {
+      } else if (type === 'comment') {
         // 返回用户评论文章列表
-        const {page_nums, count, rows} = await filterComment({current: page, user_id})
+        const { page_nums, count, rows } = await filterComment({ current: page, user_id })
         result = {
           current_page: page,
           page_nums,
@@ -89,8 +90,8 @@ class searchController {
           comment_list: rows
 
         }
-      } else if(type === 'like') {
-        const { page_nums, count, rows } = await filterLike({current: page, user_id})
+      } else if (type === 'like') {
+        const { page_nums, count, rows } = await filterLike({ current: page, user_id })
         result = {
           current_page: page,
           page_nums,

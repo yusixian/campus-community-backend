@@ -1,13 +1,14 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-02 13:53:37
+ * @LastEditTime: 2022-03-04 12:36:03
  * @LastEditors: 41
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
 const path = require('path')
 const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle, incrementVisitsByID } = require('../service/article.service')
+const { getUserInfo } = require('../service/user.service')
 const { articleOperationError, articleCreateError,
   articleDeleteError, articleParamsError,
   articleDosNotExist, articleUpdateError,
@@ -133,8 +134,14 @@ class ArticleController {
   async getAllArticle (ctx, next) {
     try {
       const articleList = await getArticleList()
+      for (let i = 0; i < articleList.length; i++) {
+        // console.log(articleList[i].user_id);
+        let id = articleList[i].user_id
+        let temp = await getUserInfo({ id })
+        articleList[i].name = temp.name
+      }
       console.log("articleList type:", typeof articleList)
-      console.log(articleList)
+      // console.log(articleList)
       ctx.body = {
         code: 0,
         message: "获取文章列表成功！",
@@ -155,7 +162,11 @@ class ArticleController {
       await searchArticleByID(article_id, true)
       const res = await incrementVisitsByID(article_id)
       const article = ctx.state.article
-      console.log(article);
+      // console.log('user_id', article.user_id);
+      let id = article.user_id
+      const user = await getUserInfo({ id })
+      // console.log('name', user.name);
+      article['name'] = user.name
       ctx.body = {
         code: 0,
         message: "获取文章成功！",
