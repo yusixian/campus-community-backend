@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-03-03 23:45:35
+ * @LastEditTime: 2022-03-04 11:09:22
  * @LastEditors: cos
  * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
@@ -211,9 +211,15 @@ class LikeService {
         raw: true
     })
     rows = await Promise.all(rows.map(async(val) => {
-      val.articleInfo = await Article.findOne({
+      const articleInfo = await Article.findOne({
         attributes: [
           ['user_id', 'author_id'],
+          [ seq.literal(`( 
+                SELECT user_name 
+                FROM sc_Users as a 
+                WHERE  a.id = sc_Article.user_id 
+            )`), 'author_name'
+          ],
           'title',
           'summary',
           'cover_url',
@@ -229,6 +235,7 @@ class LikeService {
         where: { id: val.article_id },
         raw: true
       })
+      Object.assign(val, articleInfo)
       return val
     }))
     console.log('row:', rows)

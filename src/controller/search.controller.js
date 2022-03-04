@@ -1,13 +1,13 @@
 /*
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
- * @LastEditors: cos
- * @LastEditTime: 2022-03-03 23:54:10
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-03-04 10:40:31
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
 const { filterArticle } = require('../service/article.service');
-const { selectCommentCountByAid } = require('../service/comment.service');
+const { selectCommentCountByAid, filterComment } = require('../service/comment.service');
 const { filterLike } = require('../service/like.service');
 const { searchLikeUser, searchLikeArticle } = require('../service/search.service')
 const { getUserInfo } = require('../service/user.service')
@@ -81,7 +81,14 @@ class searchController {
         }
       } else if(type === 'comment') {
         // 返回用户评论文章列表
-        
+        const {page_nums, count, rows} = await filterComment({current: page, user_id})
+        result = {
+          current_page: page,
+          page_nums,
+          comment_total: count,
+          comment_list: rows
+
+        }
       } else if(type === 'like') {
         const { page_nums, count, rows } = await filterLike({current: page, user_id})
         result = {

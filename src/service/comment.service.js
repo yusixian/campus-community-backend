@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:47:31
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-01 19:08:03
+ * @LastEditTime: 2022-03-04 10:38:40
  * @FilePath: \campus-community-backend\src\service\comment.service.js
  * @Description: 评论的业务逻辑层
  * 
@@ -119,6 +119,26 @@ class CommentService {
       }
     })
     return res
+  }
+  /**
+   * 根据
+   * @param {*} filterOpt 
+   * @param {*} orderOpt 
+   * @returns 
+   */
+  async filterComment(filterOpt, orderOpt) {
+    const { current = 1, size = 10, user_id } = filterOpt
+    const { count, rows } = await Comment.findAndCountAll({
+        where: {
+          user_id
+        },
+        offset: (current-1)*size,
+        limit: size,
+        raw: true
+    })
+    const page_nums = Math.ceil(count/size)
+    // console.log({ page_nums, count, rows })
+    return { page_nums, count, rows }
   }
 }
 
