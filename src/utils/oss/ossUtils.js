@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-02 16:23:38
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-02 18:06:52
+ * @LastEditTime: 2022-03-04 16:41:13
  * @FilePath: \campus-community-backend\src\utils\oss\ossUtils.js
  * @Description: 
  * 
@@ -14,14 +14,13 @@ let qiniu = require('qiniu'); // 需要加载qiniu模块的
 const fs = require('fs')
 // 引入key文件
 const QINIU = require('./ossConfig')
-
+const crypto = require('crypto')
 /**
  * 
  * @param {*} file 从请求头中拿到的文件对象
  * @returns 
  */
 const upToQiniu = (file) => {
-    let fileName = file.name
     const accessKey = QINIU.accessKey
     const secretKey = QINIU.secretKey
     const mac = new qiniu.auth.digest.Mac(accessKey, secretKey)
@@ -38,6 +37,8 @@ const upToQiniu = (file) => {
     const localFile = fs.createReadStream(file.path)
     const formUploader = new qiniu.form_up.FormUploader(config)
     const putExtra = new qiniu.form_up.PutExtra()
+    let suffix = file.name.substring(file.name.lastIndexOf('.')) // 获取后缀的点的索引
+    let fileName = crypto.createHash('md5').update(file.name.replace(suffix, '')).digest('hex') + suffix
     // 文件上传
     return new Promise((resolved, reject) => {
       // 以文件流的形式进行上传
