@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-03 16:26:03
+ * @LastEditTime: 2022-03-04 15:25:53
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
@@ -108,9 +108,9 @@ class CommentContrller {
       for (let index = 0; index < comment_res.length; index++) { // 遍历文章评论数组
         let comment_reply_res = await selectCommentReplyByCommentId(comment_res[index].id)
         let c_uid = comment_res[index].user_id // 获取评论者的id
-        let c_userinfo = await getUserInfo({ c_uid })
+        let c_userinfo = null
         if (!userList[`${c_uid}s`]) { // 做用户信息的缓存处理减少数据库的查询次数
-          c_userinfo = await getUserInfo({ c_uid })
+          c_userinfo = await getUserInfo({ id: c_uid })
           userList[`${c_uid}s`] = c_userinfo
         } else {
           c_userinfo = userList[`${c_uid}s`]
@@ -125,13 +125,13 @@ class CommentContrller {
           let f_userinfo = null // 回复者的信息
           let t_userinfo = null // 目标用户的信息
           if (!userList[`${f_uid}s`]) { // 做用户信息的缓存处理减少数据库的查询次数
-            f_userinfo = await getUserInfo({ f_uid })
+            f_userinfo = await getUserInfo({ id: f_uid })
             userList[`${f_uid}s`] = f_userinfo
           } else {
             f_userinfo = userList[`${f_uid}s`]
           }
           if (!userList[`${t_uid}s`]) { //同理
-            t_userinfo = await getUserInfo({ t_uid })
+            t_userinfo = await getUserInfo({ id: t_uid })
             userList[`${t_uid}s`] = t_userinfo
           } else {
             t_userinfo = userList[`${t_uid}s`]
@@ -202,9 +202,9 @@ class CommentContrller {
       for (let index = 0; index < comment_res.length; index++) { // 遍历文章评论数组
         let comment_reply_res = await selectCommentReplyByCommentId(comment_res[index].id)
         let c_uid = comment_res[index].user_id // 获取评论者的id
-        let c_userinfo = await getUserInfo({ c_uid })
+        let c_userinfo = null
         if (!userList[`${c_uid}s`]) { // 做用户信息的缓存处理减少数据库的查询次数
-          c_userinfo = await getUserInfo({ c_uid })
+          c_userinfo = await getUserInfo({ id: c_uid })
           userList[`${c_uid}s`] = c_userinfo
         } else {
           c_userinfo = userList[`${c_uid}s`]
@@ -218,13 +218,13 @@ class CommentContrller {
           let f_userinfo = null // 回复者的信息
           let t_userinfo = null // 目标用户的信息
           if (!userList[`${f_uid}s`]) { // 做用户信息的缓存处理减少数据库的查询次数
-            f_userinfo = await getUserInfo({ f_uid })
+            f_userinfo = await getUserInfo({ id: f_uid })
             userList[`${f_uid}s`] = f_userinfo
           } else {
             f_userinfo = userList[`${f_uid}s`]
           }
           if (!userList[`${t_uid}s`]) { //同理
-            t_userinfo = await getUserInfo({ t_uid })
+            t_userinfo = await getUserInfo({ id: t_uid })
             userList[`${t_uid}s`] = t_userinfo
           } else {
             t_userinfo = userList[`${t_uid}s`]

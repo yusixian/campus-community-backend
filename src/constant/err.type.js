@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-03 22:03:22
+ * @LastEditTime: 2022-03-04 14:48:01
  * @Description: 
  */
 module.exports = {
@@ -239,6 +239,10 @@ module.exports = {
   commentReplyDelError: {
     code: 14003,
     message: '评论回复删除异常'
+  },
+  commentReplyDataTypeError: {
+    code: 14004,
+    message: '评论回复的数据类型错误'
   },
   // 点赞 Like
   likeIdError: {

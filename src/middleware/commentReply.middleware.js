@@ -2,12 +2,12 @@
  * @Author: lihao
  * @Date: 2022-02-24 17:05:34
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 15:11:10
+ * @LastEditTime: 2022-03-04 15:26:29
  * @FilePath: \campus-community-backend\src\middleware\commentReply.middleware.js
  * @Description: 评论回复的中间件
  */
 
-const { commentReplyValidatorError, commentReplyIdFormateError } = require('../constant/err.type')
+const { commentReplyValidatorError, commentReplyIdFormateError, commentReplyDataTypeError } = require('../constant/err.type')
 
 /**
  * 进行回复数据验证的中间件（除回复目标id）
@@ -16,13 +16,18 @@ const { commentReplyValidatorError, commentReplyIdFormateError } = require('../c
  * @returns 
  */
 const commentReplyValidator = async (ctx, next) => {
-  const {comment_id, comment_reply_content, to_user_id} = ctx.request.body
+  const {comment_id, comment_reply_content, to_user_id, } = ctx.request.body
   // 数据合法性
   if (!comment_id || !comment_reply_content || !to_user_id) {
     ctx.app.emit('error', commentReplyValidatorError, ctx)
     return
   }
-  await next()
+  if (typeof(comment_id) == "number" && typeof(to_user_id) == "number") {
+    await next()
+  }else {
+    ctx.app.emit('error', commentReplyDataTypeError, ctx)
+    return
+  }
 }
 
 /**
