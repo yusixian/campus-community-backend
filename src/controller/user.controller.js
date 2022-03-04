@@ -2,13 +2,15 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-02 21:50:03
+ * @LastEditTime: 2022-03-04 10:01:41
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const path = require('path')
 const { createUser, getUserInfo, updateById, getAllInfo } = require('../service/user.service')
+const { getFollowInfo } = require('../service/follow.service')
+
 const {
   userRegisterError,
   userLoginError,
@@ -234,11 +236,15 @@ class UserController {
       const { id } = ctx.request.query
       let res = await getUserInfo({ id })
       let { password, ...user } = res
+      let user_id = id
+      let follows = await getFollowInfo({ user_id })
+      console.log(follows);
       ctx.body = {
         code: 0,
         message: '查询成功',
         result: {
-          user
+          user,
+          follows
         }
       }
     }
