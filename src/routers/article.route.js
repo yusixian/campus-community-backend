@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:09:32
- * @LastEditTime: 2022-03-02 17:05:43
+ * @LastEditTime: 2022-03-04 16:57:10
  * @LastEditors: cos
  * @Description: 文章管理相关路由
  * @FilePath: \campus-community-backend\src\routers\article.route.js
@@ -11,13 +11,13 @@ const Router = require('koa-router')
 const { postArticle, deleteArticle, updateArticle, shieldArticle, restoreArticle, getAllArticle, getByID, getByPages, countByFilter, upload, getByPublicPages } = require('../controller/article.controller')
 const { articleInfoValidate, articleIDValidate, articleExistValidate, articleFilterValidate } = require('../middleware/article.middleware')
 const { verifyActive } = require('../middleware/user.middleware')
-const { auth } = require('../middleware/auth.middleware')
+const { auth, isAuth } = require('../middleware/auth.middleware')
 const { verifyAdmin } = require('../middleware/user.middleware')
 
 const router = new Router({ prefix: '/articles' })
 
 // 不需要登录
-router.get('/getbyid', articleIDValidate, articleExistValidate, getByID)
+router.get('/getbyid', isAuth, articleIDValidate, articleExistValidate, getByID)
 router.get('/public/page', articleFilterValidate, getByPublicPages)
 // 需要token
 router.post('/create', auth, articleInfoValidate,verifyActive, postArticle)
