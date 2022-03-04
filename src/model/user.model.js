@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 14:42:24
- * @LastEditors: 41
- * @LastEditTime: 2022-02-25 15:09:42
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-04 16:09:06
  * @Description: 
  */
 const { DataTypes } = require('sequelize')
@@ -32,7 +32,7 @@ const User = seq.define('sc_User', {
   img: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: '',
+    defaultValue: 'http://r842fhtdz.hd-bkt.clouddn.com/default.png',
     comment: '头像图片的地址'
   },
   is_active: {

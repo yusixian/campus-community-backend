@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-24 16:17:34
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-25 20:46:56
+ * @LastEditTime: 2022-03-04 15:45:04
  * @FilePath: \campus-community-backend\src\service\commentReply.service.js
  * @Description: 评论回复服务层
  */
@@ -23,7 +23,7 @@ class CommentReplyService {
    * @returns 
    */
   async createCommentReply(comment_id, comment_reply_id, comment_reply_content, from_user_id, to_user_id) {
-    const res = CommentReply.create({
+    const res = await CommentReply.create({
       comment_id,
       comment_reply_id,
       comment_reply_content,
@@ -38,7 +38,7 @@ class CommentReplyService {
    * @returns 
    */
   async deleteCommentReply(id) {
-    const res = CommentReply.destroy({
+    const res = await CommentReply.destroy({
       where: {
         id
       }

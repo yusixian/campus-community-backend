@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
- * @LastEditors: 41
- * @LastEditTime: 2022-03-04 10:01:41
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-04 15:52:19
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -29,6 +29,7 @@ const {
   resetError
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
+const { upToQiniu } = require('../utils/oss/ossUtils')
 class UserController {
   async updatetoken (ctx, next) {
     const { authorization } = ctx.request.header
@@ -194,17 +195,15 @@ class UserController {
     // console.log(ctx.request.files.file);
     const id = ctx.state.user.id
     const { file } = ctx.request.files
-    const img = '/uploads/' + path.basename(file.path)
-    console.log(id, img);
-
-    if (await updateById({ id, img })) {
-      if (file) {
-        ctx.body = {
-          code: 0,
-          message: '头像上传成功',
-          result: {
-            img: path.basename(file.path)
-          }
+    // console.log(file)
+    if (file) {
+      const img = await upToQiniu(file)
+      await updateById({ id, img });
+      ctx.body = {
+        code: 0,
+        message: '头像上传成功',
+        result: {
+          img
         }
       }
     } else {

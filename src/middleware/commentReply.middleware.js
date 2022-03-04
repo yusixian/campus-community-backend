@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-24 17:05:34
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-04 15:26:29
+ * @LastEditTime: 2022-03-04 15:31:03
  * @FilePath: \campus-community-backend\src\middleware\commentReply.middleware.js
  * @Description: 评论回复的中间件
  */
@@ -16,7 +16,8 @@ const { commentReplyValidatorError, commentReplyIdFormateError, commentReplyData
  * @returns 
  */
 const commentReplyValidator = async (ctx, next) => {
-  const {comment_id, comment_reply_content, to_user_id, } = ctx.request.body
+  let {comment_id, comment_reply_content, to_user_id, comment_reply_id} = ctx.request.body
+  comment_reply_id = comment_reply_id ? comment_reply_id : null
   // 数据合法性
   if (!comment_id || !comment_reply_content || !to_user_id) {
     ctx.app.emit('error', commentReplyValidatorError, ctx)

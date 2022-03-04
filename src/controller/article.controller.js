@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-04 13:28:58
- * @LastEditors: 41
+ * @LastEditTime: 2022-03-04 17:05:43
+ * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
@@ -14,6 +14,8 @@ const { articleOperationError, articleCreateError,
   articleDosNotExist, articleUpdateError,
   articleShieldError, articleRestoreError, fileUploadError
 } = require('../constant/err.type');
+const { upToQiniu } = require('../utils/oss/ossUtils');
+const { getAllLikeByTargetID, isRepeatLike } = require('../service/like.service');
 
 class ArticleController {
   /**
@@ -84,7 +86,7 @@ class ArticleController {
   async restoreArticle (ctx, next) {
     try {
       const id = ctx.state.article_id
-      console.log(ctx.request.query.isDel)
+      // console.log(ctx.request.query.isDel)
       const isDel = parseInt(ctx.request.query.isDel) === 1;
       const res = await searchArticleByID(id, true, isDel)
       // console.log(`searchID ${article_id}:`, res);
@@ -140,7 +142,7 @@ class ArticleController {
         let temp = await getUserInfo({ id })
         articleList[i].name = temp.name
       }
-      console.log("articleList type:", typeof articleList)
+      // console.log("articleList type:", typeof articleList)
       // console.log(articleList)
       ctx.body = {
         code: 0,
@@ -160,13 +162,24 @@ class ArticleController {
     try {
       const article_id = ctx.state.article_id
       await searchArticleByID(article_id, true)
-      const res = await incrementVisitsByID(article_id)
+      await incrementVisitsByID(article_id)
       const article = ctx.state.article
       // console.log('user_id', article.user_id);
       let id = article.user_id
       const user = await getUserInfo({ id })
       // console.log('name', user.name);
       article['name'] = user.name
+
+      const isAuth = ctx.state.isAuth
+      if(isAuth) {
+        const { id: user_id } = ctx.state.user
+        article['isLiked'] = await isRepeatLike({ user_id, article_id })
+        // console.log('user_id:',user_id)
+      } else {
+        // console.log('未登录~')
+        article['isLiked'] = false
+      }
+      
       ctx.body = {
         code: 0,
         message: "获取文章成功！",
@@ -216,9 +229,9 @@ class ArticleController {
   async countByFilter (ctx, next) {
     try {
       const filterOpt = ctx.state.filterOpt
-      console.log("filterOpt:", filterOpt)
+      // console.log("filterOpt:", filterOpt)
       const count = await countArticle(filterOpt)
-      console.log("count: ", count)
+      // console.log("count: ", count)
       ctx.body = {
         code: 0,
         message: "获取文章总数",
@@ -243,15 +256,14 @@ class ArticleController {
       if (!file) throw Error()
       if (Array.isArray(file)) {
         // console.log("img!")
-        file.forEach(element => {
-          let img = '/uploads/' + path.basename(element.path)
-          imgPaths.push(img)
-        });
+        for(let i in file) {
+          // console.log(`file[${i}]: `, file[i])
+          const res = await upToQiniu(file[i])
+          imgPaths.push(res)
+        }
       } else {
-        // console.log("file",file)
-        let img = '/uploads/' + path.basename(file.path)
-        // console.log("img!", img)
-        imgPaths.push(img)
+        const res = await upToQiniu(file)
+        imgPaths.push(res)
       }
       // console.log(imgPaths)
       ctx.body = {
@@ -262,7 +274,7 @@ class ArticleController {
         }
       }
     } catch (err) {
-      console.log(err)
+      console.error(err)
       return ctx.app.emit('error', fileUploadError, ctx)
     }
   }
@@ -274,19 +286,19 @@ class ArticleController {
     try {
       const filterOpt = ctx.state.filterOpt
       filterOpt.status = 0
-      console.log("filterOpt:", filterOpt)
+      // console.log("filterOpt:", filterOpt)
       const res = await filterArticle(filterOpt)
       const article_pages = res.page_nums
       const article_total = res.count
       const article_list = res.rows
       for (let i = 0; i < article_list.length; i++) {
-        console.log(article_list[i].user_id);
+        // console.log(article_list[i].user_id);
         let id = article_list[i].user_id
         let temp = await getUserInfo({ id })
         article_list[i]['name'] = temp.name
       }
       const result = { article_total, article_pages, article_list }
-      console.log(result)
+      // console.log(result)
       ctx.body = {
         code: 0,
         message: "获取文章成功！",
