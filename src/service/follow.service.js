@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-03-03 16:16:24
  * @LastEditors: 41
- * @LastEditTime: 2022-03-04 09:50:32
+ * @LastEditTime: 2022-03-04 15:34:12
  * @Description: 
  */
 const { Op } = require("sequelize");
@@ -24,13 +24,12 @@ class FollowService {
     })
     return res.dataValues
   }
-  async getFollowInfo ({ user_id }) {
+  async getFollowInfo ({ user_id, follow_id }) {
+    const whereOpt = {}
+    user_id && Object.assign(whereOpt, { user_id })
+    follow_id && Object.assign(whereOpt, { follow_id })
     return Follow.findAll({
-      where: {
-        user_id: {
-          [Op.eq]: user_id
-        }
-      },
+      where: whereOpt,
       raw: true
     })
   }
