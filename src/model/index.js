@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-25 09:50:54
  * @LastEditors: 41
- * @LastEditTime: 2022-03-03 16:05:35
+ * @LastEditTime: 2022-03-04 09:23:57
  * @Description: 
  */
 const User = require('./user.model')
@@ -30,8 +30,9 @@ const drop = async () => {
   await Collection.drop()
   await Article.drop()
   await Partition.drop()
-  await User.drop()
   await Follow.drop()
+  await User.drop()
+
 }
 const forceInit = async () => {
   await drop()
