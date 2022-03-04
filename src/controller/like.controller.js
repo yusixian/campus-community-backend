@@ -1,13 +1,13 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:10:28
- * @LastEditTime: 2022-03-01 18:16:04
+ * @LastEditTime: 2022-03-04 23:25:28
  * @LastEditors: cos
  * @Description: 点赞相关控制器
  * @FilePath: \campus-community-backend\src\controller\like.controller.js
  */
 const { likeCreateError, likeOperationError } = require("../constant/err.type");
-const { createLike, countLikeByTargetID, deleteLike, getTarget } = require("../service/like.service")
+const { createLike, countLike, deleteLike, getTarget } = require("../service/like.service")
 class LikeController {
   async addLike(ctx, next) {
     try {
@@ -34,17 +34,15 @@ class LikeController {
   }
   async countLike(ctx, next) {
     try {
-      const newLike = ctx.state.newLike
-      const targrtLike = getTarget(newLike)
-      const { type, target_id } = targrtLike
-      const cnt = await countLikeByTargetID(target_id, type)
+      const filterOpt = ctx.state.filterOpt
+      // console.log('filterOpt:',filterOpt)
+      const cnt = await countLike(filterOpt)
       ctx.body = {
         code: 0,
         message: "获取点赞记录数成功！",
         result: {
-            type,
-            target_id,
-            cnt
+          filterOpt,
+          cnt
         }
     }
     } catch (err) {

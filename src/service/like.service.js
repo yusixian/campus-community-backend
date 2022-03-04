@@ -1,13 +1,14 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-03-04 11:09:22
+ * @LastEditTime: 2022-03-05 01:03:01
  * @LastEditors: cos
  * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
  */
 
 const Article = require('../model/article.model')
+const Comment = require('../model/comment.model')
 const Like = require('../model/like.model')
 const { incrementLikesByID, decrementLikesByID, searchArticleByID } = require('./article.service')
 const seq = require("../db/seq");
@@ -109,19 +110,46 @@ class LikeService {
     }
     return whereOpt
   }
+  
+  /**
+   * @param {number} user_id 过滤参数 用户
+   * @param {number | null} target_id 过滤参数 文章id
+   * @return {number | null} cnt 总点赞数
+   * @description: 获取该用户文章总点赞数 或者全部（都不传）
+   */
+  async getLikesByUser(user_id, target_id, type = 'article') {
+    const whereOpt = {}
+    user_id && Object.assign(whereOpt, { user_id })
+    // Sequelize中的聚合函数 https://itbilu.com/nodejs/npm/EJcKjQWfM.html
+    if(type == 'article') {
+      target_id && Object.assign(whereOpt, { id: target_id })
+      return await Article.sum('likes', { where: whereOpt });
+    } else if(type == 'comment'){
+      // TODO:获取该用户所有评论被点赞数 包括评论回复？@陈桑
+      const cnt = 0;
+      return cnt;
+    } 
+  }
 
   /**
-   * @description: 根据文章/评论id 查询并返回所有点赞
-   * @param {number} target_id 目标id
-   * @param {'article' | 'comment'} type 不填则为article
+   * @description: 根据文章id 评论id 用户id 查询并返回所有点赞数
+   * 若有用户id 且类型type为文章 则根据用户id找到其所有文章返回总点赞数
+   * @param filterOpt
+   * @param {'article' | 'comment'} type 可选 不填则为article
+   * @param {number} target_id 可选 目标id
+   * @param {number} user_id 可选 用户id 不填则没有用户限制
    * @return {number} cnt 查询所得数量
    */
-   async countLikeByTargetID(target_id, type) {
-    const whereOpt = LikeService.prototype.getWhereOpt({ target_id, type })
-    // console.log("article_id:", article_id);
-    const cnt = await Like.count({ where: whereOpt, raw: true })
-    // console.log(res)
-    return cnt
+  async countLike(filterOpt) {
+    const { target_id, type = 'article', user_id } = filterOpt
+    if(user_id) {
+      return await LikeService.prototype.getLikesByUser(user_id, target_id, type)
+    } else { // 普普通通获取文章/评论等的点赞数，有对应id
+      if(!target_id) return 0;
+      const whereOpt = LikeService.prototype.getWhereOpt( { target_id, type } )
+      console.log('whereOpt:',whereOpt)
+      return await Like.count({ where: whereOpt })
+    }
   }
 
   /**

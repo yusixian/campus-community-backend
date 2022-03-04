@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:08:14
- * @LastEditTime: 2022-03-02 18:54:37
+ * @LastEditTime: 2022-03-04 23:25:05
  * @LastEditors: cos
  * @Description: 点赞管理中间件
  * @FilePath: \campus-community-backend\src\middleware\like.middleware.js
@@ -20,13 +20,11 @@ const likeInfoValidate = async(ctx, next) => {
     const target_id = checkUtil.checkID(t_id)
     if(!target_id) 
       throw Error("target_id不合法！")
-      
     const targetLike = { type, target_id }
     ctx.state.newLike = getNewLike(targetLike)
     const newLike = ctx.state.newLike
-    newLike.user_id = ctx.state.user.id
-    
-    console.log("newLike:", newLike)
+    if(ctx.state.user) newLike.user_id = ctx.state.user.id
+    // console.log("newLike:", newLike)
     await next()
   } catch(err) {
     console.error(err, likeParamsError)
@@ -96,10 +94,41 @@ const likeOwnValidate = async (ctx, next) => {
     return ctx.app.emit('error', likeOwnError, ctx)
   }
 }
+
+// 验证统计点赞数信息target_id、type、user_id，都为可选参数，并进行相应处理后挂上ctx.state.filterOpt
+const likeCountParamsValidate = async(ctx, next) => {
+  console.log(ctx.request.body)
+
+  const t_id = ctx.request.body.target_id || ctx.request.query.target_id;
+  const u_id = ctx.request.body.user_id || ctx.request.query.user_id;
+  const type = ctx.request.body.type || ctx.request.query.type;
+  try {
+    ctx.state.filterOpt = {}
+    const filterOpt = ctx.state.filterOpt
+    filterOpt.type = type || 'article';
+    if(t_id) {
+      const target_id = checkUtil.checkID(t_id)
+      if(!target_id) 
+        throw Error("target_id不合法！")
+        filterOpt.target_id = target_id
+    }
+    if(u_id) {
+      const user_id = checkUtil.checkID(u_id)
+      if(!user_id) 
+        throw Error("user_id不合法！")
+        filterOpt.user_id = user_id
+    }
+    await next()
+  } catch(err) {
+    console.error(err, likeParamsError)
+    return ctx.app.emit('error', likeParamsError, ctx);
+  }
+}
 module.exports = {
   likeInfoValidate,
   likeNoExistValidate,
   likeIDValidate,
   likeExistValidate,
-  likeOwnValidate
+  likeOwnValidate,
+  likeCountParamsValidate
 }
