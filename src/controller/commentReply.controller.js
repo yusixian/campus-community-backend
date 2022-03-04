@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-24 19:19:57
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-04 15:35:47
+ * @LastEditTime: 2022-03-04 17:04:02
  * @FilePath: \campus-community-backend\src\controller\commentReply.controller.js
  * @Description: 评论回复控制器
  */
@@ -27,7 +27,7 @@ class CommentReply {
         message: "评论回复成功"
       }
     } catch (err) {
-      // console.log(err);
+      console.log(err);
       ctx.app.emit('error', commentReplyAddError, ctx)
     }
   }
