@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 13:38:05
+ * @LastEditTime: 2022-03-05 15:16:43
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -98,7 +98,7 @@ const verifySex = async (ctx, next) => {
       console.error('输入性别错误！')
       return ctx.app.emit('error', sexError, ctx)
     }
-    await next()
+    return await next()
   }
   await next()
 }

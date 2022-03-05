@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
- * @LastEditors: 41
- * @LastEditTime: 2022-03-04 19:12:15
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 16:10:18
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
@@ -10,8 +10,8 @@ const { filterArticle } = require('../service/article.service');
 const { selectCommentCountByAid, filterComment } = require('../service/comment.service');
 const { filterLike } = require('../service/like.service');
 const { searchLikeUser, searchLikeArticle } = require('../service/search.service')
-const { getUserInfo } = require('../service/user.service')
-const { getFollowInfo } = require('../service/follow.service')
+const { getUserInfo, getAllInfo } = require('../service/user.service')
+const { getFollowInfo, getfollowList } = require('../service/follow.service')
 class searchController {
   async searchUser (ctx, next) {
     try {
@@ -127,8 +127,64 @@ class searchController {
       return ctx.app.emit('error', searchError, ctx);
     }
   }
+
+  async searchUserRank (ctx, next) {
+    const sortmap = new Map()
+    const ranks = []
+    let users = await getAllInfo()
+    for (let i = 0; i < users.length; i++) {
+      let follow_id = users[i].id
+      let temp = await getFollowInfo({ follow_id })
+      // console.log(temp);
+      sortmap.set(follow_id, temp.length)
+    }
+    let temparr = Array.from(sortmap)
+    temparr.sort((a, b) => {
+      if (a[1] != b[1]) {
+        return b[1] - a[1]
+      } else {
+        return b[0] - b[1]
+      }
+    })
+    for (let i = 0; i < temparr.length; i++) {
+      let id = temparr[i][0]
+      let temp = await getUserInfo({ id })
+      temp['follows_cnt'] = temparr[i][1]
+      ranks.push(temp)
+      // console.log(temparr[i][0], temparr[i][1]);
+    }
+    ctx.body = {
+      code: 0,
+      message: '查询成功',
+      ranks
+    }
+  }
+  /**
+   * @description: 获取社区热帖排行榜前十
+   * 热帖排行根据点赞、评论、浏览数 三者结合排名即可， 
+   * 优先级第一要素为点赞，第二要素为评论， 第三要素为浏览数
+   */
+  async searchPostRank (ctx, next) {
+    try {
+      const filterOpt = { status: 0 }
+      const orderOpt = [
+        ['likes', 'DESC'],
+        ['visits', 'DESC'],
+        ['collections', 'DESC']
+      ]
+      console.log('filterOpt:', filterOpt, ' orderOpt:', orderOpt)
+      const res = await filterArticle(filterOpt, orderOpt)
+      return ctx.body = {
+        code: 0,
+        message: '查询社区热帖排行榜前十成功',
+        result: {
+          article_list: res.rows
+        }
+      }
+    } catch (err) {
+      console.error(err, searchError)
+      return ctx.app.emit('error', searchError, ctx);
+    }
+  }
 }
-
-
-
 module.exports = new searchController()

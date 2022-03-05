@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 13:40:17
+ * @LastEditTime: 2022-03-05 15:15:28
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -194,10 +194,17 @@ class UserController {
   }
   async change (ctx, next) {
     const id = ctx.state.user.id
-    const sex = ctx.request.body.sex
-    const city = ctx.request.body.city
-    const name = ctx.request.body.name
-    if (await updateById({ id, sex, city, name })) {
+    let sex, city, name
+    if (ctx.request.body.sex) {
+      sex = ctx.request.body.sex
+    }
+    if (ctx.request.body.city) {
+      city = ctx.request.body.city
+    }
+    if (ctx.request.body.name) {
+      name = ctx.request.body.name
+    }
+    if (await updateById({ id, name, city, sex })) {
       let user = await getUserInfo({ id })
       ctx.body = {
         code: 0,
