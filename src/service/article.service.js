@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-03-05 16:06:48
+ * @LastEditTime: 2022-03-05 20:42:04
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -106,7 +106,7 @@ class ArticleService {
    */
   async incrementVisitsByID (article_id) {
     const res = await Article.increment({ visits: 1 }, { where: { id: article_id } }) // 增加浏览量
-    console.log(res)
+    // console.log(res)
     return res
   }
 
@@ -136,7 +136,7 @@ class ArticleService {
    * @return {number} 查询所得结果 or null 
    */
   async searchArticleByID (article_id, showSheid = false, showDel = false, showReview = false) {
-    console.log("article_id:", article_id);
+    // console.log("article_id:", article_id);
     let whereOpt = { 
       id: article_id,
       status: {
@@ -145,7 +145,7 @@ class ArticleService {
     }
     showSheid && whereOpt.status[Op.or].push(1)
     showReview && whereOpt.status[Op.or].push(3)
-    console.log(whereOpt)
+    // console.log(whereOpt)
     const attributes = ArticleService.prototype.getElseAttribute()
     const res = await Article.findOne({
       attributes,

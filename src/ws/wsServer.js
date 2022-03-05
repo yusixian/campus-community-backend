@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-03-03 19:27:35
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-05 10:29:49
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:44:26
  * @FilePath: \campus-community-backend\src\ws\wsServer.js
  * @Description: 
  * 
@@ -47,7 +47,7 @@ wss.on('connection', (ws, request) => {
     try {
       message = JSON.parse(msg)
     } catch (err) {
-      console.log(err);
+      console.error(err);
       clients[id + 's'].send(JSON.stringify({
         fromUId: 0,
         toUId: id,
@@ -76,7 +76,7 @@ wss.on('connection', (ws, request) => {
   })
   // 监听客户端错误
   ws.on('error', (err) => {
-    console.log(err);
+    console.error(err);
   })
   // 监听客户端断开连接
   ws.on('close', () => {

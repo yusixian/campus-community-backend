@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-04 15:25:53
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:37:05
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
@@ -78,7 +78,7 @@ class CommentContrller {
 
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', commentDeleteFailedError, ctx)
     }
   }
@@ -173,7 +173,7 @@ class CommentContrller {
         result: comment_res
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', commentSelectByArticleIdFailedError, ctx)
     }
   }
@@ -266,7 +266,7 @@ class CommentContrller {
       }
 
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', commentSelectByArticleIdFailedError, ctx)
     }
   }
@@ -285,7 +285,7 @@ class CommentContrller {
         result: res //被删除的评论数量
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', commentDeleteFailedError, ctx)
     }
   }
@@ -306,7 +306,7 @@ class CommentContrller {
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', commentSelectCountError, ctx)
     }
   }

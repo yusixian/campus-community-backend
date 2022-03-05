@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-03-03 16:34:59
- * @LastEditors: 41
- * @LastEditTime: 2022-03-05 15:36:14
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:38:21
  * @Description: 
  */
 const { getUserInfo } = require('../service/user.service')
@@ -25,7 +25,7 @@ class FollowController {
   }
   async findfollow (ctx, next) {
     const { user_id } = ctx.request.query
-    console.log(user_id);
+    // console.log(user_id);
     try {
       let res = await getFollowInfo({ user_id })
       ctx.body = {
@@ -40,7 +40,7 @@ class FollowController {
   async delfollow (ctx, next) {
     const user_id = ctx.state.user.id
     const { follow_id } = ctx.request.body
-    console.log(user_id, follow_id);
+    // console.log(user_id, follow_id);
     try {
       let message = await delFollow({ user_id, follow_id }) ? '取消关注成功' : '本来就没有关注'
       ctx.body = {

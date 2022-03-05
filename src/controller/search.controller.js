@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
  * @LastEditors: cos
- * @LastEditTime: 2022-03-05 16:10:18
+ * @LastEditTime: 2022-03-05 20:39:34
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
@@ -88,7 +88,7 @@ class searchController {
   async searchByUser (ctx, next) {
     try {
       const { user_id, page, type } = ctx.state.searchInfo
-      console.log({ user_id, page, type })
+      // console.log({ user_id, page, type })
       let result
       if (type === 'article') {
         const { page_nums, count, rows } = await filterArticle({ current: page, user_id })
@@ -172,7 +172,7 @@ class searchController {
         ['visits', 'DESC'],
         ['collections', 'DESC']
       ]
-      console.log('filterOpt:', filterOpt, ' orderOpt:', orderOpt)
+      console.log('searchPostRank, filterOpt:', filterOpt, ' orderOpt:', orderOpt)
       const res = await filterArticle(filterOpt, orderOpt)
       return ctx.body = {
         code: 0,

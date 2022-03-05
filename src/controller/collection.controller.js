@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-03-02 12:11:30
- * @LastEditTime: 2022-03-02 19:40:40
+ * @LastEditTime: 2022-03-05 20:36:29
  * @LastEditors: cos
  * @Description: 收藏相关控制器
  * @FilePath: \campus-community-backend\src\controller\collection.controller.js
@@ -14,7 +14,7 @@ class CollectionController {
     const newCollection = ctx.state.newCollection
     const { user_id, article_id } = newCollection
     try {
-      console.log('addCollection:', ctx.state.newLike)
+      console.log(`addCollection: ${ctx.state.newLike}`)
       const res = await createCollection(user_id, article_id)
       ctx.body = {
           code: 0,
@@ -52,10 +52,9 @@ class CollectionController {
   }
   async getCollentionList(ctx, next) {
     const { id } = ctx.state.user
-    console.log("user_id:", id)
     try {
       const res = await getCollectionsByUser(id)
-      console.log(res)
+      // console.log(res)
       ctx.body = {
         code: 0,
         message: "获取收藏数成功！",

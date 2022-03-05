@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
- * @LastEditors: 41
- * @LastEditTime: 2022-03-05 15:16:43
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:41:43
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -31,7 +31,7 @@ const userValidator = async (ctx, next) => {
 
 const verifyUser = async (ctx, next) => {
   const { user_name, password } = ctx.request.body
-  console.log(user_name);
+  // console.log(user_name);
   try {
     // 合理性 先在数据库中进行查询
     if (await getUserInfo({ user_name })) {
@@ -69,7 +69,7 @@ const verifyLogin = async (ctx, next) => {
       ctx.app.emit('error', userDosNotExist, ctx)
       return
     }
-    console.log(password, res.password);
+    // console.log(password, res.password);
     // 2.密码是否匹配(不匹配报错)
     if (!bcrypt.compareSync(password, res.password)) {
       ctx.app.emit('error', invalidPassword, ctx)
@@ -83,7 +83,7 @@ const verifyLogin = async (ctx, next) => {
 }
 const verifyAdmin = async (ctx, next) => {
   const { is_admin } = ctx.state.user
-  console.log(is_admin);
+  // console.log(is_admin);
   if (!is_admin) {
     console.error('用户无权限，请使用管理员账号')
     return ctx.app.emit('error', unAuthorizedError, ctx)
@@ -93,7 +93,7 @@ const verifyAdmin = async (ctx, next) => {
 const verifySex = async (ctx, next) => {
   if (ctx.request.body.sex) {
     const { sex } = ctx.request.body
-    console.log(sex);
+    // console.log(sex);
     if (sex !== '男' && sex !== '女' && sex !== '保密' && sex !== '') {
       console.error('输入性别错误！')
       return ctx.app.emit('error', sexError, ctx)
@@ -105,7 +105,7 @@ const verifySex = async (ctx, next) => {
 
 const verifyActive = async (ctx, next) => {
   const { is_active } = ctx.state.user
-  console.log(is_active);
+  // console.log(is_active);
   if (!is_active) {
     console.error('账号被封禁！')
     return ctx.app.emit('error', activeError, ctx)

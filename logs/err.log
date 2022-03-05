@@ -1,0 +1,2 @@
+(node:25862) [SEQUELIZE0006] DeprecationWarning: This database engine version is not supported, please update your database server. More information https://github.com/sequelize/sequelize/blob/main/ENGINE.md
+(Use `node --trace-deprecation ...` to show where the warning was created)

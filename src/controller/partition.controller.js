@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-02-19 15:26:12
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-02 18:06:41
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:39:01
  * @FilePath: \campus-community-backend\src\controller\partition.controller.js
  * @Description:分区管理 partition
  */
@@ -28,7 +28,7 @@ class PartitionController {
         message: "分区创建成功"
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', partitionCreateErr, ctx)
     }
   }
@@ -47,7 +47,7 @@ class PartitionController {
 
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', partitionDeleteError, ctx)
     }
   }
@@ -65,7 +65,7 @@ class PartitionController {
         result: res
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', partitionQueryALLError, ctx)
     }
   }
@@ -77,7 +77,7 @@ class PartitionController {
    */
   async uploadPartitionIcon(ctx, next) {
     const { file } = ctx.request.files
-    console.log(file.name);
+    // console.log(file.name);
     try {
       const res = await upToQiniu(file)
       ctx.body = {
@@ -88,7 +88,7 @@ class PartitionController {
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return ctx.app.emit('error', fileUploadError, ctx)
     }
   }
@@ -107,7 +107,7 @@ class PartitionController {
         message: "修改分区成功"
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', updatePartitionByIdError, ctx)
     }
   }

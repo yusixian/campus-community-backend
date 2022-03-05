@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-03-02 16:23:38
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-04 16:41:13
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:43:56
  * @FilePath: \campus-community-backend\src\utils\oss\ossUtils.js
  * @Description: 
  * 
@@ -52,7 +52,7 @@ const upToQiniu = (file) => {
         }
         fs.unlink(file.path, (err) => {
           if (err) {
-            console.log(err);
+            console.error(err);
             return false
           }
           console.log("文件删除成功！");

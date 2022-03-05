@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-03-02 11:45:08
- * @LastEditTime: 2022-03-02 19:04:10
+ * @LastEditTime: 2022-03-05 20:42:23
  * @LastEditors: cos
  * @Description: 收藏相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\collection.service.js
@@ -52,9 +52,9 @@ class CollectionService {
    * @param {number} id 收藏记录的id
    */
   async deleteCollectionByID(id) {
-    console.log("id:", id)
+    // console.log("id:", id)
     const record = await CollectionService.prototype.getCollectionRecordByID(id)
-    console.log(record)
+    // console.log(record)
     const { article_id } = record
     const res = await Collection.destroy({ where: { id } })
     await Article.decrement({collections: 1}, { where: { id: article_id } })
