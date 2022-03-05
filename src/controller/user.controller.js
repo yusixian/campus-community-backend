@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
- * @LastEditors: cos
- * @LastEditTime: 2022-03-04 15:52:19
+ * @LastEditors: 41
+ * @LastEditTime: 2022-03-05 12:42:12
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -45,7 +45,7 @@ class UserController {
         result: {
           oldtoken: token,
           newtoken: jwt.sign(res, JWT_SECRET, { expiresIn: '1d' }),
-          res
+          user: res
         }
       }
     } catch (err) {
