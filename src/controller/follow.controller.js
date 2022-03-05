@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-03-03 16:34:59
  * @LastEditors: 41
- * @LastEditTime: 2022-03-04 15:40:20
+ * @LastEditTime: 2022-03-05 15:36:14
  * @Description: 
  */
 const { getUserInfo } = require('../service/user.service')

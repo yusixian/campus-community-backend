@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
  * @LastEditors: cos
- * @LastEditTime: 2022-03-05 16:08:26
+ * @LastEditTime: 2022-03-05 16:10:18
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
@@ -10,8 +10,8 @@ const { filterArticle } = require('../service/article.service');
 const { selectCommentCountByAid, filterComment } = require('../service/comment.service');
 const { filterLike } = require('../service/like.service');
 const { searchLikeUser, searchLikeArticle } = require('../service/search.service')
-const { getUserInfo } = require('../service/user.service')
-const { getFollowInfo } = require('../service/follow.service')
+const { getUserInfo, getAllInfo } = require('../service/user.service')
+const { getFollowInfo, getfollowList } = require('../service/follow.service')
 class searchController {
   async searchUser (ctx, next) {
     try {
@@ -128,6 +128,37 @@ class searchController {
     }
   }
 
+  async searchUserRank (ctx, next) {
+    const sortmap = new Map()
+    const ranks = []
+    let users = await getAllInfo()
+    for (let i = 0; i < users.length; i++) {
+      let follow_id = users[i].id
+      let temp = await getFollowInfo({ follow_id })
+      // console.log(temp);
+      sortmap.set(follow_id, temp.length)
+    }
+    let temparr = Array.from(sortmap)
+    temparr.sort((a, b) => {
+      if (a[1] != b[1]) {
+        return b[1] - a[1]
+      } else {
+        return b[0] - b[1]
+      }
+    })
+    for (let i = 0; i < temparr.length; i++) {
+      let id = temparr[i][0]
+      let temp = await getUserInfo({ id })
+      temp['follows_cnt'] = temparr[i][1]
+      ranks.push(temp)
+      // console.log(temparr[i][0], temparr[i][1]);
+    }
+    ctx.body = {
+      code: 0,
+      message: '查询成功',
+      ranks
+    }
+  }
   /**
    * @description: 获取社区热帖排行榜前十
    * 热帖排行根据点赞、评论、浏览数 三者结合排名即可， 
