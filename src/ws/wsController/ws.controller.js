@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-03 20:12:41
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-03 21:41:33
+ * @LastEditTime: 2022-03-05 11:55:00
  * @FilePath: \campus-community-backend\src\ws\wsController\ws.controller.js
  * @Description: 
  * 
@@ -37,9 +37,9 @@ class wsController {
    * @param {*} next 
    */
   async sendMessageToUid(ctx, next) {
-    const {toUid, data} = ctx.request.body
+    const {toUId, data} = ctx.request.body
     try {
-      if(await sendPrivateMessage(toUid, data)){
+      if(await sendPrivateMessage(toUId, data)){
         ctx.body = {
           code: 0,
           message: '发送消息成功'

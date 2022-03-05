@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-03 19:27:35
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-03 21:59:29
+ * @LastEditTime: 2022-03-05 10:29:49
  * @FilePath: \campus-community-backend\src\ws\wsServer.js
  * @Description: 
  * 
@@ -33,7 +33,7 @@ wss.on('connection', (ws, request) => {
   console.log(request.url);
   let id = request.url.substring(1)
   try {
-    parseInt(id)
+    id = parseInt(id)
   } catch (err) {
     ws.close()
   }
@@ -65,11 +65,12 @@ wss.on('connection', (ws, request) => {
       }))
       return
     }
+    message.fromUId = id
     if (message.type == 'private') {
-      clients[`${message.toUId}s`].send(msg)
+      clients[`${message.toUId}s`].send(JSON.stringify(message))
     } else if (message.type == 'group') {
       for (const key in clients) {
-        clients[key].send(msg)
+        clients[key].send(JSON.stringify(message))
       }
     }
   })

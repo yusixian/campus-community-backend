@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-04 14:48:01
+ * @LastEditTime: 2022-03-05 09:21:50
  * @Description: 
  */
 module.exports = {
@@ -272,6 +272,10 @@ module.exports = {
   likeOwnError: {
     code: 14006,
     message: '操作失败！不是自己的点赞！'
+  },
+  likeCountError: {
+    code: 14007,
+    message: '查询点赞记录失败'
   },
 
   // 搜索相关错误
