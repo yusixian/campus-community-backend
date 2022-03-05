@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 15:15:28
+ * @LastEditTime: 2022-03-05 17:10:04
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -31,6 +31,7 @@ const {
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 const { upToQiniu } = require('../utils/oss/ossUtils')
+const { fop } = require('qiniu')
 class UserController {
   async updatetoken (ctx, next) {
     const { authorization } = ctx.request.header
@@ -257,12 +258,22 @@ class UserController {
   }
   async findone (ctx, next) {
     try {
-      const { id } = ctx.request.query
+      let { id } = ctx.request.query
       let res = await getUserInfo({ id })
       let { password, ...user } = res
       let user_id = id
       let follows = await getFollowInfo({ user_id })
-      console.log(follows);
+      user_id = ctx.state.user.id
+      let authfollows = await getFollowInfo({ user_id })
+      let isfollow = false
+      for (let i = 0; i < authfollows.length; i++) {
+        // console.log(authfollows[i].follow_id, id);
+        if (authfollows[i].follow_id == id) {
+          isfollow = true
+          break
+        }
+      }
+      user['isfollow'] = isfollow
       ctx.body = {
         code: 0,
         message: '查询成功',
