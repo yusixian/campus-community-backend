@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-03 19:27:35
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-05 10:29:49
+ * @LastEditTime: 2022-03-05 15:49:07
  * @FilePath: \campus-community-backend\src\ws\wsServer.js
  * @Description: 
  * 
@@ -10,6 +10,7 @@
  */
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config/config.default')
+const {sendPrivateMessage}  = require('../ws/service/ws.service');
 // 已连接的客户端
 let clients = new Array()
 const WebSocket = require('ws')
