@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-03-05 10:57:08
- * @LastEditors: lihao
+ * @LastEditTime: 2022-03-05 12:12:05
+ * @LastEditors: cos
  * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
  */
@@ -10,7 +10,7 @@
 const Article = require('../model/article.model')
 const Comment = require('../model/comment.model')
 const Like = require('../model/like.model')
-const { incrementLikesByID, decrementLikesByID, searchArticleByID } = require('./article.service')
+const { incrementLikesByID, decrementLikesByID } = require('./article.service')
 const seq = require("../db/seq");
 class LikeService {
   /**

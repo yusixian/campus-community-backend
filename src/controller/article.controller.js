@@ -1,13 +1,13 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-04 17:05:43
+ * @LastEditTime: 2022-03-05 13:20:39
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
 const path = require('path')
-const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle, incrementVisitsByID } = require('../service/article.service')
+const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle, incrementVisitsByID, reviewArticleByID } = require('../service/article.service')
 const { getUserInfo } = require('../service/user.service')
 const { articleOperationError, articleCreateError,
   articleDeleteError, articleParamsError,
@@ -15,7 +15,7 @@ const { articleOperationError, articleCreateError,
   articleShieldError, articleRestoreError, fileUploadError
 } = require('../constant/err.type');
 const { upToQiniu } = require('../utils/oss/ossUtils');
-const { getAllLikeByTargetID, isRepeatLike } = require('../service/like.service');
+const { isRepeatLike } = require('../service/like.service');
 
 class ArticleController {
   /**
@@ -156,12 +156,12 @@ class ArticleController {
   }
 
   /**
-   * @description:根据id获取文章
+   * @description:根据id获取文章 公开的 只能获取已发布文章
    */
   async getByID (ctx, next) {
     try {
       const article_id = ctx.state.article_id
-      await searchArticleByID(article_id, true)
+      await searchArticleByID(article_id)
       await incrementVisitsByID(article_id)
       const article = ctx.state.article
       // console.log('user_id', article.user_id);
@@ -306,6 +306,25 @@ class ArticleController {
       }
     } catch (err) {
       console.error('获取文章失败！', err);
+      return ctx.app.emit('error', articleOperationError, ctx)
+    }
+  }
+  
+  /**
+   * @description: 审核文章
+   */
+   async reviewArticle (ctx, next) {
+    try {
+      const article_id = ctx.state.article_id
+      const pass = ctx.request.body.pass
+      console.log('article_id:', article_id, ' pass:', pass)
+      await reviewArticleByID(article_id, pass)
+      const body = { code: 0 }
+      if(pass) body.message = '审核文章通过！已成功发布'
+      else body.message = '审核文章未通过，已屏蔽该文章！'
+      ctx.body = body
+    } catch (err) {
+      console.error('审核文章失败！', err);
       return ctx.app.emit('error', articleOperationError, ctx)
     }
   }
