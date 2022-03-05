@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-03-04 15:02:32
+ * @LastEditTime: 2022-03-05 13:11:32
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -17,9 +17,23 @@ class ArticleService {
    * @return {Article} 创建成功后返回数据库中的Article 包括文章id 
    */
   async createArticle (newArticle) {
+    newArticle.status = 3   // 置为待审核状态
     const res = await Article.create(newArticle)
     // console.log(res)
     return res.dataValues
+  }
+
+  /**
+   * @description: 判断审核通过与否，置为相应状态
+   * @param {number} id 文章id
+   * @param {boolean} pass 通过为true，不通过为false 不通过置为被屏蔽 默认为true
+   * @return {number} 恢复的实际数量 
+   */
+   async reviewArticleByID (id, pass = true) {
+    let status = 0
+    if(!pass) status = 1
+    const res = await Article.update({ status }, { where: { id } })
+    return res
   }
 
   /**
@@ -118,12 +132,20 @@ class ArticleService {
    * @param {number} article_id
    * @param {boolean} showSheid 默认false,不包括被屏蔽的
    * @param {boolean} showDel 默认false,不包括软删除帖子
+   * @param {boolean} showReview 默认false,不包括软删除帖子
    * @return {number} 查询所得结果 or null 
    */
-  async searchArticleByID (article_id, showSheid = false, showDel = false) {
+  async searchArticleByID (article_id, showSheid = false, showDel = false, showReview = false) {
     console.log("article_id:", article_id);
-    let whereOpt = { id: article_id }
-    if (!showSheid) whereOpt.status = 0
+    let whereOpt = { 
+      id: article_id,
+      status: {
+        [Op.or]: [0]
+      }
+    }
+    showSheid && whereOpt.status[Op.or].push(1)
+    showReview && whereOpt.status[Op.or].push(3)
+    console.log(whereOpt)
     const attributes = ArticleService.prototype.getElseAttribute()
     const res = await Article.findOne({
       attributes,
@@ -151,18 +173,10 @@ class ArticleService {
   /**
    * @param {number} status 过滤参数
    * @return {boolean} ParanoidOpt 偏执表选项
-   * @description: 
+   * @description: 仅当status为2即被软删除时，偏执表选项为false使其可被查到
    */
   getParanoidOpt (status) {
-    let paranoidOpt = true
-    switch (status) {
-      case 0:
-      case 1:
-        break
-      case 2: paranoidOpt = false; break
-      default: break
-    }
-    return paranoidOpt
+    return status !== 2
   }
 
   /**
@@ -174,14 +188,7 @@ class ArticleService {
     const whereOpt = {}
     const { partition_id, status, start_time, end_time, user_id } = filterOpt
     // console.log("status:", status)
-    switch (status) {
-      case 0: whereOpt.status = 0; break
-      case 1: whereOpt.status = 1; break
-      case 2: whereOpt.status = 2; break
-      default:
-
-        break
-    }
+    if(status in [0,1,2,3]) whereOpt.status = status
     partition_id && Object.assign(whereOpt, { partition_id })
     user_id && Object.assign(whereOpt, { user_id })
     if (start_time || end_time) whereOpt.createdAt = {}
@@ -255,7 +262,7 @@ class ArticleService {
     const { status } = filterOpt
     const paranoidOpt = ArticleService.prototype.getParanoidOpt(status)
     const attributes = ArticleService.prototype.getElseAttribute()
-    console.log("whereOpt:", whereOpt, 'paranoidOpt:', paranoidOpt)
+    // console.log("whereOpt:", whereOpt, 'paranoidOpt:', paranoidOpt)
     // const start_time = filterOpt.start_time
     const { count, rows } = await Article.findAndCountAll({
       attributes,

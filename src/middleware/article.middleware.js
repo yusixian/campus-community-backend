@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 15:10:21
- * @LastEditTime: 2022-02-25 13:05:40
+ * @LastEditTime: 2022-03-05 12:57:38
  * @LastEditors: cos
  * @Description: 文章相关中间件
  * @FilePath: \campus-community-backend\src\middleware\article.middleware.js
@@ -10,6 +10,7 @@ const { articleParamsError, articleIDError, articleDosNotExist, partitionIsNotEx
 const { searchArticleByID } = require('../service/article.service');
 const { selectPartitionCountById } = require('../service/partition.service');
 const moment = require('moment');
+const { checkID } = require('../utils/checkUtil');
 
 
 // 验证发表文章信息合法性(必须传递必选参数)
@@ -35,19 +36,17 @@ const articleIDValidate = async (ctx, next) => {
   console.log("typeof: ",typeof article_id)
   if(!article_id) 
     return ctx.app.emit('error', articleIDError, ctx);
-
-  let id = parseInt(article_id) // 转换为数字
-  if(id !== id)   // 判断NaN
-    return ctx.app.emit('error', articleIDError, ctx);
+  let id = checkID(article_id)
+  if(!id) return ctx.app.emit('error', articleIDError, ctx);
   ctx.state.article_id = id
   await next()
 }
 
 // 验证该文章必须存在 没问题则将找到的文章挂到ctx.state上
-// 存在定义为没有被软删除, 屏蔽也算存在
+// 存在定义为没有被软删除, 屏蔽/待审核也算存在
 const articleExistValidate = async (ctx, next) => {
   const article_id = ctx.state.article_id
-  const res = await searchArticleByID(article_id, true)
+  const res = await searchArticleByID(article_id, true, false, true)
   // console.log(`searchID ${article_id}:`, res);
   if(!res) {
     return ctx.app.emit('error', articleDosNotExist, ctx);
@@ -74,12 +73,7 @@ const articleFilterValidate = async (ctx, next) => {
     
     // console.log(`start_time:${start_time},end_time:${end_time}`)
     if(status) status = parseInt(status)
-    switch (status) {
-      case 0:
-      case 1:
-      case 2: Object.assign(filterOpt, { status }); break;
-      default: break;
-    }
+    if(status in [0,1,2,3]) Object.assign(filterOpt, { status });
     // console.log("filterOpt:", filterOpt)
   } catch(err) {
     console.error('error!', articleFilterParamsError)
@@ -87,7 +81,6 @@ const articleFilterValidate = async (ctx, next) => {
   }
   await next()
 }
-
 module.exports = {
   articleInfoValidate,
   articleIDValidate,
