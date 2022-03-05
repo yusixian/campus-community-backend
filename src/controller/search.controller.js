@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
- * @LastEditors: 41
- * @LastEditTime: 2022-03-04 19:12:15
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 16:08:26
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
@@ -127,8 +127,33 @@ class searchController {
       return ctx.app.emit('error', searchError, ctx);
     }
   }
+
+  /**
+   * @description: 获取社区热帖排行榜前十
+   * 热帖排行根据点赞、评论、浏览数 三者结合排名即可， 
+   * 优先级第一要素为点赞，第二要素为评论， 第三要素为浏览数
+   */
+  async searchPostRank (ctx, next) {
+    try {
+      const filterOpt = { status: 0 }
+      const orderOpt = [
+        ['likes', 'DESC'],
+        ['visits', 'DESC'],
+        ['collections', 'DESC']
+      ]
+      console.log('filterOpt:', filterOpt, ' orderOpt:', orderOpt)
+      const res = await filterArticle(filterOpt, orderOpt)
+      return ctx.body = {
+        code: 0,
+        message: '查询社区热帖排行榜前十成功',
+        result: {
+          article_list: res.rows
+        }
+      }
+    } catch (err) {
+      console.error(err, searchError)
+      return ctx.app.emit('error', searchError, ctx);
+    }
+  }
 }
-
-
-
 module.exports = new searchController()

@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-03-05 13:11:32
+ * @LastEditTime: 2022-03-05 16:06:48
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -267,7 +267,7 @@ class ArticleService {
     const { count, rows } = await Article.findAndCountAll({
       attributes,
       where: whereOpt,
-      // order: orderOpt,
+      order: orderOpt,
       offset: (current - 1) * size,
       limit: size,
       paranoid: paranoidOpt,
