@@ -2,13 +2,13 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 20:15:40
+ * @LastEditTime: 2022-03-05 21:30:42
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const path = require('path')
-const { createUser, getUserInfo, updateById, getAllInfo } = require('../service/user.service')
+const { createUser, getUserInfo, updateById, getAllInfo, getAllactiveInfo } = require('../service/user.service')
 const { getFollowInfo } = require('../service/follow.service')
 
 const {
@@ -234,6 +234,16 @@ class UserController {
       }
     } else {
       return ctx.app.emit('error', fileUploadError, ctx)
+    }
+  }
+  async findAllactive (ctx, next) {
+    const { page, size, is_active } = ctx.request.query
+    console.log(is_active);
+    let users = await getAllactiveInfo(page, size, is_active)
+    ctx.body = {
+      code: 0,
+      message: '查询成功',
+      users
     }
   }
   async findall (ctx, next) {

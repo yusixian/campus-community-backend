@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:18:24
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 17:13:46
+ * @LastEditTime: 2022-03-05 21:31:54
  * @Description: 
  */
 const Router = require('koa-router')
@@ -23,6 +23,7 @@ const {
   change,
   findall,
   findone,
+  findAllactive,
   reset,
   blockade } = require('../controller/user.controller')
 // 导入中间件
@@ -61,8 +62,9 @@ router.patch('/change', auth, verifySex, change)
 router.get('/updatetoken', updatetoken)
 // 查询所有用户信息的接口
 router.get('/info', auth, findall)
-
 // 根据id查询用户信息的接口
 router.get('/searchbyid', auth, findone)
+// 查询active或者not_active用户,正常用户的接口
+router.get('/active', auth, verifyAdmin, findAllactive)
 
 module.exports = router
