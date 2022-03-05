@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-03-05 09:16:34
+ * @LastEditTime: 2022-03-05 10:57:08
  * @LastEditors: lihao
  * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
@@ -296,6 +296,14 @@ class LikeService {
     const page_nums = Math.ceil(count / size)
     // console.log({ page_nums, count, rows })
     return { page_nums, count, rows }
+  }
+
+  async countLikeByTargetID(target_id, type) {
+    const whereOpt = LikeService.prototype.getWhereOpt({ target_id, type })
+    // console.log("article_id:", article_id);
+    const cnt = await Like.count({ where: whereOpt, raw: true })
+    // console.log(res)
+    return cnt
   }
 
 }

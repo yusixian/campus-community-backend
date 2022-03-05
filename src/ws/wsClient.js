@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-03 19:33:57
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-05 09:37:07
+ * @LastEditTime: 2022-03-05 10:08:59
  * @FilePath: \campus-community-backend\src\ws\wsClient.js
  * @Description: 
  * 
@@ -19,7 +19,7 @@ ws.on('close', () => {
   console.log("【ws服务器客户端】：退出连接");
 })
 ws.on('message', (msg) => {
-  console.log("【ws服务器客户端】：收到消息 " + msg.data);
+  console.log("【ws服务器客户端】：收到消息 " + msg);
 })
 ws.on('error', (err) => {
   console.log("【ws服务器客户端】：连接出错 " + err);
