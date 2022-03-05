@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-03-02 21:47:55
+ * @LastEditTime: 2022-03-05 13:38:05
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -91,11 +91,14 @@ const verifyAdmin = async (ctx, next) => {
   await next()
 }
 const verifySex = async (ctx, next) => {
-  const { sex } = ctx.request.body
-  console.log(sex);
-  if (sex !== '男' && sex !== '女' && sex !== '保密' && sex !== '') {
-    console.error('输入性别错误！')
-    return ctx.app.emit('error', sexError, ctx)
+  if (ctx.request.body.sex) {
+    const { sex } = ctx.request.body
+    console.log(sex);
+    if (sex !== '男' && sex !== '女' && sex !== '保密' && sex !== '') {
+      console.error('输入性别错误！')
+      return ctx.app.emit('error', sexError, ctx)
+    }
+    await next()
   }
   await next()
 }

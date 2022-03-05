@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 12:42:12
+ * @LastEditTime: 2022-03-05 13:40:17
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -21,6 +21,7 @@ const {
   invalidPassword,
   adminError,
   findError,
+  changeError,
   userChangeError,
   changeAdminError,
   changeNameError,
@@ -190,6 +191,23 @@ class UserController {
         , ctx)
     }
     // 3.返回结果       
+  }
+  async change (ctx, next) {
+    const id = ctx.state.user.id
+    const sex = ctx.request.body.sex
+    const city = ctx.request.body.city
+    const name = ctx.request.body.name
+    if (await updateById({ id, sex, city, name })) {
+      let user = await getUserInfo({ id })
+      ctx.body = {
+        code: 0,
+        message: '修改信息成功',
+        user
+      }
+    } else {
+      ctx.app.emit('error', changeError
+        , ctx)
+    }
   }
   async upload (ctx, next) {
     // console.log(ctx.request.files.file);

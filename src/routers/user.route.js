@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:18:24
  * @LastEditors: 41
- * @LastEditTime: 2022-03-03 16:33:51
+ * @LastEditTime: 2022-03-05 13:36:48
  * @Description: 
  */
 const Router = require('koa-router')
@@ -20,6 +20,7 @@ const {
   changeSex,
   upload,
   updatetoken,
+  change,
   findall,
   findone,
   reset,
@@ -54,6 +55,8 @@ router.patch('/name', auth, changeName)
 router.patch('/city', auth, changeCity)
 // 修改性别接口
 router.patch('/sex', auth, verifySex, changeSex)
+// 修改的总接口
+router.patch('/change', auth, verifySex, change)
 // token更新接口
 router.get('/updatetoken', updatetoken)
 // 查询所有用户信息的接口

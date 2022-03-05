@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 18:54:32
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-05 09:21:50
+ * @LastEditors: 41
+ * @LastEditTime: 2022-03-05 13:33:00
  * @Description: 
  */
 module.exports = {
@@ -68,6 +68,10 @@ module.exports = {
   sexError: {
     code: 10014,
     message: '输入的性别不符合要求',
+  },
+  changeError: {
+    code: 10015,
+    message: '账号信息修改失败'
   },
   findError: {
     code: 10015,
