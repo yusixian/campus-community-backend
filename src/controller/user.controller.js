@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 17:10:04
+ * @LastEditTime: 2022-03-05 20:15:40
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -237,8 +237,10 @@ class UserController {
     }
   }
   async findall (ctx, next) {
+    const { page, size } = ctx.request.query
+    // console.log(page, size);
     try {
-      let res = await getAllInfo()
+      let res = await getAllInfo(page, size)
       let users = []
       for (let i = 0; i < res.length; i++) {
         let { password, ...ans } = res[i]
