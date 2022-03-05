@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:18:52
  * @LastEditors: 41
- * @LastEditTime: 2022-03-02 09:26:01
+ * @LastEditTime: 2022-03-05 21:29:14
  * @Description: 
  */
 const User = require('../model/user.model')
@@ -60,10 +60,46 @@ class UserService {
     return res ? res.dataValues : null
   }
 
-  async getAllInfo () {
-    return await User.findAll({
-      raw: true
-    })
+  async getAllInfo (page, size) {
+    // console.log(page, size);
+    let res
+    if (!page || !size) {
+      res = await User.findAll({
+        raw: true
+      })
+    } else {
+      let start = (page - 1) * size
+      res = await User.findAll({
+        offset: start,
+        limit: +size,
+        raw: true
+      })
+      // console.log(res);
+    }
+
+    return res
+  }
+  async getAllactiveInfo (page, size, is_active) {
+    console.log(page, size, is_active);
+    let res
+    if (!page || !size) {
+      res = await User.findAll({
+        raw: true
+      })
+    } else {
+      let start = (page - 1) * size
+      res = await User.findAll({
+        where: {
+          is_active
+        },
+        offset: start,
+        limit: +size,
+        raw: true
+      })
+      // console.log(res);
+    }
+
+    return res
   }
 
   async updateById ({ id, user_name, password, is_admin, img, is_active, name, city, sex }) {
