@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:53:45
- * @LastEditTime: 2022-03-05 12:12:05
+ * @LastEditTime: 2022-03-05 20:42:51
  * @LastEditors: cos
  * @Description:  点赞相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\like.service.js
@@ -58,7 +58,7 @@ class LikeService {
         targrtLike.target_id = nowLike.article_id;
         break;
     }
-    console.log('target_like:', targrtLike)
+    // console.log('target_like:', targrtLike)
     return targrtLike
   }
 
@@ -82,7 +82,7 @@ class LikeService {
         nowLike.article_id = targetLike.target_id;
         break;
     }
-    console.log('nowLike:', nowLike)
+    // console.log('nowLike:', nowLike)
     return nowLike
   }
 
@@ -173,7 +173,7 @@ class LikeService {
     } else { // 普普通通获取文章/评论等的点赞数，有对应id
       if (!target_id) return 0;
       const whereOpt = LikeService.prototype.getWhereOpt({ target_id, type })
-      console.log('whereOpt:', whereOpt)
+      // console.log('whereOpt:', whereOpt)
       return await Like.count({ where: whereOpt })
     }
   }
@@ -292,7 +292,7 @@ class LikeService {
       Object.assign(val, articleInfo)
       return val
     }))
-    console.log('row:', rows)
+    // console.log('row:', rows)
     const page_nums = Math.ceil(count / size)
     // console.log({ page_nums, count, rows })
     return { page_nums, count, rows }

@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-26 16:22:58
- * @LastEditTime: 2022-02-26 16:37:40
+ * @LastEditTime: 2022-03-05 20:43:23
  * @LastEditors: cos
  * @Description: 信息检查通用工具
  * @FilePath: \campus-community-backend\src\utils\checkUtil.js
@@ -20,7 +20,7 @@ class CheckUtil {
         throw Error('id为NaN!')
       return id
     } catch(err) {
-      console.log("id不合法！", err)
+      console.error("id不合法！", err)
       return null
     }
   }

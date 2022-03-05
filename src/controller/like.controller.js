@@ -1,8 +1,8 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:10:28
- * @LastEditTime: 2022-03-05 09:32:56
- * @LastEditors: lihao
+ * @LastEditTime: 2022-03-05 20:38:37
+ * @LastEditors: cos
  * @Description: 点赞相关控制器
  * @FilePath: \campus-community-backend\src\controller\like.controller.js
  */
@@ -86,7 +86,7 @@ class LikeController {
         }
       }
     } catch(err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', likeCountError, ctx)
     }
   }

@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-25 14:08:14
- * @LastEditTime: 2022-03-04 23:25:05
+ * @LastEditTime: 2022-03-05 20:41:26
  * @LastEditors: cos
  * @Description: 点赞管理中间件
  * @FilePath: \campus-community-backend\src\middleware\like.middleware.js
@@ -12,7 +12,7 @@ const checkUtil = require("../utils/checkUtil");
 
 // 验证点赞信息target_id、type有效性，并进行相应处理后挂上ctx.state.newLike
 const likeInfoValidate = async(ctx, next) => {
-  console.log(ctx.request.body)
+  // console.log(ctx.request.body)
 
   const t_id = ctx.request.body.target_id || ctx.request.query.target_id;
   const type = ctx.request.body.type || ctx.request.query.type;
@@ -64,7 +64,7 @@ const likeIDValidate = async(ctx, next) => {
 // 验证该点赞记录必须存在 并将存在的点赞记录挂到ctx.state.existLike上
 const likeExistValidate = async (ctx, next) => {
   const like_id = ctx.state.like_id
-  console.log(like_id)
+  // console.log(like_id)
   try {
     const res = await getLikeRecordByID(like_id)
     // console.log(`searchID ${article_id}:`, res);
@@ -72,7 +72,7 @@ const likeExistValidate = async (ctx, next) => {
     ctx.state.existLike = res
     await next()
   } catch(err) {
-    console.log(err, likeDosNotExistError)
+    console.error(err, likeDosNotExistError)
     return ctx.app.emit('error', likeDosNotExistError, ctx);
   }
 }
@@ -84,7 +84,7 @@ const likeOwnValidate = async (ctx, next) => {
     ctx.state.existLike = await getLikeRecordByInfo(newLike)
     // console.log(ctx.state.existLike)
     if(!ctx.state.existLike)  {
-      console.log(likeDosNotExistError)
+      // console.log(likeDosNotExistError)
       return ctx.app.emit('error', likeDosNotExistError, ctx);
     }
     // console.log('验证成功！', ctx.state.existLike)
@@ -97,7 +97,7 @@ const likeOwnValidate = async (ctx, next) => {
 
 // 验证统计点赞数信息target_id、type、user_id，都为可选参数，并进行相应处理后挂上ctx.state.filterOpt
 const likeCountParamsValidate = async(ctx, next) => {
-  console.log(ctx.request.body)
+  // console.log(ctx.request.body)
 
   const t_id = ctx.request.body.target_id || ctx.request.query.target_id;
   const u_id = ctx.request.body.user_id || ctx.request.query.user_id;

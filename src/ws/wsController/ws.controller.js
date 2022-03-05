@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-03-03 20:12:41
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-05 11:55:00
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:45:13
  * @FilePath: \campus-community-backend\src\ws\wsController\ws.controller.js
  * @Description: 
  * 
@@ -27,7 +27,7 @@ class wsController {
         }
       }
     }catch(err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', wsGetOnlineUserError,ctx)
     }
   }
@@ -51,7 +51,7 @@ class wsController {
         }
       }
     }catch(err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', wsSendMessageError,ctx)
     }
   }
@@ -76,7 +76,7 @@ class wsController {
         }
       }
     }catch(err) {
-      console.log(err);
+      console.error(err);
       ctx.app.emit('error', wsSendMessageError,ctx)
     }
   }

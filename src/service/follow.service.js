@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-03-03 16:16:24
- * @LastEditors: 41
- * @LastEditTime: 2022-03-04 15:34:12
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:42:41
  * @Description: 
  */
 const { Op } = require("sequelize");
@@ -10,10 +10,10 @@ const Follow = require('../model/follow.model')
 const { getUserInfo } = require('./user.service')
 class FollowService {
   async createFollow (user_id, follow_id) {
-    console.log(user_id, follow_id);
+    // console.log(user_id, follow_id);
     let id = follow_id
     let follower = await getUserInfo({ id })
-    console.log(follower);
+    // console.log(follower);
     let follow_name = follower.name
     let follow_pic = follower.img
     // console.log(follower);

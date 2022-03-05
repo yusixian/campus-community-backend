@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-03-03 19:53:23
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-03 21:54:24
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 20:44:57
  * @FilePath: \campus-community-backend\src\ws\service\ws.service.js
  * @Description: 
  * 
@@ -28,7 +28,7 @@ class WsService {
       ws.send(JSON.stringify(message))
       return true
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return false
     }
   }
@@ -49,7 +49,7 @@ class WsService {
       ws.send(JSON.stringify(message))
       return true
     } catch (err) {
-      console.log(err);
+      console.error(err);
       return false
     }
   }

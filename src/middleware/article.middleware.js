@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 15:10:21
- * @LastEditTime: 2022-03-05 12:57:38
+ * @LastEditTime: 2022-03-05 20:40:51
  * @LastEditors: cos
  * @Description: 文章相关中间件
  * @FilePath: \campus-community-backend\src\middleware\article.middleware.js
@@ -33,7 +33,7 @@ const articleInfoValidate = async (ctx, next) => {
 // 验证文章id必须存在
 const articleIDValidate = async (ctx, next) => {
   const article_id = ctx.request.body.article_id || ctx.request.query.article_id;
-  console.log("typeof: ",typeof article_id)
+  // console.log("typeof: ",typeof article_id)
   if(!article_id) 
     return ctx.app.emit('error', articleIDError, ctx);
   let id = checkID(article_id)
@@ -58,7 +58,7 @@ const articleExistValidate = async (ctx, next) => {
 // 验证文章过滤参数，将已传的参数判断合法性后挂到ctx.state.filterOpt上
 // status、partition_id、开始结束时间等
 const articleFilterValidate = async (ctx, next) => {
-  console.log(ctx.request.query)
+  // console.log(ctx.request.query)
   let { current, size, status, partition_id, start_time, end_time, user_id } = ctx.request.query
   ctx.state.filterOpt = {}
   const filterOpt = ctx.state.filterOpt

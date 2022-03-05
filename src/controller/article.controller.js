@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-05 13:20:39
+ * @LastEditTime: 2022-03-05 20:35:34
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -317,12 +317,12 @@ class ArticleController {
     try {
       const article_id = ctx.state.article_id
       const pass = ctx.request.body.pass
-      console.log('article_id:', article_id, ' pass:', pass)
       await reviewArticleByID(article_id, pass)
       const body = { code: 0 }
       if(pass) body.message = '审核文章通过！已成功发布'
       else body.message = '审核文章未通过，已屏蔽该文章！'
       ctx.body = body
+      console.log(`审核文章：article_id = ${article_id} , ' pass = ${pass}\n`, body)
     } catch (err) {
       console.error('审核文章失败！', err);
       return ctx.app.emit('error', articleOperationError, ctx)

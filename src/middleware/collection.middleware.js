@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-03-02 11:56:43
- * @LastEditTime: 2022-03-02 18:53:27
+ * @LastEditTime: 2022-03-05 20:41:03
  * @LastEditors: cos
  * @Description: 收藏相关中间件
  * @FilePath: \campus-community-backend\src\middleware\collection.middleware.js
@@ -64,7 +64,7 @@ const collectionIDValidate = async(ctx, next) => {
 // 验证该收藏记录必须存在 并将存在的收藏记录挂到ctx.state.existCollection上
 const collectionExistValidate = async (ctx, next) => {
   const collection_id = ctx.state.collection_id
-  console.log(collection_id)
+  // console.log(collection_id)
   try {
     const res = await getCollectionRecordByID(collection_id)
     if(!res) throw Error('数据库中不存在该收藏记录')
@@ -82,7 +82,7 @@ const collectionOwnValidate = async (ctx, next) => {
   const { user_id, article_id } = newCollection
   try {
     ctx.state.existCollection = await getCollectionRecordByInfo(user_id, article_id)
-    console.log("exist:", ctx.state.existCollection)
+    // console.log("exist:", ctx.state.existCollection)
     if(!ctx.state.existCollection)  {
       console.error(collectionDosNotExistError)
       return ctx.app.emit('error', collectionDosNotExistError, ctx);

@@ -66,7 +66,7 @@ class UserController {
     // console.log(ctx.request.body);
     // console.log(123);
     const { user_name, password, is_admin, img, is_active, name, city, sex } = ctx.request.body
-    console.log(user_name, password, is_admin, img, is_active, name, city, sex);
+    // console.log(user_name, password, is_admin, img, is_active, name, city, sex);
     try {
       // 2.操作数据库
       const res = await createUser(user_name, password, is_admin, img, is_active, name, city, sex)
@@ -143,7 +143,7 @@ class UserController {
     // 1.获取数据
     const id = ctx.state.user.id
     const name = ctx.request.body.name
-    console.log(id, name);
+    // console.log(id, name);
     // 2.操作数据库
     if (await updateById({ id, name })) {
       ctx.body = {
@@ -161,7 +161,7 @@ class UserController {
     // 1.获取数据
     const id = ctx.state.user.id
     const city = ctx.request.body.city
-    console.log(id, city);
+    // console.log(id, city);
     // 2.操作数据库
     if (await updateById({ id, city })) {
       ctx.body = {
@@ -179,7 +179,7 @@ class UserController {
     // 1.获取数据
     const id = ctx.state.user.id
     const sex = ctx.request.body.sex
-    console.log(id, sex);
+    // console.log(id, sex);
     // 2.操作数据库
     if (await updateById({ id, sex })) {
       ctx.body = {
@@ -309,7 +309,7 @@ class UserController {
     try {
       const { id } = await getUserInfo({ user_name })
       await updateById({ id, is_active })
-      console.log(is_active);
+      // console.log(is_active);
       if (is_active) {
         ctx.body = {
           code: 0,
@@ -339,7 +339,7 @@ class UserController {
     try {
       const { id } = await getUserInfo({ user_name })
       await updateById({ id, is_admin })
-      console.log(is_admin);
+      // console.log(is_admin);
       if (is_admin) {
         ctx.body = {
           code: 0,
@@ -361,7 +361,7 @@ class UserController {
   }
   async reset (ctx, next) {
     const { user_name, password } = ctx.request.body
-    console.log(user_name, password);
+    // console.log(user_name, password);
     if (user_name === "") {
       ctx.app.emit('error', userDosNotExist, ctx)
       return;
