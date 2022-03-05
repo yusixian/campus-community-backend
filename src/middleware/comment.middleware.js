@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:52:58
  * @LastEditors: lihao
- * @LastEditTime: 2022-02-27 16:36:30
+ * @LastEditTime: 2022-03-05 16:23:55
  * @FilePath: \campus-community-backend\src\middleware\comment.middleware.js
  * @Description: 评论的中间件
  * 
@@ -50,7 +50,7 @@ const commentDeleteValidator = async (ctx, next) => {
  * @returns 
  */
 const commentDeleteBatchValidator = async (ctx, next) => {
-  const {ids} = ctx.request.query
+  const { ids } = ctx.request.query
   let comment_ids = ids.map(item => {
     return Number.parseInt(item)
   })
@@ -63,7 +63,7 @@ const commentDeleteBatchValidator = async (ctx, next) => {
 }
 
 const commentPageQuery = async (ctx, next) => {
-  const {pageNo, pageSize} = ctx.request.query
+  const { pageNo, pageSize } = ctx.request.query
   if (!pageNo || !pageSize) {
     ctx.app.emit('error', commPageQueryError, ctx)
     return
@@ -74,13 +74,23 @@ const commentPageQuery = async (ctx, next) => {
   ctx.request.query.pageNo = pageNoTemp
   ctx.request.query.pageSize = pageSizeTemp
   await next()
-   
+
 }
 
 const commentOwnValidate = async (ctx, next) => {
-  const {id} = ctx.request.query
-  if (await selectCommentByUidAndCid(ctx.state.user.id, id)) {
-    ctx.app.emit('error', commentOwnError, ctx)
+  const { id } = ctx.request.query
+  console.log(ctx.state.user.id, id);
+  if (!ctx.state.user.is_admin) {
+    let res = null
+    try {
+      res = await selectCommentByUidAndCid(ctx.state.user.id, id)
+    } catch (err) {
+      console.log(err);
+    }
+    if (res) {
+      ctx.app.emit('error', commentOwnError, ctx)
+      return
+    }
   }
   await next()
 }

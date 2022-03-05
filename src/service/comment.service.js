@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-02-21 14:47:31
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-04 10:38:40
+ * @LastEditTime: 2022-03-05 16:23:10
  * @FilePath: \campus-community-backend\src\service\comment.service.js
  * @Description: 评论的业务逻辑层
  * 
@@ -102,7 +102,7 @@ class CommentService {
     const res = await Comment.count({
       where: {
         id: cid,
-        usser_id: uid, 
+        user_id: uid, 
       }
     })
     return res
