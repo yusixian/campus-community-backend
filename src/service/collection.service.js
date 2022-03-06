@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-03-02 11:45:08
- * @LastEditTime: 2022-03-06 20:02:33
+ * @LastEditTime: 2022-03-06 22:36:28
  * @LastEditors: cos
  * @Description: 收藏相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\collection.service.js
@@ -103,12 +103,15 @@ class CollectionService {
       temp = await Promise.all( res.map(async(val) => {
         // console.log("val:", val)
         const { user_id, article_id } = val
-        const userInfo = await User.findOne({ attributes: [['img', 'avator'], 'user_name'], where: { id:user_id }, raw: true})
         const articleInfo = await searchArticleByID(article_id)
+        if(!articleInfo) return null;
+        const userInfo = await User.findOne({ attributes: [['img', 'avator'], 'user_name'], where: { id:user_id }, raw: true})
         userInfo && Object.assign(val, { userInfo })
         articleInfo && Object.assign(val, { articleInfo })
         return val
       }) ) 
+      console.log(temp)
+      temp = temp.filter(v => v)
     }
     // console.log(temp)
     return temp;
