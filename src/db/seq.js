@@ -1,8 +1,8 @@
 /*
  * @Author: 41
  * @Date: 2022-02-16 00:04:26
- * @LastEditors: cos
- * @LastEditTime: 2022-03-05 21:46:27
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-03-06 23:07:29
  * @Description: 
  */
 const { Sequelize } = require('sequelize')
@@ -30,7 +30,11 @@ const seq = new Sequelize(MYSQL_DB, MYSQL_USER, MYSQL_PWD, {
   dialect: 'mysql',
   port: MYSQL_PORT,
   timezone: '+08:00',
-  logging: myLogFunc
+  logging: myLogFunc,
+  dialectOptions: {
+    dateStrings: true,
+    typeCast: true
+  }
 })
 
 // seq.authenticate().then(() => {

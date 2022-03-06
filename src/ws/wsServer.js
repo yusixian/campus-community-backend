@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-03 19:27:35
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-06 21:11:46
+ * @LastEditTime: 2022-03-06 21:48:06
  * @FilePath: \campus-community-backend\src\ws\wsServer.js
  * @Description: 
  * 
@@ -27,7 +27,7 @@ wss.on('connection', (ws, request) => {
   //   ws.close()
   //   return
   // }
-  console.log(request.headers['sec-websocket-protocol']);
+  // console.log(request.headers['sec-websocket-protocol']);
   let id = null
   let authorization = request.headers['sec-websocket-protocol']
   // console.log(authorization);
