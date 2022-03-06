@@ -1,11 +1,11 @@
 /*
  * @Author: 41
  * @Date: 2022-03-03 16:16:24
- * @LastEditors: cos
- * @LastEditTime: 2022-03-05 20:42:41
+ * @LastEditors: 41
+ * @LastEditTime: 2022-03-06 15:47:53
  * @Description: 
  */
-const { Op } = require("sequelize");
+// const { Op } = require("sequelize");
 const Follow = require('../model/follow.model')
 const { getUserInfo } = require('./user.service')
 class FollowService {

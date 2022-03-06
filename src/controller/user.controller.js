@@ -2,12 +2,12 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-06 15:32:39
+ * @LastEditTime: 2022-03-06 16:05:30
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const path = require('path')
+// const path = require('path')
 const { count_not_active, count_active, createUser, getUserInfo, updateById, getAllInfo, getAllactiveInfo } = require('../service/user.service')
 const { getFollowInfo } = require('../service/follow.service')
 
@@ -290,12 +290,31 @@ class UserController {
         }
       }
       user['isfollow'] = isfollow
+      let follow_id = id
+      let followauth = await getFollowInfo({ follow_id })
+      let befollowed = []
+      for (let i = 0; i < followauth.length; i++) {
+        let id = followauth[i].user_id
+        let temp = await getUserInfo({ id })
+        console.log(temp);
+        befollowed[i] = {}
+        befollowed[i]['user_id'] = temp.id
+        befollowed[i]['name'] = temp.name
+        befollowed[i]['user_name'] = temp.user_name
+        befollowed[i]['img'] = temp.img
+        // console.log(res);
+      }
+      let follows_cnt = follows.length
+      let befollowed_cnt = befollowed.length
       ctx.body = {
         code: 0,
         message: '查询成功',
         result: {
+          follows_cnt,
+          befollowed_cnt,
           user,
-          follows
+          follows,
+          befollowed
         }
       }
     }
