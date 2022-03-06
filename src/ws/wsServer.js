@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-03-03 19:27:35
- * @LastEditors: cos
- * @LastEditTime: 2022-03-05 20:51:01
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-03-06 14:43:42
  * @FilePath: \campus-community-backend\src\ws\wsServer.js
  * @Description: 
  * 
@@ -10,7 +10,7 @@
  */
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config/config.default')
-const {sendPrivateMessage}  = require('../ws/service/ws.service');
+const { sendPrivateMessage } = require('../ws/service/ws.service');
 // 已连接的客户端
 let clients = new Array()
 const WebSocket = require('ws')
@@ -20,24 +20,30 @@ wss.on('listening', () => {
   console.log("【开始监听】：websocket server");
 })
 wss.on('connection', (ws, request) => {
-
-  let authorization = request.headers['sec-websocket-protocol']
-  // console.log(authorization);
-  if (authorization != "**********") {
-    const token = authorization.replace('Bearer ', '')
-    try {
-      const user = jwt.verify(token, JWT_SECRET)
-    } catch (err) {
-      ws.close()
-    }
-  }
   console.log(request.url);
   let id = request.url.substring(1)
   try {
     id = parseInt(id)
   } catch (err) {
     ws.close()
+    return
   }
+  let authorization = request.headers['sec-websocket-protocol']
+  // console.log(authorization);
+  if (authorization != "**********") {
+    const token = authorization.replace('Bearer ', '')
+    try {
+      const user = jwt.verify(token, JWT_SECRET)
+      if (user.id != id) {
+        ws.close()
+        return
+      }
+    } catch (err) {
+      ws.close()
+      return
+    }
+  }
+
   clients[id + 's'] = ws
   // 用户连接的提醒
   console.log('【建立连接】：当前连接用户数量为：' + Object.keys(clients).length);
