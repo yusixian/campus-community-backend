@@ -2,13 +2,13 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 21:30:42
+ * @LastEditTime: 2022-03-06 15:32:39
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 const path = require('path')
-const { createUser, getUserInfo, updateById, getAllInfo, getAllactiveInfo } = require('../service/user.service')
+const { count_not_active, count_active, createUser, getUserInfo, updateById, getAllInfo, getAllactiveInfo } = require('../service/user.service')
 const { getFollowInfo } = require('../service/follow.service')
 
 const {
@@ -251,6 +251,8 @@ class UserController {
     // console.log(page, size);
     try {
       let res = await getAllInfo(page, size)
+      let active_cnt = await count_active()
+      let active_not_cnt = await count_not_active()
       let users = []
       for (let i = 0; i < res.length; i++) {
         let { password, ...ans } = res[i]
@@ -260,7 +262,9 @@ class UserController {
         code: 0,
         message: '查询成功',
         result: {
-          users
+          users,
+          active_cnt,
+          active_not_cnt
         }
       }
     }

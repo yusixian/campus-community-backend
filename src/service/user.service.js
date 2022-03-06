@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:18:52
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 21:29:14
+ * @LastEditTime: 2022-03-06 15:29:57
  * @Description: 
  */
 const User = require('../model/user.model')
@@ -116,6 +116,22 @@ class UserService {
     const res = await User.update(newUser, { where: whereOpt })
     // console.log(res);
     return res[0] > 0 ? true : false
+  }
+
+  async count_active () {
+    return await User.count({
+      where: {
+        is_active: 1
+      }
+    })
+  }
+
+  async count_not_active () {
+    return await User.count({
+      where: {
+        is_active: 0
+      }
+    })
   }
 }
 
