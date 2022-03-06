@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-03 19:27:35
  * @LastEditors: cos
- * @LastEditTime: 2022-03-05 20:51:01
+ * @LastEditTime: 2022-03-06 13:35:20
  * @FilePath: \campus-community-backend\src\ws\wsServer.js
  * @Description: 
  * 
@@ -23,7 +23,7 @@ wss.on('connection', (ws, request) => {
 
   let authorization = request.headers['sec-websocket-protocol']
   // console.log(authorization);
-  if (authorization != "**********") {
+  if (authorization) {
     const token = authorization.replace('Bearer ', '')
     try {
       const user = jwt.verify(token, JWT_SECRET)
