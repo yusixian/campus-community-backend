@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-03-02 12:11:30
- * @LastEditTime: 2022-03-05 20:36:29
+ * @LastEditTime: 2022-03-06 20:00:46
  * @LastEditors: cos
  * @Description: 收藏相关控制器
  * @FilePath: \campus-community-backend\src\controller\collection.controller.js
@@ -57,7 +57,7 @@ class CollectionController {
       // console.log(res)
       ctx.body = {
         code: 0,
-        message: "获取收藏数成功！",
+        message: "获取收藏列表成功！",
         result: res
       }
     } catch(err) {

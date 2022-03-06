@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-03-05 20:42:04
+ * @LastEditTime: 2022-03-06 17:02:36
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -128,12 +128,12 @@ class ArticleService {
   }
 
   /**
-   * @description: 根据id查询单个帖子是否存在 软删除的帖子会查不到
+   * @description: 根据id查询文章内容
    * @param {number} article_id
    * @param {boolean} showSheid 默认false,不包括被屏蔽的
    * @param {boolean} showDel 默认false,不包括软删除帖子
    * @param {boolean} showReview 默认false,不包括软删除帖子
-   * @return {number} 查询所得结果 or null 
+   * @return {Article} 查询所得结果文章信息 or null 
    */
   async searchArticleByID (article_id, showSheid = false, showDel = false, showReview = false) {
     // console.log("article_id:", article_id);
