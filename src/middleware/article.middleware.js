@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 15:10:21
- * @LastEditTime: 2022-03-05 20:40:51
+ * @LastEditTime: 2022-03-06 20:32:15
  * @LastEditors: cos
  * @Description: 文章相关中间件
  * @FilePath: \campus-community-backend\src\middleware\article.middleware.js
@@ -41,7 +41,25 @@ const articleIDValidate = async (ctx, next) => {
   ctx.state.article_id = id
   await next()
 }
-
+// 验证文章id必须存在
+const articleIDListValidate = async (ctx, next) => {
+  const { ids } = ctx.request.query
+  try{
+    let article_ids = ids.map(item => {
+      return checkID(item)
+    })
+    if (!article_ids.length) {
+      ctx.app.emit('error', articleIDError, ctx)
+      return
+    }
+    ctx.state.ids = article_ids
+    console.log('delete list:', ctx.state.ids );
+    await next()
+  } catch(err) {
+    console.error(err, articleIDError);
+    return ctx.app.emit('error', articleIDError, ctx);
+  }
+}
 // 验证该文章必须存在 没问题则将找到的文章挂到ctx.state上
 // 存在定义为没有被软删除, 屏蔽/待审核也算存在
 const articleExistValidate = async (ctx, next) => {
@@ -84,6 +102,7 @@ const articleFilterValidate = async (ctx, next) => {
 module.exports = {
   articleInfoValidate,
   articleIDValidate,
+  articleIDListValidate,
   articleExistValidate,
   articleFilterValidate
 }

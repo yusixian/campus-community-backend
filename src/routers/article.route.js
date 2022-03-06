@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:09:32
- * @LastEditTime: 2022-03-05 13:26:49
+ * @LastEditTime: 2022-03-06 20:37:10
  * @LastEditors: cos
  * @Description: 文章管理相关路由
  * @FilePath: \campus-community-backend\src\routers\article.route.js
@@ -9,8 +9,8 @@
 const Router = require('koa-router')
 
 const { postArticle, deleteArticle, updateArticle,shieldArticle, restoreArticle, getAllArticle, 
-  getByID, getByPages, countByFilter, upload, getByPublicPages, reviewArticle } = require('../controller/article.controller')
-const { articleInfoValidate, articleIDValidate, articleExistValidate, articleFilterValidate } = require('../middleware/article.middleware')
+  getByID, getByPages, countByFilter, upload, getByPublicPages, reviewArticle, clearArticleList, deleteArticleList } = require('../controller/article.controller')
+const { articleInfoValidate, articleIDValidate, articleExistValidate, articleFilterValidate, articleIDListValidate } = require('../middleware/article.middleware')
 const { verifyActive, verifyAdmin } = require('../middleware/user.middleware')
 const { auth, isAuth } = require('../middleware/auth.middleware')
 
@@ -61,5 +61,13 @@ router.delete('/shield', auth, verifyAdmin, verifyActive,
 router.post('/restore', auth, verifyAdmin, verifyActive, 
   articleIDValidate, 
   restoreArticle)
+
+router.delete('/delete/list', auth, verifyAdmin, verifyActive, 
+  articleIDListValidate,
+  deleteArticleList)
+
+router.delete('/clear/list', auth, verifyAdmin, verifyActive, 
+  articleIDListValidate,
+  clearArticleList)
 
 module.exports = router
