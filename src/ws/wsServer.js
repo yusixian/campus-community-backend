@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-03 19:27:35
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-06 14:46:03
+ * @LastEditTime: 2022-03-06 16:17:38
  * @FilePath: \campus-community-backend\src\ws\wsServer.js
  * @Description: 
  * 
@@ -10,7 +10,6 @@
  */
 const jwt = require('jsonwebtoken')
 const { JWT_SECRET } = require('../config/config.default')
-const { sendPrivateMessage } = require('../ws/service/ws.service');
 // 已连接的客户端
 let clients = new Array()
 const WebSocket = require('ws')
@@ -63,7 +62,9 @@ wss.on('connection', (ws, request) => {
       }))
       return
     }
+    console.log(clients[`${message.toUId}s`]);
     if (message.type == "private" && !clients[`${message.toUId}s`]) {
+      
       ws.send(JSON.stringify({
         fromUId: 0,
         toUId: id,
