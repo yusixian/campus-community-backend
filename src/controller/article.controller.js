@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-06 20:42:17
+ * @LastEditTime: 2022-03-06 22:10:16
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -288,18 +288,12 @@ class ArticleController {
   async getByPublicPages (ctx, next) {
     try {
       const filterOpt = ctx.state.filterOpt
-      filterOpt.status = 0
+      filterOpt.status = 0   // 只能获取自己的已发布文章&待审核文章
       // console.log("filterOpt:", filterOpt)
       const res = await filterArticle(filterOpt)
       const article_pages = res.page_nums
       const article_total = res.count
       const article_list = res.rows
-      for (let i = 0; i < article_list.length; i++) {
-        // console.log(article_list[i].user_id);
-        let id = article_list[i].user_id
-        let temp = await getUserInfo({ id })
-        article_list[i]['name'] = temp.name
-      }
       const result = { article_total, article_pages, article_list }
       // console.log(result)
       ctx.body = {
@@ -312,7 +306,30 @@ class ArticleController {
       return ctx.app.emit('error', articleOperationError, ctx)
     }
   }
-  
+  async getMyArticle(ctx, next) {
+    try {
+      const filterOpt = ctx.state.filterOpt
+      const user = ctx.state.user
+      const { id } = user
+      filterOpt.user_id = id
+      filterOpt.status = [0,3]   // 只能获取自己的已发布文章&待审核文章
+      console.log("filterOpt:", filterOpt)
+      const res = await filterArticle(filterOpt)
+      const article_pages = res.page_nums
+      const article_total = res.count
+      const article_list = res.rows
+      const result = { article_total, article_pages, article_list }
+      // console.log(result)
+      ctx.body = {
+        code: 0,
+        message: "获取文章成功！",
+        result
+      }
+    } catch (err) {
+      console.error('获取文章失败！', err);
+      return ctx.app.emit('error', articleOperationError, ctx)
+    }
+  }
   /**
    * @description: 审核文章
    */
@@ -360,10 +377,10 @@ class ArticleController {
       await deleteArticleByIDList(ids, true)
       ctx.body = {
         code: 0,
-        message: "清空回收站成功！已彻底删除！",
+        message: "删除回收站文章成功！已彻底删除！",
       }
     } catch (err) {
-      console.error("清空回收站成功！已彻底删除！", err);
+      console.error("删除回收站文章成功！已彻底删除！", err);
       return ctx.app.emit('error', articleDeleteError, ctx)
     }
   }

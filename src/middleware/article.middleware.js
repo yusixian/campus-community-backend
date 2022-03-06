@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 15:10:21
- * @LastEditTime: 2022-03-06 20:32:15
+ * @LastEditTime: 2022-03-06 22:08:41
  * @LastEditors: cos
  * @Description: 文章相关中间件
  * @FilePath: \campus-community-backend\src\middleware\article.middleware.js
@@ -45,9 +45,13 @@ const articleIDValidate = async (ctx, next) => {
 const articleIDListValidate = async (ctx, next) => {
   const { ids } = ctx.request.query
   try{
-    let article_ids = ids.map(item => {
-      return checkID(item)
-    })
+    console.log(ids)
+    let article_ids = []
+    if(Array.isArray(ids)) {
+      article_ids = ids.map(item => {
+        return checkID(item)
+      })
+    } else article_ids.push(checkID(ids))
     if (!article_ids.length) {
       ctx.app.emit('error', articleIDError, ctx)
       return
@@ -90,9 +94,15 @@ const articleFilterValidate = async (ctx, next) => {
     if(moment(end_time).isValid()) filterOpt.end_time = end_time
     
     // console.log(`start_time:${start_time},end_time:${end_time}`)
-    if(status) status = parseInt(status)
-    if(status in [0,1,2,3]) Object.assign(filterOpt, { status });
-    // console.log("filterOpt:", filterOpt)
+    if(Array.isArray(status)) 
+      filterOpt.status = status.map((val) => {
+        return parseInt(val);
+      })
+    else if(status) {
+      status = parseInt(status)
+      if(status in [0,1,2,3]) Object.assign(filterOpt, { status });
+    }
+    console.log("filterOpt:", filterOpt)
   } catch(err) {
     console.error('error!', articleFilterParamsError)
     return ctx.app.emit('error', articleFilterParamsError, ctx);
