@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-06 21:16:36
+ * @LastEditTime: 2022-03-06 21:33:43
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -347,6 +347,9 @@ class UserController {
       let active_cnt = await count_active()
       let active_not_cnt = await count_not_active()
       let users = []
+      let cnt = active_cnt + active_not_cnt
+      let page_cnt = (cnt / 10) >> 0
+      if (cnt % 10 > 0) page_cnt += 1
       for (let i = 0; i < res.length; i++) {
         let { password, ...ans } = res[i]
         users.push(ans)
@@ -355,15 +358,19 @@ class UserController {
         code: 0,
         message: '查询成功',
         result: {
-          users,
+          page_cnt,
           active_cnt,
-          active_not_cnt
+          active_not_cnt,
+          users
         }
       }
     }
     catch (err) {
       return ctx.app.emit('error', adminError, err)
     }
+  }
+  async allcount (ctx, next) {
+
   }
   /**
    * @description: id查询某个用户的用户信息
