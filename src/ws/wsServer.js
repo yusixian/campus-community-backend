@@ -2,7 +2,7 @@
  * @Author: lihao
  * @Date: 2022-03-03 19:27:35
  * @LastEditors: lihao
- * @LastEditTime: 2022-03-06 16:17:38
+ * @LastEditTime: 2022-03-06 21:11:46
  * @FilePath: \campus-community-backend\src\ws\wsServer.js
  * @Description: 
  * 
@@ -19,30 +19,36 @@ wss.on('listening', () => {
   console.log("【开始监听】：websocket server");
 })
 wss.on('connection', (ws, request) => {
-  console.log(request.url);
-  let id = request.url.substring(1)
-  try {
-    id = parseInt(id)
-  } catch (err) {
-    ws.close()
-    return
-  }
+  // console.log(request.url);
+  // let id = request.url.substring(1)
+  // try {
+  //   id = parseInt(id)
+  // } catch (err) {
+  //   ws.close()
+  //   return
+  // }
+  console.log(request.headers['sec-websocket-protocol']);
+  let id = null
   let authorization = request.headers['sec-websocket-protocol']
   // console.log(authorization);
   if (authorization != "**********") {
     const token = authorization.replace('Bearer ', '')
     try {
       const user = jwt.verify(token, JWT_SECRET)
-      if (user.id != id) {
-        ws.close()
-        return
-      }
+      // if (user.id != id) {
+      //   ws.close()
+      //   return
+      // }
+      id = user.id
+      console.log(123);
     } catch (err) {
+      console.log(456);
       ws.close()
       return
     }
+  }else {
+    id = 0
   }
-
   clients[id + 's'] = ws
   // 用户连接的提醒
   console.log('【建立连接】：当前连接用户数量为：' + Object.keys(clients).length);
