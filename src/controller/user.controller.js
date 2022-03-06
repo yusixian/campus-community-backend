@@ -2,15 +2,20 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-06 16:05:30
+ * @LastEditTime: 2022-03-06 21:16:36
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-// const path = require('path')
-const { count_not_active, count_active, createUser, getUserInfo, updateById, getAllInfo, getAllactiveInfo } = require('../service/user.service')
+const {
+  count_not_active,
+  count_active,
+  createUser,
+  getUserInfo,
+  updateById,
+  getAllInfo,
+  getAllactiveInfo } = require('../service/user.service')
 const { getFollowInfo } = require('../service/follow.service')
-
 const {
   userRegisterError,
   userLoginError,
@@ -31,8 +36,16 @@ const {
 } = require('../constant/err.type')
 const { JWT_SECRET } = require('../config/config.default')
 const { upToQiniu } = require('../utils/oss/ossUtils')
-const { fop } = require('qiniu')
+// const { fop } = require('qiniu')
 class UserController {
+  /**
+   * @description: 更新token
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async updatetoken (ctx, next) {
     const { authorization } = ctx.request.header
     const token = authorization.replace('Bearer ', '')
@@ -61,6 +74,14 @@ class UserController {
       }
     }
   }
+  /**
+   * @description: 注册函数
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async register (ctx, next) {
     // 1.获取数据
     // console.log(ctx.request.body);
@@ -90,6 +111,14 @@ class UserController {
       ctx.app.emit('error', userRegisterError, ctx)
     }
   }
+  /**
+   * @description: 登录函数
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async login (ctx, next) {
     const { user_name } = ctx.request.body
     // 1.获取用户信息(在token的payload中，记录id,user_name,is_admin)
@@ -110,6 +139,14 @@ class UserController {
       ctx.app.emit('error', userLoginError, ctx)
     }
   }
+  /**
+   * @description: 修改密码
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async changePassword (ctx, next) {
     // 1.获取数据
     const id = ctx.state.user.id
@@ -139,6 +176,14 @@ class UserController {
     }
     // 3.返回结果
   }
+  /**
+   * @description: 修改昵称
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async changeName (ctx, next) {
     // 1.获取数据
     const id = ctx.state.user.id
@@ -157,6 +202,14 @@ class UserController {
     }
     // 3.返回结果
   }
+  /**
+   * @description: 修改城市
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async changeCity (ctx, next) {
     // 1.获取数据
     const id = ctx.state.user.id
@@ -175,6 +228,14 @@ class UserController {
     }
     // 3.返回结果   
   }
+  /**
+   * @description: 修改性别
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async changeSex (ctx, next) {
     // 1.获取数据
     const id = ctx.state.user.id
@@ -193,6 +254,14 @@ class UserController {
     }
     // 3.返回结果       
   }
+  /**
+   * @description: 修改用户信息
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async change (ctx, next) {
     const id = ctx.state.user.id
     let sex, city, name
@@ -217,6 +286,14 @@ class UserController {
         , ctx)
     }
   }
+  /**
+   * @description: 上传图片
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async upload (ctx, next) {
     // console.log(ctx.request.files.file);
     const id = ctx.state.user.id
@@ -236,6 +313,14 @@ class UserController {
       return ctx.app.emit('error', fileUploadError, ctx)
     }
   }
+  /**
+   * @description: 返回正常或者封号的用户的用户信息
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async findAllactive (ctx, next) {
     const { page, size, is_active } = ctx.request.query
     console.log(is_active);
@@ -246,6 +331,14 @@ class UserController {
       users
     }
   }
+  /**
+   * @description: 得到所有用户的用户信息
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async findall (ctx, next) {
     const { page, size } = ctx.request.query
     // console.log(page, size);
@@ -272,6 +365,14 @@ class UserController {
       return ctx.app.emit('error', adminError, err)
     }
   }
+  /**
+   * @description: id查询某个用户的用户信息
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async findone (ctx, next) {
     try {
       let { id } = ctx.request.query
@@ -323,6 +424,14 @@ class UserController {
     }
 
   }
+  /**
+   * @description: 管理员封禁解封
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async blockade (ctx, next) {
     const { user_name, is_active } = ctx.request.body
     if (user_name === "") {
@@ -353,6 +462,14 @@ class UserController {
       return ctx.app.emit('error', userChangeError, err)
     }
   }
+  /**
+   * @description: 管理员赋予管理员权限
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} body
+   */
   async changeAdmin (ctx, body) {
     const { user_name, is_admin } = ctx.request.body
     if (user_name === "") {
@@ -382,6 +499,14 @@ class UserController {
       return ctx.app.emit('error', changeAdminError, err)
     }
   }
+  /**
+   * @description: 管理员修改用户密码
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} ctx
+   * @param {*} next
+   */
   async reset (ctx, next) {
     const { user_name, password } = ctx.request.body
     // console.log(user_name, password);

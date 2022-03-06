@@ -2,11 +2,19 @@
  * @Author: 41
  * @Date: 2022-03-03 17:36:00
  * @LastEditors: 41
- * @LastEditTime: 2022-03-03 18:25:06
+ * @LastEditTime: 2022-03-06 21:17:11
  * @Description: 
  */
 const { followedError } = require('../constant/err.type')
 const { getFollowInfo } = require('../service/follow.service')
+/**
+ * @description: 是否关注的中间件
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ * @param {*} ctx
+ * @param {*} next
+ */
 const iffollow = async (ctx, next) => {
   const user_id = ctx.state.user.id
   const { follow_id } = ctx.request.body

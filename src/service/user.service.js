@@ -2,8 +2,8 @@
  * @Author: 41
  * @Date: 2022-02-15 21:18:52
  * @LastEditors: 41
- * @LastEditTime: 2022-03-06 15:29:57
- * @Description: 
+ * @LastEditTime: 2022-03-06 19:41:27
+ * @Description: 用户相关的数据库操作
  */
 const User = require('../model/user.model')
 class UserService {
@@ -59,7 +59,14 @@ class UserService {
     })
     return res ? res.dataValues : null
   }
-
+  /**
+   * @description: 分页查询用户信息
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} page 第几页
+   * @param {*} size 每页多少个
+   */
   async getAllInfo (page, size) {
     // console.log(page, size);
     let res
@@ -79,6 +86,15 @@ class UserService {
 
     return res
   }
+  /**
+   * @description: 分页查询(正常/封禁)的用户信息
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} page
+   * @param {*} size
+   * @param {*} is_active
+   */
   async getAllactiveInfo (page, size, is_active) {
     console.log(page, size, is_active);
     let res
@@ -101,7 +117,21 @@ class UserService {
 
     return res
   }
-
+  /**
+   * @description: 更新数据库
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   * @param {*} id
+   * @param {*} user_name
+   * @param {*} password
+   * @param {*} is_admin
+   * @param {*} img
+   * @param {*} is_active
+   * @param {*} name
+   * @param {*} city
+   * @param {*} sex
+   */
   async updateById ({ id, user_name, password, is_admin, img, is_active, name, city, sex }) {
     const whereOpt = { id }
     const newUser = {}
@@ -117,7 +147,12 @@ class UserService {
     // console.log(res);
     return res[0] > 0 ? true : false
   }
-
+  /**
+   * @description: 正常用户总人数
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   */
   async count_active () {
     return await User.count({
       where: {
@@ -125,7 +160,12 @@ class UserService {
       }
     })
   }
-
+  /**
+   * @description: 封禁用户总人数
+   * @param1 {*}
+   * @return {*}
+   * @detail: 
+   */
   async count_not_active () {
     return await User.count({
       where: {

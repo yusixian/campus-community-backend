@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-03-05 20:42:04
+ * @LastEditTime: 2022-03-06 20:37:57
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -72,7 +72,31 @@ class ArticleService {
     // console.log("res", res)
     return res
   }
-
+/**
+   * @description: 根据id列表 软删除/强制删除该文章 软删除则置status为2 强制删除则在数据库中删除
+   * @param {number} ids id列表
+   * @param {boolean} isForce or null 仅当为true时强制删除
+   * @return {number} 删除的实际数量 
+   */
+ async deleteArticleByIDList (ids, isForce = false) {
+  // console.log("article_id:", article_id);
+  let foropt = isForce ? true : false;
+  // console.log("foropt: ", foropt)
+  if (!foropt)
+    await Article.update({ status: 2 }, { 
+      where: { id: { [Op.in]: ids } }   
+    })
+  const res = await Article.destroy({
+    where: {
+      id:  {
+        [Op.in]: ids
+      }
+    },
+    force: foropt
+  })
+  // console.log("res", res)
+  return res
+}
   /**
    * @description: 根据id恢复被屏蔽/被软删除的帖子 status重新变为0
    * @param {number} article_id
@@ -128,12 +152,12 @@ class ArticleService {
   }
 
   /**
-   * @description: 根据id查询单个帖子是否存在 软删除的帖子会查不到
+   * @description: 根据id查询文章内容
    * @param {number} article_id
    * @param {boolean} showSheid 默认false,不包括被屏蔽的
    * @param {boolean} showDel 默认false,不包括软删除帖子
    * @param {boolean} showReview 默认false,不包括软删除帖子
-   * @return {number} 查询所得结果 or null 
+   * @return {Article} 查询所得结果文章信息 or null 
    */
   async searchArticleByID (article_id, showSheid = false, showDel = false, showReview = false) {
     // console.log("article_id:", article_id);
