@@ -2,11 +2,11 @@
  * @Author: 41
  * @Date: 2022-02-24 11:14:28
  * @LastEditors: cos
- * @LastEditTime: 2022-03-05 20:39:34
+ * @LastEditTime: 2022-03-05 22:25:30
  * @Description: 
  */
 const { searchError } = require('../constant/err.type');
-const { filterArticle } = require('../service/article.service');
+const { filterArticle, countArticle } = require('../service/article.service');
 const { selectCommentCountByAid, filterComment } = require('../service/comment.service');
 const { filterLike } = require('../service/like.service');
 const { searchLikeUser, searchLikeArticle } = require('../service/search.service')
@@ -159,6 +159,7 @@ class searchController {
       ranks
     }
   }
+
   /**
    * @description: 获取社区热帖排行榜前十
    * 热帖排行根据点赞、评论、浏览数 三者结合排名即可， 
@@ -183,6 +184,28 @@ class searchController {
       }
     } catch (err) {
       console.error(err, searchError)
+      return ctx.app.emit('error', searchError, ctx);
+    }
+  }
+
+  /**
+   * @description: 获取各状态文章数
+   * 获取已发布文章数、违规被屏蔽文章数、回收站文章数、待审核文章数
+   */
+  async searchStatusCount(ctx, next) {
+    const res = {}
+    try {
+      res.post_cnt = await countArticle({ status:0 })
+      res.shield_cnt = await countArticle({ status:1 })
+      res.deleted_cnt = await countArticle({ status:2 })
+      res.pending_cnt = await countArticle({ status:3 })
+      return ctx.body = {
+        code: 0,
+        message: '获取各状态文章数成功',
+        result: res
+      }
+    } catch (err) {
+      console.error('获取各状态文章数失败！', err, searchError)
       return ctx.app.emit('error', searchError, ctx);
     }
   }

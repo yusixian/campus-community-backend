@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-02-21 14:52:58
- * @LastEditors: lihao
- * @LastEditTime: 2022-03-05 16:23:55
+ * @LastEditors: cos
+ * @LastEditTime: 2022-03-05 21:05:54
  * @FilePath: \campus-community-backend\src\middleware\comment.middleware.js
  * @Description: 评论的中间件
  * 
@@ -79,13 +79,13 @@ const commentPageQuery = async (ctx, next) => {
 
 const commentOwnValidate = async (ctx, next) => {
   const { id } = ctx.request.query
-  console.log(ctx.state.user.id, id);
+  // console.log(ctx.state.user.id, id);
   if (!ctx.state.user.is_admin) {
     let res = null
     try {
       res = await selectCommentByUidAndCid(ctx.state.user.id, id)
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     if (res) {
       ctx.app.emit('error', commentOwnError, ctx)

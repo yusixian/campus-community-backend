@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 13:57:27
- * @LastEditTime: 2022-03-05 12:12:06
+ * @LastEditTime: 2022-03-05 22:49:02
  * @LastEditors: cos
  * @Description: 文章类型 
  * @FilePath: \campus-community-backend\src\model\article.model.js
@@ -64,8 +64,8 @@ const Article = seq.define('sc_Article', {
   status: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    defaultValue: 0,
-    comment: '0已发布 1被屏蔽 2为回收站 3为待审核 默认为0'
+    defaultValue: 3,
+    comment: '0已发布 1被屏蔽 2为回收站 3为待审核 默认为3'
   },
   cover_url: {
     type: DataTypes.STRING,
