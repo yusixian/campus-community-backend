@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 18:25:25
  * @LastEditors: 41
- * @LastEditTime: 2022-03-05 21:33:25
+ * @LastEditTime: 2022-03-06 21:09:51
  * @Description: 
  */
 const bcrypt = require('bcryptjs')
@@ -17,6 +17,14 @@ const {
   sexError,
   activeError,
   unAuthorizedError } = require('../constant/err.type')
+/**
+ * @description: 验证注册输入
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ * @param {*} ctx
+ * @param {*} next
+ */
 const userValidator = async (ctx, next) => {
   const { user_name, password } = ctx.request.body
   // console.log(user_name, password);
@@ -28,7 +36,14 @@ const userValidator = async (ctx, next) => {
   }
   await next()
 }
-
+/**
+ * @description: 验证密码
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ * @param {*} ctx
+ * @param {*} next
+ */
 const verifyUser = async (ctx, next) => {
   const { user_name, password } = ctx.request.body
   // console.log(user_name);
@@ -47,8 +62,14 @@ const verifyUser = async (ctx, next) => {
 
   await next()
 }
-
-
+/**
+ * @description: 密码加密
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ * @param {*} ctx
+ * @param {*} next
+ */
 const cryptPassword = async (ctx, next) => {
   const { password } = ctx.request.body
   const salt = bcrypt.genSaltSync(10)
@@ -58,7 +79,14 @@ const cryptPassword = async (ctx, next) => {
 
   await next()
 }
-
+/**
+ * @description: 判断用户是否存在
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ * @param {*} ctx
+ * @param {*} next
+ */
 const verifyLogin = async (ctx, next) => {
   // 1.判断用户是否存在(不存在报错)
   const { user_name, password } = ctx.request.body
@@ -81,6 +109,14 @@ const verifyLogin = async (ctx, next) => {
   }
   await next()
 }
+/**
+ * @description: 判断是否是管理员
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ * @param {*} ctx
+ * @param {*} next
+ */
 const verifyAdmin = async (ctx, next) => {
   const { is_admin } = ctx.state.user
   // console.log(is_admin);
@@ -90,6 +126,14 @@ const verifyAdmin = async (ctx, next) => {
   }
   await next()
 }
+/**
+ * @description: 验证性别输入正确性
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ * @param {*} ctx
+ * @param {*} next
+ */
 const verifySex = async (ctx, next) => {
   if (ctx.request.body.sex) {
     const { sex } = ctx.request.body
@@ -102,7 +146,14 @@ const verifySex = async (ctx, next) => {
   }
   await next()
 }
-
+/**
+ * @description: 验证账号是否可用
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ * @param {*} ctx
+ * @param {*} next
+ */
 const verifyActive = async (ctx, next) => {
   const { is_active } = ctx.state.user
   // console.log(is_active);
@@ -112,6 +163,12 @@ const verifyActive = async (ctx, next) => {
   }
   await next()
 }
+/**
+ * @description: 导出！
+ * @param1 {*}
+ * @return {*}
+ * @detail: 
+ */
 module.exports = {
   userValidator,
   verifyUser,
