@@ -1,13 +1,13 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-06 12:53:28
+ * @LastEditTime: 2022-03-06 20:42:17
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
  */
 const path = require('path')
-const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle, incrementVisitsByID, reviewArticleByID } = require('../service/article.service')
+const { createArticle, deleteArticleByID, updateArticleByID, getArticleList, restoreArticleByID, searchArticleByID, filterArticle, countArticle, incrementVisitsByID, reviewArticleByID, deleteArticleByIDList } = require('../service/article.service')
 const { getUserInfo } = require('../service/user.service')
 const { articleOperationError, articleCreateError,
   articleDeleteError, articleParamsError,
@@ -329,6 +329,42 @@ class ArticleController {
     } catch (err) {
       console.error('审核文章失败！', err);
       return ctx.app.emit('error', articleOperationError, ctx)
+    }
+  }
+  
+  /**
+   * @description: 批量删除文章，将status置为2(放入回收站)，同时软删除数据库中文章
+   */
+  async deleteArticleList (ctx, next) {
+    try {
+      const ids = ctx.state.ids
+      console.log(`文章 ${ids} 已移至回收站！`)
+      await deleteArticleByIDList(ids)
+      ctx.body = {
+        code: 0,
+        message: "批量删除文章成功！已移至回收站！",
+      }
+    } catch (err) {
+      console.error("批量删除文章失败！", err);
+      return ctx.app.emit('error', articleDeleteError, ctx)
+    }
+  }
+  
+  /**
+   * @description: 批量彻底删除文章，硬删除数据库中文章
+   */
+   async clearArticleList (ctx, next) {
+    try {
+      const ids = ctx.state.ids
+      console.log(`文章 ${ids} 已彻底删除！`)
+      await deleteArticleByIDList(ids, true)
+      ctx.body = {
+        code: 0,
+        message: "清空回收站成功！已彻底删除！",
+      }
+    } catch (err) {
+      console.error("清空回收站成功！已彻底删除！", err);
+      return ctx.app.emit('error', articleDeleteError, ctx)
     }
   }
 }

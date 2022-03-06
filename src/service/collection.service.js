@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-03-02 11:45:08
- * @LastEditTime: 2022-03-05 20:42:23
+ * @LastEditTime: 2022-03-06 20:02:33
  * @LastEditors: cos
  * @Description: 收藏相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\collection.service.js
@@ -10,6 +10,7 @@ const Collection = require('../model/collection.model')
 const seq = require("../db/seq")
 const User = require('../model/user.model')
 const Article = require('../model/article.model')
+const { searchArticleByID } = require('./article.service')
 class CollectionService {
   /**
    * 添加收藏
@@ -103,7 +104,7 @@ class CollectionService {
         // console.log("val:", val)
         const { user_id, article_id } = val
         const userInfo = await User.findOne({ attributes: [['img', 'avator'], 'user_name'], where: { id:user_id }, raw: true})
-        const articleInfo = await Article.findOne({ attributes: { exclude: ['status', 'deletedAt'] }, where: { id:article_id }, raw: true})
+        const articleInfo = await searchArticleByID(article_id)
         userInfo && Object.assign(val, { userInfo })
         articleInfo && Object.assign(val, { articleInfo })
         return val
