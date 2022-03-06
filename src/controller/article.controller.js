@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-05 20:35:34
+ * @LastEditTime: 2022-03-06 12:53:28
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -16,6 +16,7 @@ const { articleOperationError, articleCreateError,
 } = require('../constant/err.type');
 const { upToQiniu } = require('../utils/oss/ossUtils');
 const { isRepeatLike } = require('../service/like.service');
+const { isRepeatCollection } = require('../service/collection.service');
 
 class ArticleController {
   /**
@@ -174,10 +175,12 @@ class ArticleController {
       if(isAuth) {
         const { id: user_id } = ctx.state.user
         article['isLiked'] = await isRepeatLike({ user_id, article_id })
+        article['isCollectioned'] = await isRepeatCollection(user_id, article_id)
         // console.log('user_id:',user_id)
       } else {
         // console.log('未登录~')
         article['isLiked'] = false
+        article['isCollectioned'] = false
       }
       
       ctx.body = {
