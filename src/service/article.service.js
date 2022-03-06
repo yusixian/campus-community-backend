@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:16:17
- * @LastEditTime: 2022-03-06 20:37:57
+ * @LastEditTime: 2022-03-06 21:07:23
  * @LastEditors: cos
  * @Description: 文章相关服务 操纵model
  * @FilePath: \campus-community-backend\src\service\article.service.js
@@ -212,7 +212,9 @@ class ArticleService {
     const whereOpt = {}
     const { partition_id, status, start_time, end_time, user_id } = filterOpt
     // console.log("status:", status)
-    if(status in [0,1,2,3]) whereOpt.status = status
+    if(Array.isArray(status)) whereOpt.status = { [Op.in]: status } 
+    else if(status in [0,1,2,3]) whereOpt.status = status
+    
     partition_id && Object.assign(whereOpt, { partition_id })
     user_id && Object.assign(whereOpt, { user_id })
     if (start_time || end_time) whereOpt.createdAt = {}
