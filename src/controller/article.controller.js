@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 14:15:27
- * @LastEditTime: 2022-03-06 21:29:00
+ * @LastEditTime: 2022-03-06 22:10:16
  * @LastEditors: cos
  * @Description: 文章相关控制器
  * @FilePath: \campus-community-backend\src\controller\article.controller.js
@@ -377,10 +377,10 @@ class ArticleController {
       await deleteArticleByIDList(ids, true)
       ctx.body = {
         code: 0,
-        message: "清空回收站成功！已彻底删除！",
+        message: "删除回收站文章成功！已彻底删除！",
       }
     } catch (err) {
-      console.error("清空回收站成功！已彻底删除！", err);
+      console.error("删除回收站文章成功！已彻底删除！", err);
       return ctx.app.emit('error', articleDeleteError, ctx)
     }
   }

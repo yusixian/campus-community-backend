@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-16 00:04:26
  * @LastEditors: cos
- * @LastEditTime: 2022-03-05 21:46:27
+ * @LastEditTime: 2022-03-06 22:06:47
  * @Description: 
  */
 const { Sequelize } = require('sequelize')
@@ -19,6 +19,18 @@ const {
 const myLogFunc = function(msg) {
   try {
     const logPath = path.join(__dirname, '../../logs/seq.log')
+    let fsize
+    fs.stat(logPath, (err, stats) => {
+        if (err) {
+            console.error(err);
+    　　　　 return false;
+        } else {
+            // 检测类型，是文件还是目录
+            fsize = stats.size
+            if(stats.size >= 50000) fs.unlinkSync(logPath); 
+        }
+    })
+
     const data = fs.writeFileSync(logPath, '\n'+msg, { flag: 'a+' })
     //文件写入成功。
   } catch (err) {

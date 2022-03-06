@@ -1,7 +1,7 @@
 /*
  * @Author: cos
  * @Date: 2022-02-18 15:10:21
- * @LastEditTime: 2022-03-06 21:23:26
+ * @LastEditTime: 2022-03-06 22:08:41
  * @LastEditors: cos
  * @Description: 文章相关中间件
  * @FilePath: \campus-community-backend\src\middleware\article.middleware.js
@@ -45,9 +45,13 @@ const articleIDValidate = async (ctx, next) => {
 const articleIDListValidate = async (ctx, next) => {
   const { ids } = ctx.request.query
   try{
-    let article_ids = ids.map(item => {
-      return checkID(item)
-    })
+    console.log(ids)
+    let article_ids = []
+    if(Array.isArray(ids)) {
+      article_ids = ids.map(item => {
+        return checkID(item)
+      })
+    } else article_ids.push(checkID(ids))
     if (!article_ids.length) {
       ctx.app.emit('error', articleIDError, ctx)
       return
