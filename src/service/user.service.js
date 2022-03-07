@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:18:52
  * @LastEditors: 41
- * @LastEditTime: 2022-03-06 19:41:27
+ * @LastEditTime: 2022-03-07 10:18:43
  * @Description: 用户相关的数据库操作
  */
 const User = require('../model/user.model')
@@ -134,15 +134,17 @@ class UserService {
    */
   async updateById ({ id, user_name, password, is_admin, img, is_active, name, city, sex }) {
     const whereOpt = { id }
+    // console.log(whereOpt, is_active);
     const newUser = {}
     user_name && Object.assign(newUser, { user_name })
     password && Object.assign(newUser, { password })
     is_admin && Object.assign(newUser, { is_admin })
     img && Object.assign(newUser, { img })
-    is_active && Object.assign(newUser, { is_active })
     name && Object.assign(newUser, { name })
     city && Object.assign(newUser, { city })
     sex && Object.assign(newUser, { sex })
+    newUser['is_active'] = is_active
+    console.log(newUser);
     const res = await User.update(newUser, { where: whereOpt })
     // console.log(res);
     return res[0] > 0 ? true : false

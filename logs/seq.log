@@ -150,3 +150,73 @@ Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHE
 Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` LIMIT 0, 5;
 Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = 1;
 Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = 0;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'admin';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'admin';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `name`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `name`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = '1' LIMIT 0, 5;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` LIMIT 0, 5;
+Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = 1;
+Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = 0;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` LIMIT 0, 5;
+Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = 1;
+Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = 0;
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`user_name` = 'cos';
+Executing (default): UPDATE `sc_Users` SET `is_active`=?,`updatedAt`=? WHERE `id` = ?
+Executing (default): SELECT `id`, `user_name`, `password`, `is_admin`, `img`, `is_active`, `name`, `city`, `sex`, `createdAt`, `updatedAt` FROM `sc_Users` AS `sc_User` LIMIT 0, 5;
+Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = 1;
+Executing (default): SELECT count(*) AS `count` FROM `sc_Users` AS `sc_User` WHERE `sc_User`.`is_active` = 0;

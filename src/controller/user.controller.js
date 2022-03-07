@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 17:37:39
  * @LastEditors: 41
- * @LastEditTime: 2022-03-06 21:33:43
+ * @LastEditTime: 2022-03-07 10:10:41
  * @Description: 
  */
 const jwt = require('jsonwebtoken')
@@ -447,8 +447,8 @@ class UserController {
     }
     try {
       const { id } = await getUserInfo({ user_name })
-      await updateById({ id, is_active })
-      // console.log(is_active);
+      let temp = await updateById({ id, is_active })
+      console.log(temp, id, is_active);
       if (is_active) {
         ctx.body = {
           code: 0,
