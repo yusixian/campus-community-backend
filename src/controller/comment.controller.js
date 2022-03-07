@@ -1,8 +1,8 @@
 /*
  * @Author: lihao
  * @Date: 2022-02-21 14:54:26
- * @LastEditors: cos
- * @LastEditTime: 2022-03-05 20:37:05
+ * @LastEditors: lihao
+ * @LastEditTime: 2022-03-06 23:34:19
  * @FilePath: \campus-community-backend\src\controller\comment.controller.js
  * @Description: 评论的控制器
  * 
@@ -142,11 +142,13 @@ class CommentContrller {
 
           comment_reply_res[j].dataValues.from_user = { // 回复者信息
             avatar: f_userinfo.img,
-            name: f_userinfo.user_name
+            user_name: f_userinfo.user_name,
+            name: f_userinfo.name
           }
           comment_reply_res[j].dataValues.to_user = { // 目标用户信息
             avatar: t_userinfo.img,
-            name: t_userinfo.user_name
+            user_name: t_userinfo.user_name,
+            name: t_userinfo.name
           }
           comment_reply_res[j].dataValues.reply_good = comment_reply_good
           if (comment_reply_isGood != null) {
@@ -163,7 +165,8 @@ class CommentContrller {
         }
         comment_res[index].dataValues.comment_user = { // 评论者信息
           avatar: c_userinfo.img,
-          name: c_userinfo.user_name
+          user_name: c_userinfo.user_name,
+          name: c_userinfo.name
         }
         comment_res[index].dataValues.reply_list = comment_reply_res
       }

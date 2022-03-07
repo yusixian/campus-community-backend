@@ -2,7 +2,7 @@
  * @Author: 41
  * @Date: 2022-02-15 21:18:52
  * @LastEditors: 41
- * @LastEditTime: 2022-03-07 10:18:43
+ * @LastEditTime: 2022-03-07 10:24:43
  * @Description: 用户相关的数据库操作
  */
 const User = require('../model/user.model')
@@ -15,7 +15,7 @@ class UserService {
    * @param {*} user_name
    * @param {*} password
    */
-  async createUser (user_name, password, is_admin = 0, img = '', is_active = true, name, city = '', sex = '保密') {
+  async createUser (user_name, password, is_admin = 0, img, is_active = true, name, city = '', sex = '保密') {
     // await表达式:promise对象的值
     if (!name) name = user_name
     const res = await User.create({
@@ -139,6 +139,7 @@ class UserService {
     user_name && Object.assign(newUser, { user_name })
     password && Object.assign(newUser, { password })
     is_admin && Object.assign(newUser, { is_admin })
+    is_active && Object.assign(newUser, { is_active })
     img && Object.assign(newUser, { img })
     name && Object.assign(newUser, { name })
     city && Object.assign(newUser, { city })

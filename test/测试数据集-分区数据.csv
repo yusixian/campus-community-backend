@@ -1,6 +1,10 @@
-﻿数据集名称,partition_name,partition_desc
-数据集-1,校园新闻,一些学校新闻的集合~
-数据集-2,通知公告,学校重要通知会在此进行发布
-数据集-3,生活唠嗑,校园生活如此精彩
-数据集-4,体育运动,约球吗，就这周末
-数据集-5,学习交流,学霸聚集地！
+﻿数据集名称,partition_name,partition_desc,icon
+数据集-1,校园新闻,一些学校新闻的集合~,http://r842fhtdz.hd-bkt.clouddn.com/c4ca4238a0b923820dcc509a6f75849b.png
+数据集-2,通知公告,学校重要通知会在此进行发布,http://r842fhtdz.hd-bkt.clouddn.com/c81e728d9d4c2f636f067f89cc14862c.png
+数据集-3,生活唠嗑,校园生活如此精彩,http://r842fhtdz.hd-bkt.clouddn.com/eccbc87e4b5ce2fe28308fd9f2a7baf3.png
+数据集-4,体育运动,约球吗，就这周末,http://r842fhtdz.hd-bkt.clouddn.com/a87ff679a2f3e71d9181a67b7542122c.png
+数据集-5,学习交流,学霸聚集地！,http://r842fhtdz.hd-bkt.clouddn.com/e4da3b7fbbce2345d7772b0674a318d5.png
+数据集-6,闲置交易,缺啥了就来这儿,http://r842fhtdz.hd-bkt.clouddn.com/1679091c5a880faf6fb5e6087eb1b2dc.png
+数据集-7,考研冲刺,考研共勉，一起学习呀,http://r842fhtdz.hd-bkt.clouddn.com/8f14e45fceea167a5a36dedd4bea2543.png
+数据集-8,失物招领,丢啥了？看看这儿~,http://r842fhtdz.hd-bkt.clouddn.com/c9f0f895fb98ab9159f51fd0297e236d.png
+数据集-9,情感交流,分享情感生活，大胆说出你的所爱吧,http://r842fhtdz.hd-bkt.clouddn.com/45c48cce2e2d7fbdea1afc51c7c6ad26.png

@@ -1,0 +1,1801 @@
+﻿数据集名称,username,password,title,summary,small_content,content,pid,cover_url
+文章数据-1,admin,123456,campus SNS 校园社区,使用koa搭建的校园社区后端 巧妇难为无米之炊！一个厉害的项目的后端！ 前端地址：https://gitee.com/honxinn/campus-sns-campus-community,这是一个内容,"##  1.技术介绍
+**前端**：vue3 + pinia + vue-router + axios + vant + mock
+
+**其他**：接入QQ，微博第三方登录
+
+ 感谢大家支持，项目配置部署运行另开文章介绍。
+![login_bg.png](http://r842fhtdz.hd-bkt.clouddn.com/994ea355012d523de1f95517b0516336.png)
+![logotext.png](http://r842fhtdz.hd-bkt.clouddn.com/97fc16e082ba95059f86a3f49373192d.png)",2,null
+文章数据-2,cosine,qwertyuiop,MOOC浙大数据结构课后题记录——PTA数据结构题目集(全),本博客是为了记录学习数据结构时做的题集，若代码有疏漏欢迎指出！,这是一个内容,"[MOOC传送门](https://www.icourse163.org/learn/ZJU-93001?tid=1459700443#/learn/announce)
+
+# 第一周——最大子列和算法、二分查找
+代码及其思路指路博客：[PTA数据结构题目集 第一周——最大子列和算法、二分查找](https://blog.csdn.net/qq_45890533/article/details/107884183)
+## 01-复杂度1 最大子列和问题 (20分)
+## 01-复杂度2 Maximum Subsequence Sum (25分)
+## 01-复杂度3 二分查找 (20分)
+# 第二周——线性结构
+学习笔记指路博客  [线性表](https://blog.csdn.net/qq_45890533/article/details/104528176)、[堆栈](https://blog.csdn.net/qq_45890533/article/details/104546450)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第二周——线性结构](https://blog.csdn.net/qq_45890533/article/details/107884336)
+## 02-线性结构1 两个有序链表序列的合并 (15分)
+## 02-线性结构2 一元多项式的乘法与加法运算 (20分)
+## 02-线性结构3 Reversing Linked List (25分)
+## 02-线性结构4 Pop Sequence (25分)
+# 第三周——栽树（二叉树等）
+学习笔记指路博客  [二叉树](https://blog.csdn.net/qq_45890533/article/details/104870234)、[队列](https://blog.csdn.net/qq_45890533/article/details/104600930)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第三周——栽树（二叉树等）](https://blog.csdn.net/qq_45890533/article/details/107884504)
+## 03-树1 树的同构 (25分)
+## 03-树2 List Leaves (25分)
+## 03-树3 Tree Traversals Again (25分)
+# 第四周——二叉搜索树&二叉平衡树
+学习笔记指路博客 [二叉搜索树与平衡二叉树](https://blog.csdn.net/qq_45890533/article/details/105189507)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第四周——二叉搜索树&二叉平衡树
+](https://blog.csdn.net/qq_45890533/article/details/107884689)
+## 04-树4 是否同一棵二叉搜索树 (25分)
+## 04-树5 Root of AVL Tree (25分)
+## 04-树6 Complete Binary Search Tree (30分)
+## 04-树7 二叉搜索树的操作集 (30分)
+
+# 第五周——堆&哈夫曼树&并查集
+学习笔记指路博客 [堆与哈夫曼树与并查集](https://blog.csdn.net/qq_45890533/article/details/105374437)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第五周——堆&哈夫曼树&并查集](https://blog.csdn.net/qq_45890533/article/details/107884805)
+## 05-树7 堆中的路径 (25分)
+## 05-树8 File Transfer (25分)
+## 05-树9 Huffman Codes (30分)
+# 第六周——图（上）
+学习笔记指路博客 [图](https://blog.csdn.net/qq_45890533/article/details/105475331)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第六周——图（上）](hhttps://blog.csdn.net/qq_45890533/article/details/107884926)
+涉及知识有图的基本表示与遍历方法（BFS、DFS）
+## 06-图1 列出连通集 (25分)
+## 06-图2 Saving James Bond - Easy Version (25分)
+## 06-图3 六度空间 (30分)
+# 第七周——图（中）
+学习笔记指路博客 [图论](https://blog.csdn.net/qq_45890533/article/details/105475331)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第七周——图（中）](https://blog.csdn.net/qq_45890533/article/details/107885114)
+涉及知识有图的单源最短路算法（Floyed算法、Dijkstra算法）
+## 07-图4 哈利·波特的考试 (25分)
+## 07-图5 Saving James Bond - Hard Version (30分)
+## 07-图6 旅游规划 (25分)
+# 第八周——图（下）
+学习笔记指路博客  [解决最小生成树问题(Kruskal算法&Prim算法)](https://blog.csdn.net/qq_45890533/article/details/105684653)、[数据结构学习笔记＜8＞ 排序](https://blog.csdn.net/qq_45890533/article/details/107886039)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第八周——图（下）](https://blog.csdn.net/qq_45890533/article/details/107885357)
+涉及知识有图的最小生成树、拓扑排序求解关键路径等问题
+## 08-图7 公路村村通 (30分)
+## 08-图8 How Long Does It Take (25分)
+## 08-图9 关键活动 (30分)
+# 第九周——排序（上）
+学习指路博客 [数据结构学习笔记＜8＞ 排序](https://blog.csdn.net/qq_45890533/article/details/108246044)、[归并排序循环实现（存用）](https://blog.csdn.net/qq_45890533/article/details/108249317)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第九周——排序（上）](https://blog.csdn.net/qq_45890533/article/details/108246166)
+涉及各种排序算法（插入排序、归并排序、堆排序等）
+## 09-排序1 排序 (25分)
+## 09-排序2 Insert or Merge (25分)
+## 09-排序3 Insertion or Heap Sort (25分)
+# 第十周——排序（下）
+学习指路博客 [数据结构学习笔记＜8＞ 排序](https://blog.csdn.net/qq_45890533/article/details/108246044)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第十周——排序（下）](https://blog.csdn.net/qq_45890533/article/details/108246166)
+涉及各种排序算法的应用、结构体的排序、表排序中的环判断等
+## 10-排序4 统计工龄 (20分)
+## 10-排序5 PAT Judge (25分)
+## 10-排序6 Sort with Swap(0, i) (25分)
+# 第十一周——散列查找
+学习指路博客 [数据结构学习笔记＜9＞ 散列查找](https://blog.csdn.net/qq_45890533/article/details/108269198)
+课后习题代码及其思路指路博客：[PTA数据结构题目集 第十一周——散列查找](https://blog.csdn.net/qq_45890533/article/details/108296148)
+涉及散列查找的应用、KMP等
+## 11-散列1 电话聊天狂人 (25分)
+## 11-散列2 Hashing (25分)
+## 11-散列3 QQ帐户的申请与登陆 (25分)
+## Kmp 串的模式匹配 (25分)
+# 总结
+做这些题的时候，有些特意用了慕课教的数据结构的定义，有些则是用STL代替偷懒了，因为有方便的东西不用真的很心塞嗷（比如优先队列代替小顶堆大顶堆，map代替散列查找，STL的东西可好使）。
+不管咋样咕咕咕到了最后一刻总算是做完了，这个超 ~ 漫长的暑假算没白过23333，寒假再接再厉加把劲准备学java~完结撒花【bushi】
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200905224429890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODkwNTMz,size_16,color_FFFFFF,t_70#pic_center)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200905224553635.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODkwNTMz,size_16,color_FFFFFF,t_70#pic_center)
+",5,null
+文章数据-3,admin,123456,黑进学校体育馆系统？！,已被封号！请勿模仿！,这是一个内容,"# 写在前面
+体育场馆最多只能抢明天的场子,所以就导致了，想打羽毛球就必须要熬夜抢场子，而且还可能抢不到！
+
+所以，初次下策，最终被人举报，封了学号！再也无法进行偷袭！
+
+下面就带大家一起学习一下Fiddle，然后让我们看看如何用抓包黑进系统！
+
+# Fiddle入门
+## 什么是抓包？
+抓包就是将网络传输发送与接收的数据包进行截获，重发，编辑，转存等操作，页用来检查网络安全。抓包页经常被用来进行数据截取等。
+## Fiddler的下载和使用
+选择Fiddler Classic
+![在这里插入图片描述](https://img-blog.csdnimg.cn/35bd60332dd8433dab7de1cfa0356885.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+抓包协议：HTTP,HTTPS协议
+
+配置支持HTTPS抓包：
+==Tools-Options-HTTPS-勾选左边所有选项-重启==
+
+### 怎么抓到想要的包
+快速清除所有的包`ctrl+x`
+只抓取当前操作步骤的包
+![在这里插入图片描述](https://img-blog.csdnimg.cn/eb268a37a72841c0910b670b441f4a0b.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+
+## 移动端抓包
+### 为什么Fiddler可以抓移动端的包呢？
+代理抓包
+- 1.手机能连上电脑(手机和电脑需要在同一个局域网)
+- 2.配置代理
+	全部勾选![-](https://img-blog.csdnimg.cn/03d1fdee53ef48c99117d9de9fc195cc.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+  
+#### 通过ipconfig看本地ip地址
+![在这里插入图片描述](https://img-blog.csdnimg.cn/e78a3f9469524e268c6ca637f981923c.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+#### 通过上面配置的8888端口可以看到fiddler代理页面
+![在这里插入图片描述](https://img-blog.csdnimg.cn/cf46b8f508eb41b4be5bd5cd90d3101f.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+#### 然后我们用手机连接同一个wifi下载代理页面里面的安全证书
+之后就可以抓到手机上的包了
+
+# 黑进,系统
+## 核心就修改拦截下来的JSON文件
+我们知道网站都是响应式的！数据决定了网页！
+## 第一步，打开断点，拦截包
+![在这里插入图片描述](https://img-blog.csdnimg.cn/41108f84ebe34cc4acad3490b5223264.png)
+==Fiddler左上角==
+
+Rules-》Automatic Breakpoints-》Before Requests
+
+## 第二步，找到要修改的JSON文件
+![在这里插入图片描述](https://img-blog.csdnimg.cn/6cafe27c459d4d70be37df46e10f80f7.png)
+点击预约一共拦截了三个http包
+
+我们通过实验得到是第二个包控制返回的日期
+![在这里插入图片描述](https://img-blog.csdnimg.cn/31faa6973416470691ff8c1b04e66b97.png)
+点击==Break on Response==
+
+## 第三步，修改JSON文件
+![在这里插入图片描述](https://img-blog.csdnimg.cn/ee2f7cdf760c463689ac86224490d87a.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+点击完Break后，我们在Raw里面可以看到content里面就是JSON文件
+这里面是可修改的，我们把date属性改成20，就可以预定10.20的场子了，week是显示星期几，并不打紧。
+
+修改完后点击Run to Completion，然后关闭掉第一步里面的断点就可以了
+
+
+已经可以预定20.21号的场子了，但是也有人订了，看来黑客不止我一个！！！
+![在这里插入图片描述](https://img-blog.csdnimg.cn/eb32d1c3ec7649a5aa61d846136c4ba5.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)",2,null
+文章数据-4,Donald,E8(bG213,夏天的样子，你体会到了吗？,烧烤啤酒小龙虾，空调WiFi和西瓜,这是一个内容,"夏天是甜美的、热烈的，同样也是酷热难熬的
+
+夏天的样子有很多种
+
+那么你喜欢的样子是哪种呢？",3,http://r842fhtdz.hd-bkt.clouddn.com/46fb4ebf806904a2d26d51981ae201d5.png
+文章数据-5,Charles,TR16xsa,apifox如何自动携带token,yoxi！,这是一个内容,"# 写在前面
+`Apifox = Postman + Swagger + Mock + JMeter`
+
+从公式我们可以看出apifox是值得学习的！
+
+今天就和大家介绍一下如何在所有的接口中添加登录接口获得的**token**
+
+两行代码即可！
+# 在登录接口调通的基础上
+![在这里插入图片描述](https://img-blog.csdnimg.cn/93ab14ab547a4d7d8d86ab4b0d87edc6.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+如图,我们已经成功测试登录接口了,得到了返回的==token==
+```JSON
+{
+    ""code"": 0,
+    ""message"": ""用户登录成功"",
+    ""result"": {
+        ""token"": ""eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcl9uYW1lIjoi5bCP5piOIiwiaXNfYWRtaW4iOmZhbHNlLCJpYXQiOjE2NDUyODUxNjQsImV4cCI6MTY0NTM3MTU2NH0.BcDUW91Xld6VUHV4FBMUgvQuzprb_cDDddK3DQqaW7g""
+    }
+}
+```
+- 那么，我们如何获得这个值，然后自动添加到所有的接口上呢？
+
+# 在登录接口添加后置操作提取token作为环境变量
+```javascript
+var data= JSON.parse(responseBody)
+pm.environment.set(""token"", data.result.token);
+```
+![在这里插入图片描述](https://img-blog.csdnimg.cn/baed57db406e409ca0aff6d9d292e6ce.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+
+# 在项目概览中选择Auth和Bearer Token类型并赋值环境变量token
+![在这里插入图片描述](https://img-blog.csdnimg.cn/63a2505c6796483cbc4d9774b1a6a001.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+***
+- 此时,我们就将token放到了项目概览的Auth中了！！！
+- 但是，如何将所有的token都放到接口中呢！
+- 看下一步
+# 我们在接口中修改文档可以看到Auth继承父级
+![请添加图片描述](https://img-blog.csdnimg.cn/112f0afe12794d23bf9796adc6633175.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)
+在修改文档中我们下面的`Auth`我们可以看到==从父级继承==(而且是自动默认父级继承的)
+那么就会自动携带项目概览中的==token==
+
+# 添加成功,完成修改密码！
+![在这里插入图片描述](https://img-blog.csdnimg.cn/cad413527ebf41afbb3b7f10bc6c06d5.png?x-oss-process=image/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBA6ZKn5qGQ,size_20,color_FFFFFF,t_70,g_se,x_16)",5,http://r842fhtdz.hd-bkt.clouddn.com/cbd346517382bea03e6f1fb15651a50c.png
+文章数据-6,Jeffrey,$vw!Csq,JavaScript 不再像以前那样,开心就好,这是一个内容,"## 执行上下文
+
+```javascript
+var scope = ""global scope"";
+function checkscope(){
+    var scope = ""local scope"";
+    function f(){
+        return scope;
+    }
+    return f();
+}
+checkscope();
+```
+
+1. 执行全局代码，创建全局上下文，全局上下文被压入执行上下文栈
+
+```javascript
+    ECStack = [
+        globalContext
+    ];
+```
+
+1. 全局上下文初始化
+
+```javascript
+globalContext = {
+  VO: [global],
+  Scope: [globalContext.VO],
+  this: globalContext.VO
+}
+```
+
+初始化的时候，checkscope函数被创建，保存作用域链到函数的内部属性[[scope]]
+
+```javascript
+checkscope.[[scope]] = [
+  globalContext.VO
+];
+```
+
+1. 执行checkscope，创建checkscope函数执行上下文，checkscope函数执行上下文被压入执行上下文栈
+
+```javascript
+ECStack = [
+  checkscopeContext,
+  globalContext
+];
+```
+
+1. checkscope函数执行上下文初始化
+
+1. 1. 复制函数的[[scope]]属性创建作用域链
+   2. 用arguments来创建活动对象
+
+1. 1. 初始化活动对象，加入形参、函数声明、变量声明等
+   2. 将活动对象压入checkscope作用域链顶端
+
+与此同时f函数被创建，保存作用域到f函数的内部属性[[scope]]
+
+```javascript
+    checkscopeContext = {
+        AO: {
+            arguments: {
+                length: 0
+            },
+            scope: undefined,
+            f: reference to function f(){}
+        },
+        Scope: [AO, globalContext.VO],
+        this: undefined
+    }
+```
+
+1. 执行f函数，创建f函数的函数执行上下文，f函数执行上下文被压入执行上下文栈中
+
+```javascript
+    ECStack = [
+        fContext,
+        checkscopeContext,
+        globalContext
+    ];
+```
+
+1. f函数执行上下文初始化，以下跟第四步相同：
+
+1. 1. 复制函数的[[scope]]属性创建作用域链
+   2. 用arguments创建活动对象
+
+1. 1. 初始化活动对象，即加入形参，函数声明，变量声明
+   2. 将活动对象压入f作用域链顶端
+
+```javascript
+    fContext = {
+        AO: {
+            arguments: {
+                length: 0
+            }
+        },
+        Scope: [AO, checkscopeContext.AO, globalContext.VO],
+        this: undefined
+    }
+```
+
+1. f函数执行，沿着作用域链查找scope值，返回scope值
+2. f函数执行完毕，f函数上下文从执行上下文栈中弹出
+
+1. checkscope函数执行完毕，checkscope执行上下文栈中弹出",7,null
+文章数据-7,Matthew,debsww,【第二届青训营-寒假前端场】- 「Node.js 与前端开发实战」,,这是一个内容,zzzzzzz,1,null
+文章数据-8,admin,123456,诚信考试，从我做起！,这就到期末了，考试！,这是一个内容,众所周知，考试是不可以作弊哒,2,9eb361c8c289f86a2d0ed3ea18cc8fd1.png (900×383) (clouddn.com)
+文章数据-9,Charles,TR16xsa,【闲置】出ipad2020款,考研可用,这是一个内容,3000带pencil，价格可小刀,6,null
+文章数据-10,cosine,qwertyuiop,PAT乙级刷题感想及踩坑总结,还有好多坑点没写，等有机会再补吧【咕咕咕】,这是一个内容,"后记：考完PTA乙级了，92分人麻了，字符串的题永远的痛呜呜呜呜（
+# 注意点
+ - 规定几位输出老老实实输出几位，比如规定id4位数就%04d，限制好域宽，不然前导0没了！！这个经常吃亏
+	 - 	典型题：[1065 单身狗 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805266942377984)、[1072 开学寄语 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805263964422144)
+ - 同理，需要去掉前导0的时候不要犹豫：[1074 宇宙无敌加法器 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805263297527808)
+ - printf输出%的时候用%%（不会吧不会吧不会只有我忘了吧）
+ - 注意数据范围，选好用什么类型，有时候需要用long long
+ - 字符串题getline用烂（）
+ - 基本上反反复复就用那么几个vector、map，尤其是map的find函数（
+ - 注意边界，为0，为最大值，重复等情况，
+
+
+# 好题推荐
+
+- [1003 我要通过！ (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805323154440192)  看到这个通过率就明白了。
+- [1013 数素数 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805309963354112) 经典埃式筛法求素数，练习一下。
+- [1014 福尔摩斯的约会 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805308755394560)  典型的好玩的字符串题。
+- [1024 科学计数法 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805297229447168) 字符串解析，坑点挺多，记得补0，分正负等
+- [1034 有理数四则运算 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805287624491008)  gcd、lcm、最简分数 (其实lcm没用上，不过作为一个练习了)
+- [1035 插入与归并 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805286714327040)  好题啊好题.jpg，考到了插入排序和归并排序，个人感觉挺难的一道题
+- [1040 有理数四则运算 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805282389999616)   字符串，dp
+- [1045 快速排序 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805278589960192) 说是快排，其实是找一个元素其左边元素都比他小，右边都比他大，即找主元
+-  [1049 数列的片段和 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805275792359424) 思维题，找规律
+- [1050 螺旋矩阵 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805275146436608) 蓝桥杯模拟赛做过，模拟一下这个过程即可
+- [1055 集体照 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805272021680128)  坑点较多，可以一做，结构体。
+- [ 1073 多选题常见计分法 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805263624683520)，是之前1058的选择题plus版本，感觉可以当25分题了（
+ - [1074 宇宙无敌加法器 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805263297527808)  考到了进制和大整数加法，我愿称之为好题
+ - [1075 链表元素分类 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805262953594880)  直接用vector模拟链表，注意结点不在链表中的情况 。1070-1075这一套题挺好的
+- [1078 字符串压缩与解压 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805262018265088)  字符串处理的好题
+- [1080 MOOC期终成绩 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805261493977088)  典型结构体、重载排序规则
+ - [1084 外观数列 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805260583813120)， 题意读懂就很简单，核心思想类同于1078中的字符串压缩，一个个处理
+- [1090 危险品装箱 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/1038429484026175488)  有坑点，但我不说，哎就是玩（
+
+## 1003 我要通过！ (20 分)
+- [1003 我要通过！ (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805323154440192)  看到这个通过率就明白了。
+```cpp
+#include <iostream>
+#include <string>
+#include <map>
+using namespace std;
+int main() {
+    int T;
+    string s;
+    cin >> T;
+    while(T--) {
+        cin >> s;
+        map<char, int> m;   //PAT各自的数量
+        int vp = 0, vt = 0;
+        int len = s.length();
+        for(int i = 0; i < len; ++i) {
+            m[s[i]]++;
+            if(s[i] == 'P') vp = i;
+            if(s[i] == 'T') vt = i;
+        }
+        if(m.size() == 3 && m['P'] == 1 && m['T'] == 1 
+        && vt-vp != 1 && vp * (vt-vp-1) == len - vt - 1)
+            cout << ""YES"" << endl;
+        else cout << ""NO"" << endl;
+    }
+    return 0;
+}
+```
+
+## 1013 数素数 (20 分)
+- [1013 数素数 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805309963354112) 经典埃式筛法求素数，练习一下。
+
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+typedef long long ll;
+const int maxn = 9000000;
+int a[maxn]={0};//素数数组 是则为0
+int ans[10001];//全是素数
+int main() {
+    int m, n, k = 0;
+    cin >> m >> n;
+    for (int i = 2; i < maxn; i++){
+        if(a[i] == 1) continue;
+        ans[k++] = i;
+        for(ll j = (ll)i * i; j < maxn; j += i) a[j] = 1;
+    }
+    int cnt = 0;
+    for(int i = m-1; i <= n-1; i++) {
+        cnt++;
+        cout << ans[i];
+        if(i == n-1) {
+            cout << endl;
+            break;
+        }
+        if(cnt%10 == 0) cout << endl;
+        else cout << "" "";
+    }
+    return 0;
+}
+
+```
+##   1014 福尔摩斯的约会 (20 分)
+- [1014 福尔摩斯的约会 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805308755394560)  典型的好玩的字符串题。
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+string day[7] = {""MON"",""TUE"",""WED"",""THU"",""FRI"",""SAT"",""SUN""};
+int h, m;
+char date;
+char hour;
+string input[4];
+int main() {
+    for(int i = 0; i < 4; ++i)
+        cin >> input[i];
+    int len1 = input[0].length();
+    int len2 = input[1].length();
+    int len = min(len1, len2);
+    int k = 0;
+    for(int i = 0; i < len; ++i) {
+        char ch = input[0].at(i);
+        if(ch >= 'A' && ch <= 'G') {
+            if(ch == input[1].at(i)) {
+                date =  ch;
+                k = i;
+                break;
+            }
+        };
+    }
+    for(int i = k+1; i < len; ++i) {
+        char ch = input[0].at(i);
+        if((ch >= 'A' && ch <= 'N') || (ch >= '0' && ch <= '9')) {
+            if(ch == input[1].at(i)) {
+                hour =  ch;
+                break;
+            }
+        };
+    }
+    if(hour >= '0' && hour <= '9') h = hour - '0';
+    else h = hour - 'A' +10;
+    int len3 = input[2].length();
+    int len4 = input[3].length();
+    len = min(len3, len4);
+    for(int i = 0; i < len; ++i) {
+        char ch = input[2].at(i);
+        if((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z')) {
+            if(ch == input[3].at(i)) {
+                m = i;
+                break;
+            } 
+        };
+    }
+    cout << day[date-'A'];
+    printf("" %02d:%02d"", h, m);
+    return 0;
+}
+
+```
+## 1024 科学计数法 (20 分)
+- [1024 科学计数法 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805297229447168) 字符串解析，坑点挺多，记得补0，分正负等
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <sstream>
+using namespace std;
+typedef long long ll;
+string str;
+string ans;
+int ei;
+int s2i(string str) {
+    int x;
+    stringstream ss;
+    ss << str;
+    ss >> x;
+    return x;
+}
+int main() {
+    cin >> str;
+    int len = str.length();
+    if(str[0] == '-') cout << '-';
+    ei = str.find('E');
+    string A = str.substr(1, ei-1);
+    int lenA = A.length();
+    int h = s2i(str.substr(ei+2, len-ei-1));
+    if(h == 0) {
+        cout << A;
+    } else if(str[ei+1] == '-') {
+        cout << ""0."";
+        --h;
+        for(int i = 0; i < h; ++i)
+            cout << '0';
+        for(int i = 0; i < lenA; ++i) {
+            if(A[i] == '.') continue;
+            cout << A[i];
+        }
+    } else if(str[ei+1] == '+') {
+        cout << A[0];
+        for(int i = 2; i < lenA; ++i) {
+            cout << A[i];
+            --h;
+            if(h == 0 && i+1 < lenA) cout << '.'; 
+        }
+        int len0 = h-(lenA-2)+1;
+        for(int i = 0; i < len0; ++i) 
+            cout << '0';
+    }
+    return 0;
+}
+```
+## 1034 有理数四则运算 (20 分)
+- [1034 有理数四则运算 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805287624491008)  gcd、lcm (其实lcm没用上，不过作为一个范例了)
+```cpp
+#include <iostream>
+#include <cstdio>
+using namespace std;
+typedef long long ll;
+ll gcd(ll a, ll b) {
+    return a%b == 0? b: gcd(b, a%b);
+}
+ll lcm(ll a, ll b) {
+    return (a*b)/gcd(a,b);
+}
+// k ta/tb
+void solve(ll a, ll b) { // 4 -12
+    if(a*b == 0) {
+        if(!b) printf(""Inf"");
+        else if(!a) printf(""0"");
+        return;
+    }
+    int flag = 0;
+    ll k = a/b; // 0
+    ll ta = a;
+    ll tb = b;
+    if((a>0 && b<0) || (a<0 && b>0)) {//异号
+        flag = 1;
+        if(a < 0) a *= -1;//
+        if(b < 0) b *= -1;
+    } else if(a < 0 && b < 0){
+        a *= -1, b *= -1;
+    }
+    // a 4 b 2
+    ll t = gcd(a%b, b);
+    if(k || !flag) {
+        ta = (a%b)/t;
+        tb = b / t;
+    } else { // !k && flag
+        if(ta > 0 && tb < 0) {
+            ta = -1*(a%b)/t;
+            tb = b/t;
+        } else {
+            ta = (ta%tb)/t;
+            tb = tb / t;
+        }
+    }
+    if(flag) {// 为负数
+        if(ta == 0) {
+            printf(""(%lld)"", k);
+            return;
+        }
+        if(k) {
+            printf(""(%lld %lld/%lld)"", k, ta, tb);
+        } else {
+            printf(""(%lld/%lld)"", ta, tb);
+        }
+    } else {
+        if(ta == 0) {
+            printf(""%lld"", k);
+            return;
+        }
+        if(k) {
+            printf(""%lld %lld/%lld"", k, ta, tb);
+        } else printf(""%lld/%lld"", ta, tb);
+    }
+
+}
+ll a1, b1, a2, b2;
+int main() {
+    scanf(""%lld/%lld %lld/%lld"", &a1, &b1, &a2, &b2);
+    solve(a1, b1);
+    printf("" + "");
+    solve(a2, b2);
+    printf("" = "");
+    ll lc = lcm(b1, b2);
+    solve(a1*(lc/b1)+a2*(lc/b2), lc);
+    printf(""\n"");
+    
+    solve(a1, b1);
+    printf("" - "");
+    solve(a2, b2);
+    printf("" = "");
+    solve(a1*(lc/b1)-a2*(lc/b2), lc);
+    printf(""\n"");// ohhhhhhhh
+    
+    solve(a1, b1);
+    printf("" * "");
+    solve(a2, b2);
+    printf("" = "");
+    solve(a1*a2, b1*b2);
+    printf(""\n"");
+    
+    solve(a1, b1);
+    printf("" / "");
+    solve(a2, b2);
+    printf("" = "");
+    solve(a1*b2, a2*b1);
+    printf(""\n"");
+    return 0;
+}
+```
+## 1035 插入与归并 (25 分)
+- [1035 插入与归并 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805286714327040)  好题啊好题.jpg，考到了插入排序和归并排序，个人感觉挺难的一道题
+
+```cpp
+#include <iostream>
+using namespace std;
+typedef long long ll;
+const int maxn = 110;
+int N;
+ll a[maxn], A[maxn], b[maxn];
+bool isSame(ll a[], int N) {
+    for(int i = 0; i < N; ++i) {
+        if(a[i] != A[i]) return false;
+    }
+    return true;
+}
+bool Insert_sort(ll a[], int N) {
+    bool flag = false;
+    for(int p = 1; p < N; ++p) {
+        ll t = a[p];
+        int i;
+        for(i = p; i > 0 && a[i-1] > t; --i) {
+            a[i] = a[i-1];
+        }
+        a[i] = t;
+        if(flag) return true;
+        if(isSame(a, N)) {
+            flag = true;
+            continue;
+        }
+    }
+    return false;
+}
+void Merge(ll a[], ll tmp[], int s, int m, int e) {
+    int pb = s;
+    int p1 = s, p2 = m;
+    while(p1 <= m-1 && p2 <= e) {
+        if(a[p1] <= a[p2]) tmp[pb++] = a[p1++];
+        else tmp[pb++] = a[p2++];
+    }
+    while(p1 <= m-1)
+        tmp[pb++] = a[p1++];
+    while(p2 <= e)
+        tmp[pb++] = a[p2++];
+    for(int i = 0; i < e-s+1; ++i)
+        a[s+i] = tmp[i];
+}
+void Merge_Pass(ll a[], ll b[], int N, int len) {
+    // 按len长度切分 归并到b
+    int i;
+    for(i = 0; i <= N-2*len; i+=2*len) 
+        Merge(a, b, i, i+len, i+2*len-1);
+    if(i+len < N) Merge(a, b,i, i+len, N-1);//剩2个子列
+    else for(int j = i; j < N; ++j) b[j] = a[j];
+}
+void Merge_Sort(ll a[], int N) {
+    bool flag = false;
+    int len = 1;
+    ll tmp[maxn];
+    while(len < N) {
+        Merge_Pass(a, tmp, N, len);
+        len *= 2;
+        if(isSame(tmp, N)) flag = true;
+        else if(flag) return;
+        Merge_Pass(tmp, a, N, len);
+        len *= 2;
+        if(isSame(a, N)) flag = true;
+        else if(flag) return;
+    }
+}
+int main() {
+    scanf(""%d"", &N);
+    for(int i = 0; i < N; ++i) {
+        scanf(""%lld"", &a[i]);
+        b[i] = a[i];
+    }
+    for(int i = 0; i < N; ++i) {
+        scanf(""%lld"", &A[i]);
+    }
+    if(Insert_sort(a, N)) {
+        printf(""Insertion Sort\n"");
+    } else {
+        for(int i = 0; i < N; ++i) 
+            a[i] = b[i];
+        Merge_Sort(a, N);
+        printf(""Merge Sort\n"");
+        
+    }
+    for(int i = 0; i < N; ++i) {
+        printf("" %lld""+!i, a[i]);
+    }
+    return 0;
+}
+```
+
+## 1040 有几个PAT (25 分)
+- [1040 有理数四则运算 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805282389999616)   字符串，dp
+```cpp 
+// PPAATTPATTAP
+#include <iostream>
+#include <string>
+using namespace std;
+string s;
+int dp[100010][3];
+int main() {
+    cin >> s;
+    int len = s.length();
+    if(s[0] == 'P') dp[0][0] = 1;
+    for(int i = 1; i < len; ++i) {
+        if(s[i] == 'P') dp[i][0] = dp[i-1][0]+1;
+        else dp[i][0] = dp[i-1][0];
+        if(s[i] == 'A') dp[i][1] = dp[i-1][1]+dp[i-1][0];
+        else dp[i][1] = dp[i-1][1];
+        if(s[i] == 'T') dp[i][2] = dp[i-1][2]+dp[i-1][1];
+        else dp[i][2] = dp[i-1][2];
+        dp[i][0] %= 1000000007;
+        dp[i][1] %= 1000000007;
+        dp[i][2] %= 1000000007;
+    }
+    cout << dp[len-1][2];
+    return 0;
+}
+```
+
+## 1045 快速排序 (25 分)
+- [1045 快速排序 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805278589960192) 说是快排，其实是找一个元素其左边元素都比他小，右边都比他大，即找主元
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+typedef long long ll;
+const int maxn = 100005;
+int N;
+vector<ll> ans;
+ll a[maxn];
+bool l[maxn], r[maxn];
+ll maxx, minx;
+int main() {
+    cin >> N;
+    maxx = a[0];
+    l[0] = true;
+    for(int i = 0; i < N; ++i) 
+        cin >> a[i];
+    for(int i = 1; i < N; ++i) {
+        if(a[i] < maxx) {
+            l[i] = false;
+        } else {
+            l[i] = true;
+            maxx = a[i];
+        }
+    }
+    minx = a[N-1];
+    r[N-1] = true;
+    for(int i = N-2; i >= 0; --i) {
+        if(a[i] > minx) {
+            r[i] = false;
+        } else {
+            r[i] = true;
+            minx = a[i];
+        }
+    }
+    for(int i = 0; i < N; ++i) {
+        if(l[i] && r[i]) ans.push_back(a[i]);
+    }
+    sort(ans.begin(), ans.end());
+    int len = ans.size();
+    cout << len << endl;
+    for(int i = 0; i < len; ++i) {
+        printf("" %lld""+!i, ans[i]);
+    }
+    cout << endl;
+    return 0;
+}
+```
+## 1049 数列的片段和 (20 分)
+-  [1049 数列的片段和 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805275792359424) 思维题，找规律
+
+```cpp
+#pragma GCC optimize(2)
+#include <iostream>
+using namespace std;
+const int maxn = 100005;
+int N;
+long double a[maxn];
+long double ans;
+int main() {
+    cin >> N;
+    for(int i = 0; i < N; ++i) {
+        cin >> a[i];
+        ans += (i+1.0)*(N-i)*a[i];
+    }
+    printf(""%.2llf\n"", ans);
+    return 0;
+}
+```
+## 1050 螺旋矩阵 (25 分)
+- [1050 螺旋矩阵 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805275146436608) 蓝桥杯模拟赛做过，模拟一下这个过程即可
+
+```cpp
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+using namespace std;
+const int maxn = 10005;
+int N, m, n, t, nowi, nowj;
+int a[maxn];
+int b[maxn][maxn];
+int main() {
+    cin >> N;
+    int k = sqrt(N);
+    for(int i = 1; i <= k; ++i) {
+        if(N % i == 0) {
+            n = i, m = N / i;
+        } else continue;
+    }
+    for(int i = 0; i < N; ++i) cin >> a[i];
+    sort(a, a+N, greater<int>());
+    b[nowi][nowj] = a[t++];
+    while(t < N) {
+        while(nowj+1 < n && !b[nowi][nowj+1]) { // 右
+            b[nowi][++nowj] = a[t++];
+        } 
+        while(nowi+1 < m && !b[nowi+1][nowj]) { // 下
+            b[++nowi][nowj] = a[t++];
+        } 
+        while(nowj-1 >= 0 && !b[nowi][nowj-1]) {// 左
+            b[nowi][--nowj] = a[t++];
+        } 
+        while(nowi-1 >= 0 && !b[nowi-1][nowj]) {// 上
+            b[--nowi][nowj] = a[t++];
+        } 
+    }
+    for(int i = 0; i < m; ++i) {
+        for(int j = 0; j < n; ++j) {
+            printf("" %d""+!j, b[i][j]);
+        }
+        printf(""\n"");
+    }
+    return 0;
+}
+```
+## 1055 集体照 (25 分)
+- [1055 集体照 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805272021680128)  坑点较多，可以一做，结构体。
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <stack>
+#include <deque>
+using namespace std;
+const int maxn = 10005;
+int N, K, k;
+struct Person {
+    string name;
+    int height;
+    bool operator<(const Person& p1) {
+        if(height != p1.height) return height < p1.height;
+        return name > p1.name;
+    }
+} p;
+vector<Person> v;
+stack<deque<Person>> ans;
+// 175 188 190 186
+// 168 170 168
+// 160 160 159
+void solve(vector<Person> t) {
+    deque<Person> newt;
+    int len = t.size();
+    int nowp = len-1;
+    newt.push_back(t[nowp--]);
+    while(nowp >= 0) {
+        newt.push_front(t[nowp--]);
+        if(nowp < 0) break;
+        newt.push_back(t[nowp--]);
+    }
+    ans.push(newt);
+}
+int main() {  
+    cin >> N >> K;
+    for(int i = 0; i < N; ++i) {
+        cin >> p.name >> p.height;
+        v.push_back(p);
+    }
+    sort(v.begin(), v.end());
+    k = N / K;
+    int i = 0;
+    while(i < N) {
+        vector<Person> t;
+        for(int j = i; j < i+k; ++j) t.push_back(v[j]); 
+        i += k;
+        if(i+k > N) {
+            for(int j = i; j < N; ++j) 
+                t.push_back(v[j]); 
+            i += k;
+        }
+        solve(t);
+    }
+    while(!ans.empty()) {
+        deque<Person> d = ans.top();
+        cout << d[0].name;
+        for(int i = 1; i < d.size(); ++i)
+            cout << ' ' << d[i].name;
+        cout << endl;
+        ans.pop();
+    }
+    return 0;
+}
+// 6 2
+// sss 190
+// die 202 
+// wjc 120
+// abs 180
+// bsw 180
+// fwr 100
+```
+##   1073 多选题常见计分法 (20 分)
+- [ 1073 多选题常见计分法 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805263624683520)，是之前1058的选择题plus版本，感觉可以当25分题了（
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <sstream>
+using namespace std;
+typedef long long ll;
+const int maxn = 1005;
+const int maxm = 105;
+int N, M, ct;
+struct Choice {
+    int id, falcnt;
+    char val;
+    bool operator<(const Choice& c1) {
+        if(falcnt != c1.falcnt) return falcnt > c1.falcnt;
+        if(id != c1.id) return id < c1.id;
+        return val < c1.val;
+    }
+} c[maxn];
+map<string, int> m;
+struct Title {
+    int id, falcnt;
+    int sumg, cnt, rcnt;
+    string allr;
+    map<char, int> rindex;
+    Title():allr(""""){}
+    bool operator<(const Title& t1) {
+        return falcnt != t1.falcnt ? falcnt > t1.falcnt: id < t1.id;
+    }
+} t[maxm];
+// 3 0 0 0
+// 3 2 0 1
+// 0 0 5 0
+string tran(int id, char ch) {
+    stringstream ss;
+    string s;
+    ss << id << '-' << ch;
+    ss >> s;
+    return s;
+}
+int main() { 
+    cin >> N >> M;
+    for(int i = 0; i < M; ++i) {
+        cin >> t[i].sumg >> t[i].cnt >> t[i].rcnt;
+        t[i].id = i+1;
+        t[i].falcnt = 0;
+        for(int j = 0; j < t[i].rcnt; ++j) {
+            char ch;
+            cin >> ch;
+            t[i].rindex[ch] = t[i].allr.size();
+            t[i].allr += ch;
+        }
+        cin.ignore();
+        // cout << t[i].allr << endl;
+    }
+    // 
+    for(int i = 0; i < N; ++i) {
+        int total;     //学生选择的选项数
+        char nowc;
+        double sum = 0;
+        for(int j = 0; j < M; ++j) {//每个多选题
+            int flag = 2; // 0 1 2 代表错误 部分正确 全对
+            vector<int> v;
+            for(int k = 0; k < t[j].rcnt; ++k) v.push_back(0);
+            scanf(""%*c%d"", &total);
+            if(total != t[j].rcnt)
+                flag = 1;
+            for(int x = 0; x < total; ++x) { //每个选项
+                scanf(""%*c%c"", &nowc);
+                if(t[j].allr.find(nowc) == string::npos) {  //错选
+                    flag = 0;
+                    string s = tran(j, nowc);
+                    if(m.find(s) == m.end()) {
+                        m[s] = ct;
+                        c[ct].id = j+1;
+                        c[ct].falcnt = 1;
+                        c[ct].val = nowc;
+                        ++ct;
+                    } else ++c[m[s]].falcnt;
+                } else v[t[j].rindex[nowc]] = 1;           
+            }
+            scanf(""%*c%*c"");
+            if(flag != 2) {//漏选
+                for(int k = 0; k < t[j].rcnt; ++k) {
+                    if(v[k] == 0) {
+                        // cout << k << ':' << t[j].allr << ':' << t[j].allr[k] << endl;; 
+                        string s = tran(j, t[j].allr[k]);
+                        if(m.find(s) == m.end()) {
+                            m[s] = ct;
+                            c[ct].id = j+1;
+                            c[ct].falcnt = 1;
+                            c[ct].val = t[j].allr[k];
+                            ++ct;
+                        } else ++c[m[s]].falcnt;
+                    }
+                }
+            }
+            if(flag == 2) sum += t[j].sumg;
+            else if(flag == 1) sum += (t[j].sumg*1.0/2);
+            else continue;
+        }
+        printf(""%.1f\n"", sum);
+    }
+    sort(c, c+ct);
+    if(c[0].falcnt == 0 ) cout << ""Too simple"" << endl;
+    else {
+        int k = 0;
+        while(k+1 < ct && c[k+1].falcnt == c[k].falcnt) ++k;
+        for(int i = 0; i <= k; ++i) 
+            cout << c[i].falcnt << ' ' << tran(c[i].id, c[i].val) << endl;
+    }
+    return 0;
+}
+// 3 4 
+// 3 4 2 a c
+// 2 5 1 b
+// 5 3 2 b c
+// 1 5 4 a b d e
+// (2 a c) (3 b d e) (2 a c) (3 a b e)
+// (2 a c) (1 b) (2 a b) (4 a b d e)
+// (1 c) (1 e) (1 c) (4 a b c d)
+```
+
+## 1074 宇宙无敌加法器 (20 分)
+- [1074 宇宙无敌加法器 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805263297527808)  考到了进制和大整数加法，我愿称之为好题
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+typedef long long ll;
+const int maxn = 50;
+string jw;
+string n1, n2;
+int main() {
+    getline(cin, jw);
+    getline(cin, n1);
+    getline(cin, n2);
+    reverse(jw.begin(), jw.end());
+    reverse(n1.begin(), n1.end());
+    reverse(n2.begin(), n2.end());
+    int N = jw.size();
+    int flag = 0;// 进位
+    string ans = """";
+    if(n1.length() < N) n1.append(N-n1.length(), '0');
+    if(n2.length() < N) n2.append(N-n2.length(), '0');
+    for(int i = 0; i < N; ++i) {
+        int x1 = n1[i]-'0';
+        int x2 = n2[i]-'0';
+        int d = jw[i]-'0';
+        if(d == 0) d = 10;
+        int t = x1+x2+flag;
+        int x;
+        if(t >= d) {
+            x = t % d;
+            flag = 1;
+        } else {
+            x = t;
+            flag = 0;
+        }
+        char ch = '0'+x;
+        ans += ch;
+    }
+    if(flag == 1) ans += '1';
+    reverse(ans.begin(), ans.end());
+    if(ans.find_first_not_of('0') == string::npos) cout << 0 << endl;
+    else cout << ans.substr(ans.find_first_not_of('0')) << endl;
+    return 0;
+}
+// 000
+// 000
+// 00
+```
+## 1075 链表元素分类 (25 分)
+- [1075 链表元素分类 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805262953594880)  直接用vector模拟链表，也可以直接写个链表。1070-1075这一套题挺好的
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <map>
+using namespace std;
+typedef long long ll;
+const int maxn = 1000005;
+int p, N, K, head, x;
+struct LNode {
+    int val;
+    int nowp, next;
+} a[maxn], t;
+map<int, int> m;
+vector<LNode> temp;
+vector<LNode> ans;
+int main() {
+   scanf(""%d %d %d"", &p, &N, &K);
+   for(int i = 0; i < N; ++i) {
+       scanf(""%d %d %d"", &a[i].nowp, &a[i].val, &a[i].next);
+       m[a[i].nowp] = i;
+       if(a[i].nowp == p) head = i;
+   }
+   x = head;
+   while(a[x].next != -1) {
+       temp.push_back(a[x]);
+       x = m[a[x].next];
+   }
+   temp.push_back(a[x]);
+   int len1 = temp.size();
+//    cout << len1 << endl;
+   for(int i = 0; i < len1; ++i)
+       if(temp[i].val < 0) ans.push_back(temp[i]);
+   for(int i = 0; i < len1; ++i)
+       if(temp[i].val >= 0 && temp[i].val <= K) ans.push_back(temp[i]);
+   for(int i = 0; i < len1; ++i)
+       if(temp[i].val >= 0 && temp[i].val > K) ans.push_back(temp[i]);
+    int len2 = ans.size();
+    for(int i = 0; i < len2; ++i) {
+        if(i == len2-1) printf(""%05d %d -1\n"", ans[i].nowp, ans[i].val);
+        else printf(""%05d %d %05d\n"", ans[i].nowp, ans[i].val, ans[i+1].nowp);
+
+    }   return 0;
+}
+
+```
+
+## 1078 字符串压缩与解压 (20 分)
+- [1078 字符串压缩与解压 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805262018265088)  字符串处理的好题
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+char ch;
+void zip(string s) {
+    // cout << ""zip"";
+    char prec = s[0];
+    int cnt = 1;
+    int len = s.length();
+    for(int i = 1; i < len; ++i) {
+        if(s[i] == prec) {
+            ++cnt;
+        } else {
+            if(cnt >= 2) cout << cnt;
+            cout << prec;
+            prec = s[i];
+            cnt = 1;
+        }
+    }
+    if(cnt >= 2) cout << cnt;
+    cout << prec;
+}
+void Print(char c, int num) {
+    for(int i = 0; i < num; ++i) cout << c;
+}
+void unzip(string s) {
+    // cout << ""unzip"";
+    int len = s.length();
+    int cnt = 1;
+    char nowc = s[0];
+    string nowcnt;
+    for(int i = 0; i < len; ++i){
+        if(s[i] >= '0' && s[i] <= '9') {
+            nowcnt += s[i];
+        } else {
+            if(nowcnt.length() > 0) cnt = stoi(nowcnt);
+            nowc = s[i];
+            Print(nowc, cnt);
+            cnt = 1;
+            nowcnt = """";
+        }
+    }
+}
+int main() {
+    string str;
+    cin >> ch;
+    getchar();
+    getline(cin, str);
+    if(ch == 'C') zip(str);
+    else unzip(str);
+    return 0;
+}
+// D
+// 10T2h4is i5s a3 te4st CA3a as10Z
+```
+
+## 1080 MOOC期终成绩 (25 分)
+- [1080 MOOC期终成绩 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805261493977088)  典型结构体、重载排序规则
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <map>
+using namespace std;
+typedef long long ll;
+const int maxn = 1000005;
+int P, M, N;
+struct Student {
+    string name;
+    int realg, gp, gm, gf;
+    Student():gp(-1), gm(-1), gf(-1),realg(0) {}
+    bool operator<(const Student& s1) {
+        if(realg != s1.realg) return realg > s1.realg;
+        return name < s1.name;
+    }
+};
+vector<Student> v;
+vector<Student> ans;
+map<string,int> m;
+int main() {
+    ios::sync_with_stdio(false);
+    cin >> P >> M >> N;
+    string s;
+    int g;
+    for(int i = 0; i < P; ++i) {
+        Student t;
+        cin >> s >> g;
+        if(m.find(s) == m.end()) {
+            m[s] = v.size();
+            t.name = s, t.gp = g;
+            v.push_back(t);
+        } else v[m[s]].gp = g;
+    }
+    for(int i = 0; i < M; ++i) {
+        Student t;
+        cin >> s >> g;
+        if(m.find(s) == m.end()) {
+            m[s] = v.size();
+            t.name = s, t.gm = g;
+            v.push_back(t);
+        } else v[m[s]].gm = g;
+    }
+    for(int i = 0; i < N; ++i) {
+        Student t;
+        cin >> s >> g;
+        if(m.find(s) == m.end()) {
+            m[s] = v.size();
+            t.name = s, t.gf = g;
+            v.push_back(t);
+        } else v[m[s]].gf = g;
+    }
+    for(int i = 0; i < v.size(); ++i) {
+        if(v[i].gm > v[i].gf) {
+            double x = v[i].gm*0.4 + v[i].gf*0.6;
+            if((int)(x*10)%10 >= 5) v[i].realg = (int)(x+1);
+            else v[i].realg = (int)x;
+        }
+        else v[i].realg = v[i].gf;
+        if(v[i].gp >= 200 && v[i].realg >= 60) ans.push_back(v[i]);
+    }
+    sort(ans.begin(), ans.end());
+    for(auto i: ans) {
+        cout << i.name << ' ' << i.gp << ' ' << i.gm << ' ' << i.gf << ' ' << i.realg << endl;
+    }
+    return 0;
+}
+```
+## 1084 外观数列 (20 分)
+ - [1084 外观数列 (20 分)](https://pintia.cn/problem-sets/994805260223102976/problems/994805260583813120)， 题意读懂就很简单，核心思想类同于1078中的字符串压缩，一个个处理
+
+```cpp
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <sstream>
+using namespace std;
+int N;
+string i2s(int x) {
+    stringstream ss;
+    string str;
+    ss << x;
+    ss >> str;
+    return str;
+}
+int main() {
+    string ans, d;
+    cin >> d >> N;
+    ans = d;
+    for(int i = 1; i < N; ++i){
+        string temp = """";
+        char prec = ans[0];
+        int cnt = 1;
+        for(int j = 1; j < ans.length(); ++j) {
+            if(ans[j] == ans[j-1]) {
+                ++cnt;
+            } else {
+                temp += prec;
+                temp += i2s(cnt);
+                cnt = 1;
+                prec = ans[j];
+            }
+        }
+        temp += prec;
+        temp += i2s(cnt);
+        ans = temp;
+    }
+    cout << ans << endl;
+    return 0;
+}
+// 4 41 4111 41
+```
+
+## 1090 危险品装箱 (25 分)
+- [1090 危险品装箱 (25 分)](https://pintia.cn/problem-sets/994805260223102976/problems/1038429484026175488)  有坑点，但我不说，哎就是玩（
+
+```cpp
+#include <iostream>
+#include <map>
+#include <vector>
+using namespace std;
+const int maxn = 10006;
+int N, M, x1, x2;
+map<int, vector<int> > m1;
+int main() {
+    scanf(""%d %d"", &N, &M);
+    for(int i = 0; i < N; ++i) {
+        cin >> x1 >> x2;
+        m1[x1].push_back(x2);
+        m1[x2].push_back(x1);
+    }
+    while(M--) {
+        cin >> x1;
+        map<int, int> m2;
+        bool flag = true;
+        vector<int> v(x1);
+        for(int i = 0; i < x1; ++i) {
+            cin >> v[i];
+            m2[v[i]] = 1;
+        }
+        for(int i = 0; i < x1; ++i) {
+            if(m1.find(v[i]) == m1.end()) continue;
+            int len = m1[v[i]].size();
+            for(auto k : m1[v[i]]) {
+                if(m2.find(k) != m2.end()) flag = false;
+                if(!flag) break;
+            }
+        }
+        if(flag) cout << ""Yes"" << endl;
+        else cout << ""No"" << endl;
+    }
+    return 0;
+}
+```
+# 感想
+PTA乙级的题目特别抠细节，往往有些题会卡在那么一两个测试点上令人头疼，但只要程序正常写出来了一般能拿到大部分分，最难好像也就考到排序、dp和一些思维题，没有任何高级算法的出现。最后，善用STL基本上就没问题了。",5,null
+文章数据-11,cosine,qwertyuiop,【第二届青训营-寒假前端场】- 「跟着月影学 JavaScript」笔记,本节课主要讲了写好js的原则、一些高阶函数使用原理，组件化的真正意义，js如何实现面向对象的设计,这是一个内容,"将自己在掘金上发的笔记搬了过来：[「跟着月影学 JavaScript」](https://forum.juejin.cn/youthcamp/post/7053787960738742280?from=4)、[个人博客](https://cosine.ren/index.php/2022/01/17/javascript-learning/)
+
+## 写好js的原则
+
+### 各司其责
+
+举个栗子：写一段JS，控制一个网页，让他支持浅色/深色两种模式。你会怎么做呢？
+
+我的第一反应：写一个深色类，在切换按钮事件进行切换。这也是课件里讲的第二版。
+
+- 第一版 直接切换样式，不妥，但能用
+
+```js
+const btn = document.getElementById('modeBtn');
+btn.addEventListener('click', (e) => {
+  const body = document.body;
+  if(e.target.innerHTML === '☀️') {
+    body.style.backgroundColor = 'black';
+    body.style.color = 'white';
+    e.target.innerHTML = '🌙';
+  } else {
+    body.style.backgroundColor = 'white';
+    body.style.color = 'black';
+    e.target.innerHTML = '☀️';
+  }
+});
+```
+
+- 第二版 封装了深色类
+
+```js
+const btn = document.getElementById('modeBtn');
+btn.addEventListener('click', (e) => {
+  const body = document.body;
+  if(body.className !== 'night') {
+    body.className = 'nignt';
+  } else {
+    body.className = '';
+  }
+});
+```
+
+- 第三版 既然是**完全的展示行为**，那么可以完全由html和css实现
+
+  将切换作为一个type为 [`checkbox`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/Input/checkbox) 控件，id为 `modeCheckBox`，使用 `label` 标签的 [`for`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/label#attr-for) 控件，id为 `modeCheckBox`，使用 `label` 标签的 [`for`](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/label#attr-for) 属性将其关联到这个控件，再把checkbox隐藏掉即可实现点击切换模式。
+  ""~~只要不写代码就不会有bug~~"" ，这也是各司其责的一种体现。
+  ![image-20220117144502775.png](https://img-blog.csdnimg.cn/img_convert/323e7e3923a25e570e6cf2b347fb640b.png)
+
+总结：需要避免不必要的由js直接操作样式，可以用class来表示状态，而纯展示类的交互寻求零JS方案。版本2也是有其好处的，如适应性是不一定有版本3的好的。
+
+### 组件封装
+
+组件是指web页面上抽出来的一个个包含模板(HTML)、功能（JS）和样式（CSS）的单元，好的组件具备封装性、正确性、扩展性和复用性。虽然现在由于有很多优秀的组件存在，往往我们不需要去自己设计一个组件，但我们也要去试着了解他们的实现。
+
+举个栗子：用原生JS写一个电商网站的轮播图，应该怎么实现？
+
+- 结构：HTML中的无序列表（ `<ul>` ）
+  - 轮播图是典型的列表结构，可以用无序列表 `<ul>` 元素来实现，每个图放在一个li标签中。
+
+- 表现：CSS 绝对定位
+  - 使用CSS的绝对定位，将图片重叠在一个位置
+  - 切换状态使用修饰符（modifier） 
+    - selected
+  - 轮播图切换动画使用CSS  [`transition`](https://developer.mozilla.org/zh-CN/docs/Web/CSS/transition) 实现
+- 行为：JS
+  - API设计应保证原子操作，职责单一，满足灵活性
+    - ps：原子操作就是指 不可中断的一个或一系列操作，比如操作系统中的原语wait、read等。
+  - 封装一些事件：getSelectedItem()、getSelectedItemIndex()、slidTo()、slideNext()、slidePrevious()……
+  - 更进一步：控制流，使用自定义事件来进行解耦。
+
+总结：组件封装需要注意其结构设计、展现效果、行为设计（API、Event等）是否达标
+
+思考：如何来改进这个轮播图？
+
+#### 重构1：插件化，解耦
+
+- 将控制元素抽取成一个个插件（左右小箭头、底下的四个小圆点）等等![image.png](https://img-blog.csdnimg.cn/img_convert/70354831245e0562c8c26f60b98f57b0.png)
+
+- 插件与组件之间通过依赖注入方式建立联系、
+
+  ![image.png](https://img-blog.csdnimg.cn/img_convert/1b433bb2cb3a8bd496a1e7ec7f0476ed.png)
+
+这样的好处？组件的构造器做的工作就只是将组件们一一注册了，日后复用的时候不需要的组件直接将构造器注释掉即，无需关注其他的。
+
+再进一步扩展？
+
+#### 重构2：模板化
+
+将html也模板化，做到只需一个 `<div class='slider‘></div>` 就能实现图片轮播，修改控制器的构造，传入图片列表。
+
+#### 重构3：抽象化
+
+将通用的组件模型，抽象出来一个组件类（Component），其他组件类通过继承该类并实现其render方法。
+
+![image.png](https://img-blog.csdnimg.cn/img_convert/8121360c090205ec96a74cc4c9182f0a.png)
+
+```js
+class Component{
+    constructor(id, opts = {name, data: []}) {
+        this.container = document.getElementById(id);
+        this.options = opts;
+        this.container.innerHTML = this.render(opts.data);
+    }
+    registerPlugins(...plugins) { 
+        plugins.forEach( plugin => {
+            const pluginContainer = document.createElement( 'div');
+            pluginContainer.className = `${name}__plugin`;
+            pluginContainer.innerHTML = plugin.render(this.options.data);
+            this.container.appendchild(pluginContainer);
+
+            plugin.action(this);
+        });
+    }
+    render(data) {
+        /* abstract */
+        return ''
+    }
+}
+```
+
+总结：
+
+- 组件设计的原则——封装性、正确性、拓展性和复用性
+- 实现步骤：结构设计、展现效果、行为设计
+- 三次重构
+  - 插件化
+  - 模板化
+  - 抽象化
+- 改进：CSS模板化、父子组件的状态同步和消息通信等等
+
+### 过程抽象
+
+- 处理局部细节控制的一些方法
+
+- 函数式编程思想的基础应用
+
+  ![image.png](https://img-blog.csdnimg.cn/img_convert/21dfb5058d09ec1277e9b653d8327265.png)
+
+#### 应用：操作次数限制
+
+  - 一些异步交互
+  - 一次性的HTTP请求
+
+有这样一段代码，在每次点击时延时2s后移除该节点，但如果用户在该节点还没完全移除的时候又点了几次则会报错。
+
+```js
+const list = document.querySelector('ul');
+const buttons = list.querySelectorAll('button');
+buttons.forEach((button)=>{
+    button.addEventListener('click', (evt) => {
+        const target = evt.target;
+        target.parentNode.className = 'completed';
+        setTimeout(()=>{
+            list.removeChild(target.parentNode);
+        },2000);
+    })
+});
+```
+
+   而这个操作次数的限制，则可以抽象出来一个高级函数
+
+```js
+function once(fn) {
+    return function(...args) {
+        if(fn) {
+            const ret = fn.apply(this, args);
+            fn = null;
+            return ret;
+        }
+    }
+}
+const list = document.querySelector('ul');
+const buttons = list.querySelectorAll('button');
+buttons.forEach((button)=>{
+    button.addEventListener('click', once((evt) => {
+        const target = evt.target;
+        target.parentNode.className = 'completed';
+        setTimeout(()=>{
+            list.removeChild(target.parentNode);
+        },2000);
+    }))
+});
+```
+
+如代码中显示的那样，这个函数once接受一个函数，返回的也是一个函数，判断接受的函数是否为null，若不为null则执行这个函数并返回其结果，若接受的函数为null则返回一个不进行任何操作的函数。click事件注册的实际上是once返回的函数，这样再怎么点击也不会报错了。
+
+> ps：好精彩的应用例子！
+
+为了让 ”只执行一次“ 这个需求覆盖不同的事件处理，将这个需求剥离出来，这个过程就称之为 **过程抽象**
+
+## 高阶函数
+
+- 以函数作为参数
+- 以函数作为返回值
+- 常用于作为 **函数装饰器**
+
+```js
+funtion HOF(fn) {
+    return function(...args) {
+        return fn.apply(this, args);
+    }
+}
+```
+
+### 常用高阶函数
+
+#### Once 只执行一次
+
+前文讲过，这里不再阐述
+
+#### Throttle 节流
+
+为函数添加一个间隔time，每隔time事件调用一次函数，节省其需求，比如某个事件很容易持续的发生（如鼠标移上去就触发），那么他会一直速度特别快的调用这个事件函数，这个时候为其加一个节流函数则可以防止崩溃节约流量。
+
+```js
+function throttle(fn, time = 500) {
+    let timer;
+    return function(...args) {
+        if(timer == null) {
+            fn.apply(this, args);
+            timer = setTimeout(() => {
+                timer = null;
+            }, timer);
+        }
+    }
+}
+btn.onclick = throttle(function(e){
+    /* 事件处理 */
+    circle.innerHTML = parseInt(circle.innerHTML)+1;
+    circle.className = 'fade';
+    setTimeout(() => circle.className = '', 250);
+});
+```
+
+对原始的函数进行包装，没有timer的话就注册一个timer，500ms后取消，因为在这500ms中这个timer都还存在，所以不会去执行函数（或者说执行空函数），500ms后timer取消了，函数就可以被调用执行了。
+
+#### Debounce 防抖
+
+在上面的节流中，timer存在期间是不会去执行函数，而防抖是在每次事件一开始的时候清空timer，然后设置timer为dur，当事件调用dur时间并且没有新的事件再次调用时（比如鼠标移动后悬停一段时间），函数就可以被调用执行了。
+
+```js
+function debounce(fn, dur) {
+    dur = dur || 100;   // dur若不存在则设置dur为100ms
+    var timer;
+    return function() {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(this, arguments);
+        }, dur);
+    }
+}
+```
+
+#### Consumer
+
+这是将一个函数变成类似setTimeout这样的异步操作的函数，如调用了很多次某事件，将这些事件丢到一个列表中，按设定好的时间隔一段时间并执行返回其结果。先来看代码：
+
+```js
+function consumer(fn, time) {
+    let tasks = [],
+        timer;
+    return function (...args) {
+        tasks.push(fn.bind(this, ...args));
+        if(timer == null) {
+            timer = setInterval(() => {
+                tasks.shift().call(this);
+                if(tasks.length <= 0) {
+                    clearInterval(timer);
+                    timer = null;
+                }
+            }, time);
+        }
+    }
+}
+btn.onclick = consumer((evt) => {
+    /*
+     * 事件处理 如每次调用了很多次某事件，将这些事件丢到
+     * 一个列表中，按设定好的时间隔一段时间并执行返回其结果。 
+     */
+    let t = parseInt(count.innerHTML.slice(1)) + 1;
+    count.className = 'hit';
+    let r = t * 7 % 256,
+        g = t * 17  % 128,
+        b = t * 31  % 128;
+    count.style.color = `rgb(${r}, ${g}, ${b})`.trim();
+    setTimeout(() => {
+        count.className = 'hide';
+    }, 500);
+}, 800);
+```
+
+这里的事件处理实现了点击按钮时执行这个不断显示+count并在500ms后渐隐，而快速点击时，则将这个点击事件存储到是事件列表中每隔800ms执行（不然上一个+count还未消失）。
+
+要弄明白函数原理，得从其中的bind函数和shift函数和call说起：
+
+>  [`bind()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) 方法创建一个新的函数，在 `bind()` 被调用时，这个新函数的 `this` 被指定为 `bind()` 的第一个参数，而其余参数将作为新函数的参数，供调用时使用。
+
+> [`shift()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) 方法从数组中删除**第一个**元素，并返回该元素的值。此方法更改数组的长度。与之相反的则是 [`unshift()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) 插入第一个元素。
+>
+> 与之相似的一对方法还有，[`pop()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/pop) 和 [`push()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ，他们作用于数组最后一个元素
+
+> [`call()`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call) 方法使用一个指定的 `this` 值和单独给出的一个或多个参数来调用一个函数。
+
+那么不难看出上面这个函数的用途，将每次准备调用的函数放入tasks列表中，若定时器为空则设置一个定时器执行内容 `定时执行tasks出队，若全部tasks已经清空（当前没有任务了）则将定时器清除` ，若定时器不为空则不做操作（但放到tasks列表中了）。
+
+#### Iterative
+
+将一个函数，变成可迭代使用的的，这通常用于一个函数要给一组对象执行批量操作的时候。如批量设置颜色，代码如下：
+
+```js
+const isIterable = obj => obj != null && typeof obj[Symbol.iterator] === 'function';
+function iterative(fn) {
+    return function(subject, ...rest) {
+        if(isIterable(subject)) {
+            const ret = [];
+            for(let obj of subject) {
+                ret.push(fn.apply(this, [obj, ...rest]));
+            }
+            return ret;
+        }
+        return fn.apply(this, [subject, ...rest]);
+    }
+}
+const setColor = iterative((el, color) => {
+    el.style.color = color;
+})
+const els = document.querySelectorAll('li:nth-child(2n+1)');
+setColor(els, 'red');
+```
+
+#### Toggle
+
+切换状态，也可以封装成一个高级函数，这样有多少种状态只要添加到里面就可以了。
+
+例子：
+
+```js
+function toggle(...actions) {
+    return function (...args) {
+        let action = actions.shift();
+        action.push(action);
+        return action.apply(this, args);
+    }
+}
+// 多少态都可以!
+switcher.onclick = toggle(
+    evt => evt.target.className = 'off',
+    evt => evt.target.className = 'on'
+);
+```
+
+
+
+#### 思考
+
+为什么要使用高阶函数？
+
+了解一个概念：**纯函数，是指一个函数的返回结果只依赖于它的参数，并且在执行过程里面没有副作用**
+
+这也就意味着，纯函数是非常靠谱的，不会对外界产生影响。
+
+- 方便进行单元测试！
+- 减少系统中非纯函数的数量，从而使得系统可靠性增加
+#### 其他一些思考
+
+-   命令式与声明式，没有优劣之分
+
+-   过程抽象 / HOF / 装饰器
+
+-   命令式 / 声明式
+
+-   代码风格、效率、质量的权衡。
+
+    -   根据场景来权衡
+## 总结感想
+
+太牛了！！
+
+看完这节课，收获非常多，实现一个真正意义上的组件原来需要这么多步骤，原来js也能实现如此面向对象的设计，结合之前学过的c++/java的设计模式，发现都是有共通之处的，一个组件可以向下细分为许许多多的子组件。后面的高阶函数更是知识盲区，原来js还能实现这些方法
+
+> 本文引用的内容大部分来自月影老师的课以及MDN。",5,null
+文章数据-12,Shirleysqw,S0&l^K1,带你在b站学习！,怕在家呆久了恢复出厂设置？ 别着急！带你在b站搜寻有趣又能学习的up主们,这是一个内容,"不知你们有没有为线上学习而愁苦？
+
+有没有想去学习却停不下看剧、打游戏？
+
+怕在家呆久了恢复出厂设置？
+
+别着急！
+带你在b站搜寻有趣又能学习的up主们
+
+陪你在各位学习大神的指点下过关斩将
+
+让学习变得生动有趣",7,http://r842fhtdz.hd-bkt.clouddn.com/eff92cec343eda6ba83c749c13ef6b0d.jpg
+文章数据-13,Ruthsq,VJSMfJ,【表白】心海我爱你！！,谁也不能阻止我喜欢心海呜呜呜,这是一个内容,拔剑吧xdm!,9,null
+文章数据-14,EVOxqe,Jennifer,【失物招领】谁的身份证落在操场了,进来看详细信息,这是一个内容,"## 时间
+
+3月1日下午3点30分捡到
+
+## 地点
+
+西操场东南角
+
+## 详细信息
+
+姓名是王春霞，身份证号后四位为xxxx，有知道的麻烦加我qq:3123xxx3231 ",8,null
+文章数据-15,Shirleysqw,S0&l^K1,【约球】有一起打羽毛球的吗,想找个球友,这是一个内容,有意联系xxxxxx,4,null
+文章数据-16,Ruthsq,VJSMfJ,【闲置】出一个旧路由器,45可刀,这是一个内容,五成新，对付校园网绰绰有余了,6,null
+文章数据-17,EVOxqe,Jennifer,【表白】我爱学习,没想到吧，哈哈哈,这是一个内容,我超爱学习的，一天不学习要死了呜呜呜,9,null
+文章数据-18,Shirleysqw,S0&l^K1,【捞人】咱就是说，心动了,,这是一个内容,今天下午西操场那个黑衣服的女生有人认识吗，想要个微信,9,null
